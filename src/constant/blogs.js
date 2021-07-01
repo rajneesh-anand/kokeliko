@@ -1,0 +1,32 @@
+export const blogTagsOptions = [
+  "News",
+  "Sports",
+  "Science",
+  "Yoga",
+  "People",
+  "Nature",
+  "City",
+  "Jobs",
+  "Travel",
+  "Fashion",
+  "Mobile",
+  "Spirituality",
+  "Health",
+];
+
+export const blogCategoryOptions = [
+  "New Added",
+  "News",
+  "Sports",
+  "Science",
+  "Yoga",
+  "People",
+  "Nature",
+  "City",
+  "Jobs",
+  "Travel",
+  "Fashion",
+  "Mobile",
+  "Health",
+  "Spirituality",
+];
