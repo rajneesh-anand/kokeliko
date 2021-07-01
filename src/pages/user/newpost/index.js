@@ -9,7 +9,6 @@ import ScrollToTop from "../../../components/scroll-to-top";
 import { useSession } from "next-auth/client";
 import dynamic from "next/dynamic";
 import SunEditor, { buttonList } from "suneditor-react";
-import "suneditor/dist/css/suneditor.min.css";
 import { blogTagsOptions } from "../../../constant/blogs";
 import { blogCategoryOptions } from "../../../constant/blogs";
 // const SunEditor = dynamic(() => import("suneditor-react"), {

@@ -5,7 +5,7 @@ import * as ga from "../lib/ga";
 import AOS from "aos";
 // CSS
 import "aos/dist/aos.css";
-// import "../assets/css/bootstrap.min.css";
+import "suneditor/dist/css/suneditor.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/icofont.css";
 import "../assets/css/animate.css";
