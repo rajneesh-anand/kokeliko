@@ -91,6 +91,11 @@
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 100%;
+  img{
+    height:260px;
+    width:100%;
+    object-fit: cover;
+  }
 
   @media #{$xs-device} {
     margin: 0px;
@@ -112,7 +117,40 @@
   align-items: flex-start;
   padding: 20px;
   min-height: 250px;
+  .card-user{
+    display: flex;
+    width: 100%;
+
+    @media #{$xs-device} {
+      font-size: 12px;
+    }
+  
+    @media #{$xxs-device} {
+      font-size: 12px;
+    }
+    
+
+
+    small {
+      padding: 0px 4px;
+    }
+    img{
+      width:24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+    .social-icons{
+      margin-left: auto;
+      a{
+        padding: 0px 3px;
+      }
+    }
+
 }
+}
+
+ 
+
 
 .card-body-movie {
   display: flex;
@@ -157,7 +195,7 @@
 
 .card-body p {
   font-size: 13px;
-  margin: 0 0 40px;
+  margin: 8px 0 35px;
 }
 .user {
   display: flex;

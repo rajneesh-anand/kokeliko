@@ -21,7 +21,7 @@ const StripeCheckout = ({ data }) => {
     return (
       <Layout>
         <SEO
-          title="Checkout | Victoria Studio "
+          title="Checkout | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/checkout"}
         />
         <div className="wrapper home-default-wrapper">
@@ -43,7 +43,7 @@ const StripeCheckout = ({ data }) => {
   return (
     <Layout>
       <SEO
-        title="Checkout | Victoria Studio "
+        title="Checkout | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/checkout"}
       />
       <div className="wrapper home-default-wrapper">

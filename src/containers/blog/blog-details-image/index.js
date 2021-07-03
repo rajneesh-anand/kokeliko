@@ -36,7 +36,7 @@ const BlogDetailsWithoutImage = ({ data }) => {
           <div className="user">
             <img src={data.author.image} alt="profile image" />
             <div className="user-info">
-              <h5>{data.author.name}</h5>
+              <small>{data.author.name}</small>
               <small>{formatDate(data.createdAt)}</small>
             </div>
             <div className="social-icons">

@@ -99,7 +99,7 @@ const UploadVideo = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="Video Upload | Victoria Studio "
+          title="Video Upload | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/user/video"}
         />
         <div className="wrapper home-default-wrapper">
@@ -120,7 +120,7 @@ const UploadVideo = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="Video Upload | Victoria Studio "
+          title="Video Upload | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/user/video"}
         />
         <div className="wrapper home-default-wrapper">

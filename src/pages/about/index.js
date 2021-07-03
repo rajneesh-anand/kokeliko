@@ -17,7 +17,7 @@ const AboutPage = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="About | Victoria Studio "
+          title="About | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/about"}
         />
         <div className="wrapper about-page-wrapper">

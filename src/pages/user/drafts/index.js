@@ -22,7 +22,7 @@ const Drafts = ({ blogData }) => {
   ) : !session ? (
     <Layout>
       <SEO
-        title="Drafts List | Victoria Studio "
+        title="Drafts List | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/user/drafts"}
       />
       <div className="wrapper home-default-wrapper">
@@ -41,7 +41,7 @@ const Drafts = ({ blogData }) => {
   ) : (
     <Layout>
       <SEO
-        title="Drafts List | Victoria Studio "
+        title="Drafts List | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/user/drafts"}
       />
       <div className="wrapper home-default-wrapper">

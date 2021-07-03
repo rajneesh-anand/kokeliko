@@ -23,7 +23,7 @@ export default function SignIn({ csrfToken }) {
   ) : (
     <Layout>
       <SEO
-        title="Login | Victoria Studio"
+        title="Login | KokeLiko"
         canonical={`${process.env.NEXTAUTH_URL}/auth/signin`}
       />
       <div className="wrapper about-page-wrapper">
@@ -34,7 +34,7 @@ export default function SignIn({ csrfToken }) {
               <div className="col-md-6 col-lg-6">
                 <div className="signBlock">
                   <div className="commonStyle">
-                    <p>SignIn Victoria Studio</p>
+                    <p>SignIn KokeLiko</p>
                   </div>
 
                   <div className="commonStyle">
@@ -95,7 +95,7 @@ export default function SignIn({ csrfToken }) {
                   </form>
                   <div>
                     <p>
-                      By Login, you agree to Victoria Studio
+                      By Login, you agree to KokeLiko
                       <a href="http://www.google.com"> Terms of Service </a>
                       and
                       <a target="_blank" href="http://www.google.com">

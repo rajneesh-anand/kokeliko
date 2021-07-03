@@ -82,7 +82,7 @@ const Upload = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="Upload | Victoria Studio "
+          title="Upload | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/user/upload"}
         />
         <div className="wrapper home-default-wrapper">
@@ -104,7 +104,7 @@ const Upload = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="Upload | Victoria Studio "
+          title="Upload | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/user/upload"}
         />
         <div className="wrapper home-default-wrapper">

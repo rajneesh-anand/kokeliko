@@ -39,7 +39,7 @@ const Footer = () => {
                 </div>
                 <div className="widget-copyright">
                   <p>
-                    © 2021 <span>Victoria Studio</span>. Made with{" "}
+                    © 2021 <span>KokeLiko</span>. Made with{" "}
                     <i className="icofont-heart-alt"></i> by{" "}
                     <a
                       target="_blank"

@@ -9,7 +9,7 @@ const MoviePage = ({ movieData }) => {
   return (
     <Layout>
       <SEO
-        title="Movie | Victoria Studio "
+        title="Movie | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/movie"}
       />
       <div className="wrapper home-default-wrapper">

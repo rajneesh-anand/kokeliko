@@ -77,7 +77,7 @@ const UploadPage = () => {
       <React.Fragment>
         <Layout>
           <SEO
-            title="Upload | Victoria Studio "
+            title="Upload | KokeLiko "
             canonical={process.env.PUBLIC_URL + "/upload"}
           />
           <div className="wrapper home-default-wrapper">
@@ -101,7 +101,7 @@ const UploadPage = () => {
   return (
     <React.Fragment>
       <Layout>
-        <SEO title="Victoria Studio | Upload" />
+        <SEO title="KokeLiko | Upload" />
         <div className="wrapper home-default-wrapper">
           <Header />
 

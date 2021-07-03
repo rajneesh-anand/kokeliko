@@ -19,7 +19,7 @@ const SEO = ({ title, description, canonical, css, js, image }) => (
       content={description}
     />
     <meta name="og:url" property="og:url" content={`${canonical}`} />
-    <meta property="og:site_name" content="Victoria Studio" />
+    <meta property="og:site_name" content="KokeLiko" />
     <meta name="twitter:card" property="twitter:card" content="summary" />
     <meta name="twitter:title" property="twitter:title" content={title} />
     <meta

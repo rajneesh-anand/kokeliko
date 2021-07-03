@@ -13,7 +13,7 @@ const Account = () => {
     return (
       <Layout>
         <SEO
-          title="Payment Success | Victoria Studio "
+          title="Payment Success | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/payment/success"}
         />
         <div className="wrapper home-default-wrapper">
@@ -34,7 +34,7 @@ const Account = () => {
   return (
     <Layout>
       <SEO
-        title="Payment Success | Victoria Studio "
+        title="Payment Success | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/payment/success"}
       />
       <div className="wrapper home-default-wrapper">

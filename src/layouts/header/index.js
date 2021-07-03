@@ -5,6 +5,7 @@ import Logo from "../../components/logo";
 import Profile from "../../components/profile";
 import PopupSearch from "../../components/popup-search";
 import SideBarMenu from "../../components/sidebar-menu";
+import Link from "next/link";
 
 const Header = ({ classOption }) => {
   const [show, setShow] = useState(false);
@@ -58,6 +59,26 @@ const Header = ({ classOption }) => {
                 <Logo image={`${process.env.PUBLIC_URL}/img/logo.png`} />
               </div>
             </div>
+            <div className="col">
+              <div className="topNav">
+                <div>
+                  <Link href="/blogs">
+                    <a>Yoga</a>
+                  </Link>
+                </div>
+                <div>
+                  <Link href="/yoga">
+                    <a>Yoga</a>
+                  </Link>
+                </div>
+                <div>
+                  <Link href="/yoga">
+                    <a>Yoga</a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
             <div className="col-auto">
               <Profile />
             </div>

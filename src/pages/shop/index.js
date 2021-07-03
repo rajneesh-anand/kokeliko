@@ -12,7 +12,7 @@ const ShopPage = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="Shop | Victoria Studio "
+          title="Shop | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/shop"}
         />
         <div className="wrapper home-default-wrapper">

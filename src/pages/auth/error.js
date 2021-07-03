@@ -12,7 +12,7 @@ export default function AccountverifyPage() {
   //   return (
   //     <Layout>
   //       <SEO
-  //         title="Email Verification | Victoria Studio "
+  //         title="Email Verification | KokeLiko "
   //         canonical={process.env.PUBLIC_URL + "/auth/verify-account"}
   //       />
   //       <div className="wrapper home-default-wrapper">
@@ -33,7 +33,7 @@ export default function AccountverifyPage() {
   return (
     <Layout>
       <SEO
-        title="Email Verification | Victoria Studio "
+        title="Email Verification | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/auth/verify-account"}
       />
       <div className="wrapper home-default-wrapper">

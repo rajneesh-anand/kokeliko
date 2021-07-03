@@ -10,7 +10,7 @@ export default function Photos() {
   return (
     <Layout>
       <SEO
-        title="Photo Gallery | Victoria Studio "
+        title="Photo Gallery | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/photos"}
       />
       <div className="wrapper home-default-wrapper">

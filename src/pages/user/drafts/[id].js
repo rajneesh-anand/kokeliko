@@ -189,7 +189,7 @@ function SinglePostForEdit({ post }) {
     return (
       <Layout>
         <SEO
-          title="Edit Blog | Victoria Studio "
+          title="Edit Blog | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/drafts"}
         />
         <div className="wrapper home-default-wrapper">
@@ -211,7 +211,7 @@ function SinglePostForEdit({ post }) {
   return (
     <Layout>
       <SEO
-        title="New Blog | Victoria Studio "
+        title="New Blog | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/user/newpost"}
       />
       <div className="wrapper home-default-wrapper">

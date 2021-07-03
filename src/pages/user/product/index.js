@@ -66,7 +66,7 @@ const Product = () => {
       <React.Fragment>
         <Layout>
           <SEO
-            title="Product | Victoria Studio "
+            title="Product | KokeLiko "
             canonical={process.env.PUBLIC_URL + "/user/product"}
           />
           <div className="wrapper home-default-wrapper">
@@ -91,7 +91,7 @@ const Product = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="Product | Victoria Studio "
+          title="Product | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/user/product"}
         />
         <div className="wrapper home-default-wrapper">

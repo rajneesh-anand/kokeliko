@@ -85,6 +85,7 @@
         }
       }
       .header-action-area {
+
         button,
         a {
           color: $white;
@@ -231,7 +232,7 @@
   // Header Default
   &.header-default {
     background-color: $white;
-    padding: 10px 0 10px;
+    padding: 6px 0 6px;
     position: relative;
     z-index: 999;
     @media #{$md-device} {
@@ -336,6 +337,7 @@
     &.sticky-header {
       &.sticky {
         background-color: $white !important;
+        border-bottom: 1px solid #ddd !important;
         @media #{$sm-device} {
           padding: 8px 0 8px;
         }
@@ -457,8 +459,7 @@
             }
           }
         }
-        .header-action-area {
-        }
+       
       }
     }
   }
@@ -483,8 +484,10 @@
 // Header Action Style
 .header-action-area {
   width: 100px;
+  display: none;
   // Responsive
   @media #{$xxs-device} {
+    display: inline;
     width: auto;
   }
   button,
@@ -811,5 +814,12 @@
         }
       }
     }
+  }
+}
+.topNav{
+  display: flex;
+  @media #{$xs-device} {
+    display: none;
+    
   }
 }

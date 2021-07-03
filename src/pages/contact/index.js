@@ -12,7 +12,7 @@ const Contact = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="Contact | Victoria Studio "
+          title="Contact | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/contact"}
         />
         <div className="wrapper home-default-wrapper">

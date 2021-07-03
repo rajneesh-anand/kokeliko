@@ -11,7 +11,7 @@ const BlogsPage = ({ blogData }) => {
   return (
     <Layout>
       <SEO
-        title="Blog | Victoria Studio "
+        title="Blog | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/blogs"}
       />
       <div className="wrapper home-default-wrapper">

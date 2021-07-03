@@ -30,10 +30,11 @@ const Newpost = () => {
   const [session, loading] = useSession();
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [subCat, setSubCat] = useState([]);
   const [isProcessing, setProcessingTo] = useState(false);
   const [isDrafting, setDraftingTo] = useState(false);
   const [template, setTemplate] = useState("template_with_headerimage");
+  const [category, setCategory] = useState("All");
 
   const tagSelectedValues = ["Nature", "People"];
   const catSelectedValues = ["New Added", "People"];
@@ -42,14 +43,14 @@ const Newpost = () => {
     setTags(event);
   };
   const onCatSelect = (event) => {
-    setCategories(event);
+    setSubCat(event);
   };
 
   const onTagRemove = (event) => {
     setTags(event);
   };
   const onCatRemove = (event) => {
-    setCategories(event);
+    setSubCat(event);
   };
 
   const handleEditorChange = (content) => {
@@ -72,11 +73,12 @@ const Newpost = () => {
       const formData = new FormData();
       formData.append("image", selectedImage);
       formData.append("title", title);
+      formData.append("category", category);
       formData.append(
-        "categories",
-        categories.length === 0
+        "subCategories",
+        subCat.length === 0
           ? JSON.stringify(catSelectedValues)
-          : JSON.stringify(categories)
+          : JSON.stringify(subCat)
       );
       formData.append(
         "tags",
@@ -125,11 +127,12 @@ const Newpost = () => {
       const formData = new FormData();
       formData.append("image", selectedImage);
       formData.append("title", title);
+      formData.append("category", category);
       formData.append(
-        "categories",
-        categories.length === 0
+        "sub-categories",
+        subCat.length === 0
           ? JSON.stringify(catSelectedValues)
-          : JSON.stringify(categories)
+          : JSON.stringify(subCat)
       );
       formData.append(
         "tags",
@@ -177,7 +180,7 @@ const Newpost = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="New Blog | Victoria Studio "
+          title="New Blog | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/user/newpost"}
         />
         <div className="wrapper home-default-wrapper">
@@ -201,7 +204,7 @@ const Newpost = () => {
     <React.Fragment>
       <Layout>
         <SEO
-          title="New Blog | Victoria Studio "
+          title="New Blog | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/user/newpost"}
         />
         <div className="wrapper home-default-wrapper">
@@ -242,6 +245,14 @@ const Newpost = () => {
                           <option value="template_without_headerimage">
                             Blog without Header Image
                           </option>
+                        </select>
+                        <select
+                          onChange={(event) => setCategory(event.target.value)}
+                          value={category}
+                        >
+                          <option value="All">All</option>
+                          <option value="Blogs">Blogs</option>
+                          <option value="Yoga">Yoga</option>
                         </select>
                       </div>
                       <div className="text-center-black">

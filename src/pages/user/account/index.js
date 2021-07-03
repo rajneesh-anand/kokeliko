@@ -21,7 +21,7 @@ const Account = ({ blogData }) => {
   ) : !session ? (
     <Layout>
       <SEO
-        title="My Account | Victoria Studio "
+        title="My Account | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/user/account"}
       />
       <div className="wrapper home-default-wrapper">
@@ -40,7 +40,7 @@ const Account = ({ blogData }) => {
   ) : (
     <Layout>
       <SEO
-        title="My Account | Victoria Studio "
+        title="My Account | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/user/account"}
       />
       <div className="wrapper home-default-wrapper">
