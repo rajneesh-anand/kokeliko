@@ -19,10 +19,6 @@ const ShopPage = () => {
           <Header classOption="hb-border" />
           <div className="main-content">
             <div className="container">
-              {/* <PageTitleContainerTwo
-              subTitle="Our Blog"
-              title="Write &amp; Share"
-            /> */}
               <ShopContainer />
             </div>
           </div>

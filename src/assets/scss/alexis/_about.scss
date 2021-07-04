@@ -5,6 +5,7 @@
 */
 .about-page-wrapper {
   position: relative;
+  min-height: 100vh;
   .title {
     font-family: $font-current-theme1;
     font-size: 36px;

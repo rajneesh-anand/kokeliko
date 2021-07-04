@@ -38,6 +38,7 @@
       z-index: 99;
 
       .header-logo-area {
+        cursor: pointer;
         .logo-main {
           //     display: none;
         }
@@ -155,6 +156,7 @@
     z-index: 9;
 
     .header-logo-area {
+
       .logo {
         &-main {
           display: none;
@@ -285,6 +287,7 @@
 
     .header-logo-area {
       max-width: none;
+      cursor: pointer;
       @media #{$md-device} {
         max-width: 140px;
       }
@@ -349,6 +352,7 @@
             margin-top: 14px;
           }
           .header-logo-area {
+            cursor: pointer;
             img {
               max-width: 153.7px;
               @media #{$sm-device} {
@@ -770,56 +774,72 @@
     }
   }
 
-  .off-canvas-footer {
-    .side-footer {
-      display: inline-block;
-      .widget-social-icons {
-        display: block;
-        a {
-          border: none;
-          color: #000;
-          font-size: 16px;
-          float: left;
-          margin-right: 40px;
-          padding: 0;
-          @media #{$xs-device} {
-            font-size: 13px;
-            margin-right: 22px;
-          }
-          &.icon-color {
-            color: #185381;
-            &.color-twitter {
-              color: #429cd6;
-            }
-            &.color-instagram {
-              color: #521313;
-            }
-            &.color-googleplus {
-              color: #d62d20;
-            }
-          }
-        }
+ 
+   
+  
+}
+.topNav{
+  display: flex;
+  justify-content: center;  
+  a{
+    margin-right: 8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    .active-link{     
+      color: #03121b;
+      text-decoration: underline;
+     
+    } 
+    
+  }
+  @media #{$xs-device} {
+    display: none;
+    
+  }
+}
+
+
+.side-footer {  
+  background-color: black; 
+  .widget-social-icons {
+    display: flex;   
+    margin-bottom: 12px;  
+    color: rgb(179, 174, 174);
+    padding: 0px 4px;
+  
+    a {
+      border: none;
+      color: rgb(255, 255, 255);
+      font-size: 16px;    
+      @media #{$xs-device} {
+        font-size: 13px;
+        margin-left: 8px;
       }
-      .widget-copyright {
-        display: block;
-        @media #{$xs-device} {
-          display: inline-block;
-          margin-top: 12px;
+      &.icon-color {
+        color: #185381;
+        &.color-twitter {
+          color: #429cd6;
         }
-        p {
-          line-height: 1.7;
-          @media #{$xs-device} {
-            font-size: 15px;
-          }
+        &.color-instagram {
+          color: #521313;
+        }
+        &.color-googleplus {
+          color: #d62d20;
         }
       }
     }
   }
-}
-.topNav{
-  display: flex;
-  @media #{$xs-device} {
-    display: none;
-    
+  .widget-copyright {
+    display: block;
+    @media #{$xs-device} {
+      display: inline-block;
+      margin-top: 12px;
+    }
+    p {
+      line-height: 1.7;
+      @media #{$xs-device} {
+        font-size: 15px;
+      }
+    }
   }
 }

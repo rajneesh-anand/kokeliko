@@ -89,7 +89,7 @@ const BlogContainer = ({ blogData }) => {
                 return (
                   <div
                     key={blog.id}
-                    className={`col-sm-6 col-md-6 col-lg-4 blogList masonry-item ${blog.categories
+                    className={`col-sm-6 col-md-6 col-lg-4 blogList masonry-item ${blog.subCategories
                       .map((cat) => slugify(cat))
                       .join(" ")}`}
                     style={{ marginTop: "10px" }}

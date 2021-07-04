@@ -13,7 +13,7 @@ const useMasonry = (
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const mixCategories = PortfolioData.map((item) => {
-      return item.categories.map((cat) => cat);
+      return item.subCategories.map((cat) => cat);
     });
     const allCat = flatDeep(mixCategories, Infinity);
     const commonCategories = [...new Set(allCat)];

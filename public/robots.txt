@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
-Sitemap: https://vic.vercel.app/sitemap.xml
+Sitemap: https://kokeliko.vercel.app/sitemap.xml

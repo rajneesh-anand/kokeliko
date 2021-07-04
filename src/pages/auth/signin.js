@@ -24,7 +24,7 @@ export default function SignIn({ csrfToken }) {
     <Layout>
       <SEO
         title="Login | KokeLiko"
-        canonical={`${process.env.NEXTAUTH_URL}/auth/signin`}
+        canonical={`${process.env.PUBLIC_URL}/auth/signin`}
       />
       <div className="wrapper about-page-wrapper">
         <Header classOption="hb-border" />
@@ -42,7 +42,7 @@ export default function SignIn({ csrfToken }) {
                       className="google"
                       onClick={() =>
                         signIn("google", {
-                          callbackUrl: "https://vic.vercel.app",
+                          callbackUrl: "https://kokeliko.vercel.app",
                         })
                       }
                     >
@@ -59,7 +59,7 @@ export default function SignIn({ csrfToken }) {
                       className="facebook"
                       onClick={() =>
                         signIn("facebook", {
-                          callbackUrl: "https://vic.vercel.app",
+                          callbackUrl: "https://kokeliko.vercel.app",
                         })
                       }
                     >
@@ -93,12 +93,21 @@ export default function SignIn({ csrfToken }) {
                       </button>
                     </div>
                   </form>
-                  <div>
+                  <div className="text-center">
                     <p>
                       By Login, you agree to KokeLiko
-                      <a href="http://www.google.com"> Terms of Service </a>
+                      <a
+                        href={process.env.PUBLIC_URL + "/termsofuse"}
+                        target="_blank"
+                      >
+                        {" "}
+                        Terms of Service{" "}
+                      </a>
                       and
-                      <a target="_blank" href="http://www.google.com">
+                      <a
+                        href={process.env.PUBLIC_URL + "/privacypolicy"}
+                        target="_blank"
+                      >
                         {" "}
                         Privacy Policy
                       </a>

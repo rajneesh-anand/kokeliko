@@ -5,8 +5,10 @@ import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
 import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { signOut, useSession } from "next-auth/client";
 
 const SideBarMenu = ({ show, handleClose }) => {
+  const [session] = useSession();
   const onClickHandler = (e) => {
     const target = e.currentTarget;
     const parentEl = target.parentElement;
@@ -41,8 +43,51 @@ const SideBarMenu = ({ show, handleClose }) => {
       placement="start"
       style={{ width: "250px" }}
     >
-      <OffcanvasHeader closeButton style={{ backgroundColor: "#e4ded6" }}>
-        <OffcanvasTitle></OffcanvasTitle>
+      <OffcanvasHeader>
+        <OffcanvasTitle style={{ width: "100%" }}>
+          {!session ? (
+            <>
+              <div className="text-center">
+                <img
+                  src="/fav.png"
+                  style={{
+                    width: "60px",
+                    borderRadius: "50%",
+                    marginRight: 5,
+                  }}
+                />
+              </div>
+
+              <div className="profile-sidebar-slider">
+                <Link href="/auth/signin">
+                  <a>Sign In</a>
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="text-center">
+                <img
+                  src={session.user.image}
+                  style={{
+                    width: "60px",
+                    borderRadius: "50%",
+                    marginRight: 5,
+                  }}
+                />
+              </div>
+              <div className="text-center">
+                <p>{session.user.name}</p>
+              </div>
+              <div className="profile-sidebar-slider">
+                <Link href="/user/account">
+                  <a>My Account</a>
+                </Link>
+                <button onClick={() => signOut()}>Sign Out</button>
+              </div>
+            </>
+          )}
+        </OffcanvasTitle>
       </OffcanvasHeader>
 
       <OffcanvasBody style={{ backgroundColor: "#100f0f" }}>
@@ -105,8 +150,42 @@ const SideBarMenu = ({ show, handleClose }) => {
             </li>
           </ul>
         </div>
-        <div className="off-canvas-footer"></div>
       </OffcanvasBody>
+
+      <div className="side-footer">
+        <ul className="widget-social-icons">
+          <li className="social-text">
+            <span>follow us on social</span>
+          </li>
+          <li>
+            <a
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="social_twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="social_facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="social_instagram"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </Offcanvas>
   );
 };

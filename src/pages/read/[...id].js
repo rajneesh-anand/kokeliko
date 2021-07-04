@@ -3,7 +3,6 @@ import React from "react";
 import prisma from "../../lib/prisma";
 import BlogDetailsContainer from "../../containers/blog/blog-details";
 import BlogDetailsWithoutImage from "../../containers/blog/blog-details-image";
-// import BlogData from "../data/blog.json";
 import Link from "next/link";
 import SEO from "../../components/seo";
 import Footer from "../../layouts/footer";
@@ -19,7 +18,7 @@ const BlogDetails = ({ data }) => {
     <Layout>
       <SEO
         title={result.title}
-        canonical={process.env.PUBLIC_URL + `/read/${result.id}/${result.slug}`}
+        canonical={`${process.env.PUBLIC_URL}/read/${result.id}/${result.slug}`}
       />
       <div className="wrapper home-default-wrapper">
         <Header classOption="hb-border" />

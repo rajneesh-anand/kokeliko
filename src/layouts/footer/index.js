@@ -6,32 +6,32 @@ const Footer = () => {
     <footer className="footer-area reveal-footer border-top-style">
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-12">
+          <div className="col-12">
             <div className="footer-content">
               <div className="widget-item">
                 <div className="widget-footer-nav">
                   <nav>
                     <ul>
                       <li>
-                        <Link href={process.env.PUBLIC_URL + "/"}>
-                          <a>term &amp; condition</a>
+                        <Link href={process.env.PUBLIC_URL + "/termsofuse"}>
+                          <a target="_blank">terms &amp; service</a>
                         </Link>
                       </li>
                       <li>
-                        <Link href={process.env.PUBLIC_URL + "/"}>
-                          <a>policy</a>
+                        <Link href={process.env.PUBLIC_URL + "/privacypolicy"}>
+                          <a target="_blank">privacy policy</a>
                         </Link>
                       </li>
                       <li>
-                        <Link href={process.env.PUBLIC_URL + "/"}>
-                          <a>map</a>
+                        <Link href={process.env.PUBLIC_URL + "/contact"}>
+                          <a>contact</a>
                         </Link>
                       </li>
                     </ul>
                   </nav>
                 </div>
               </div>
-              <div className="widget-item text-center">
+              {/* <div className="widget-item text-center">
                 <div className="about-widget">
                   <FooterLogo
                     image={`${process.env.PUBLIC_URL}/img/logo.png`}
@@ -50,7 +50,7 @@ const Footer = () => {
                     </a>
                   </p>
                 </div>
-              </div>
+              </div> */}
               <div className="widget-item">
                 <ul className="widget-social">
                   <li className="social-text">

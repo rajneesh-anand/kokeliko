@@ -11,44 +11,41 @@ import Layout from "../layouts/index";
 import { slugify } from "../utils";
 
 const BlogCategory = ({
-    match: {
-        params: { slug },
-    },
+  match: {
+    params: { slug },
+  },
 }) => {
-    const data = BlogData.map((blog) => {
-        return {
-            ...blog,
-            categories: blog.categories.filter((cat) => slugify(cat) === slug),
-        };
-    }).filter((blog) => blog.categories.length > 0);
-    const categoryTitle = data[0].categories[0];
-    return (
-        <React.Fragment>
-            <Layout>
-                <SEO title="Alexis || Blog Category" />
-                <div className="wrapper home-default-wrapper">
-                    <Header classOption="hb-border" />
-                    <div className="main-content">
-                        <PageTitleContainerTwo
-                            subTitle="Category"
-                            title={categoryTitle}
-                        />
-                        <BlogItemContainer data={data} />
-                    </div>
-                    <Footer />
-                    <ScrollToTop />
-                </div>
-            </Layout>
-        </React.Fragment>
-    );
+  const data = BlogData.map((blog) => {
+    return {
+      ...blog,
+      categories: blog.subCategories.filter((cat) => slugify(cat) === slug),
+    };
+  }).filter((blog) => blog.subCategories.length > 0);
+  const categoryTitle = data[0].subCategories[0];
+  return (
+    <React.Fragment>
+      <Layout>
+        <SEO title="Alexis || Blog Category" />
+        <div className="wrapper home-default-wrapper">
+          <Header classOption="hb-border" />
+          <div className="main-content">
+            <PageTitleContainerTwo subTitle="Category" title={categoryTitle} />
+            <BlogItemContainer data={data} />
+          </div>
+          <Footer />
+          <ScrollToTop />
+        </div>
+      </Layout>
+    </React.Fragment>
+  );
 };
 
 BlogCategory.propTypes = {
-    match: PropTypes.shape({
-        params: PropTypes.shape({
-            slug: PropTypes.string,
-        }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      slug: PropTypes.string,
     }),
+  }),
 };
 
 export default BlogCategory;

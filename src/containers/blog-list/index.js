@@ -9,7 +9,6 @@ const BlogList = ({ blogData }) => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   const startLoading = () => setLoading(true);
   const stopLoading = () => setLoading(false);
 
@@ -74,6 +73,9 @@ const BlogList = ({ blogData }) => {
     ".blog-filter-menu",
     ".blog-filter-menu button"
   );
+  console.log(blogs);
+  console.log(categories);
+
   return (
     <>
       <div className="blog-area blog-masonry-area">
@@ -89,7 +91,7 @@ const BlogList = ({ blogData }) => {
                 return (
                   <div
                     key={blog.id}
-                    className={`col-lg-12  blogList masonry-item ${blog.categories
+                    className={`col-lg-12  blogList masonry-item ${blog.subCategories
                       .map((cat) => slugify(cat))
                       .join(" ")}`}
                   >

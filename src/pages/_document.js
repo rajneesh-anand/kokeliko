@@ -10,10 +10,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="icon" href="/fav.png" />
-
-
-
-            <script
+          <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=G-L55RZMPEQ3`}
           />
@@ -26,7 +23,7 @@ class MyDocument extends Document {
             gtag('config', 'G-L55RZMPEQ3', {
               page_path: window.location.pathname,
             });
-          `
+          `,
             }}
           />
 

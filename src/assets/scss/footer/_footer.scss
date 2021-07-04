@@ -25,14 +25,14 @@
     }
   }
   &.border-top-style {
-    padding: 40px 0 40px;
+    padding: 8px 0 8px;
     // border-top: 1px solid #ddd;
     // Responsive
     @media #{$md-device} {
-      padding: 40px 0 40px;
+      padding: 8px 0 8px;
     }
     @media #{$sm-device} {
-      padding: 40px 0 40px;
+      padding: 8px 0 8px;
     }
     &:before {
       background-color: $gray-light;
@@ -149,16 +149,18 @@
       }
     }
   }
-  .footer-content {
-    align-items: center;
+  .footer-content {   
     display: flex;
     justify-content: space-between;
-    @media #{$md-device} {
-      display: block;
-      text-align: center;
+    @media #{$xxs-device} {
+      justify-content: center;
+    }
+    @media #{$xs-device} {
+      justify-content: center;
     }
     .widget-footer-nav {
       ul {
+        margin-bottom: 12px !important;
         li {
           display: inline-block;
           padding: 0 20px;
@@ -172,12 +174,18 @@
             display: block;
             font-size: 14px;
             line-height: 1.2;
-            font-weight: 700;
+            font-weight: 600;
             font-family: $heading-font;
             text-transform: uppercase;
-            color: $heading-color;
+            color: #666666;
             &:hover {
               color: $theme-color;
+            }
+            @media #{$xxs-device} {
+              font-size: 10px;
+            }
+            @media #{$xs-device} {
+              font-size: 10px;
             }
           }
         }
@@ -198,6 +206,12 @@
     }
     .widget-social {
       margin-bottom: 0;
+      @media #{$xxs-device} {
+        display: none;
+      }
+      @media #{$xs-device} {
+        display: none;
+      }
       li {
         display: inline-block;
         margin-right: 20px;
@@ -235,10 +249,10 @@
 .reveal-footer {
   bottom: 0;
   left: 0;
-  position: relative;
+  position: absolute;
   width: 100%;
   @media #{$md-device} {
-    position: relative;
+    position: absolute;
   }
 }
 

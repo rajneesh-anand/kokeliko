@@ -5,7 +5,7 @@ import Logo from "../../components/logo";
 import Profile from "../../components/profile";
 import PopupSearch from "../../components/popup-search";
 import SideBarMenu from "../../components/sidebar-menu";
-import Link from "next/link";
+import ActiveLink from "../../utils/activeLink";
 
 const Header = ({ classOption }) => {
   const [show, setShow] = useState(false);
@@ -62,19 +62,54 @@ const Header = ({ classOption }) => {
             <div className="col">
               <div className="topNav">
                 <div>
-                  <Link href="/blogs">
-                    <a>Yoga</a>
-                  </Link>
+                  <ActiveLink
+                    href="/articles/Meditation"
+                    activeClassName="active-link"
+                  >
+                    <a>Meditation</a>
+                  </ActiveLink>
                 </div>
                 <div>
-                  <Link href="/yoga">
+                  <ActiveLink
+                    href="/articles/yoga"
+                    activeClassName="active-link"
+                  >
                     <a>Yoga</a>
-                  </Link>
+                  </ActiveLink>
                 </div>
                 <div>
-                  <Link href="/yoga">
-                    <a>Yoga</a>
-                  </Link>
+                  <ActiveLink
+                    href="/articles/ayurveda"
+                    activeClassName="active-link"
+                  >
+                    <a>Ayurveda</a>
+                  </ActiveLink>
+                </div>
+                <div>
+                  <ActiveLink
+                    href="/articles/travel"
+                    activeClassName="active-link"
+                  >
+                    <a>Travel</a>
+                  </ActiveLink>
+                </div>
+                <div>
+                  <ActiveLink
+                    href="/articles/tantra"
+                    activeClassName="active-link"
+                  >
+                    <a>Tantra</a>
+                  </ActiveLink>
+                </div>
+                <div>
+                  <ActiveLink href="/shop" activeClassName="active-link">
+                    <a>Shop</a>
+                  </ActiveLink>
+                </div>
+                <div>
+                  <ActiveLink href="/query" activeClassName="active-link">
+                    <a>Send Your Queries ?</a>
+                  </ActiveLink>
                 </div>
               </div>
             </div>

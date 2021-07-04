@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { slugify } from "../../../utils";
 
 const BlogFilter = ({ categories }) => {
+    console.log(categories);
     return (
         <div className="blog-filter-menu">
             <button className="active is-checked" data-filter="*">

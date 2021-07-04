@@ -36,8 +36,8 @@ const Newpost = () => {
   const [template, setTemplate] = useState("template_with_headerimage");
   const [category, setCategory] = useState("All");
 
-  const tagSelectedValues = ["Nature", "People"];
-  const catSelectedValues = ["New Added", "People"];
+  const tagSelectedValues = ["Yoga"];
+  const catSelectedValues = ["Yoga"];
 
   const onTagSelect = (event) => {
     setTags(event);
@@ -129,7 +129,7 @@ const Newpost = () => {
       formData.append("title", title);
       formData.append("category", category);
       formData.append(
-        "sub-categories",
+        "subCategories",
         subCat.length === 0
           ? JSON.stringify(catSelectedValues)
           : JSON.stringify(subCat)
@@ -187,10 +187,10 @@ const Newpost = () => {
           <Header classOption="hb-border" />
           <div className="main-content">
             <div className="hv-center">
-              <div className="text-center-black">
-                <p>Please Sign In to Post Your Blogs </p>
+              <div className="text-center">
+                <p>Please Sign In to publish your blogs </p>
                 <Link href="/auth/signin">
-                  <a>Sign In</a>
+                  <a className="blue-button">Sign In</a>
                 </Link>
               </div>
             </div>
@@ -215,9 +215,6 @@ const Newpost = () => {
                 <form>
                   <div className="row">
                     <div className="col-sm-6 col-md-6 col-lg-4">
-                      <div className="text-center-black">
-                        <p>SELECT BLOG THUMBNAIL IMAGE</p>
-                      </div>
                       <div className="img-style">
                         <img
                           src={
@@ -226,18 +223,28 @@ const Newpost = () => {
                               : null
                           }
                           alt={selectedImage ? selectedImage.name : null}
-                          height={280}
+                          height={180}
                         />
-
-                        <input
-                          accept=".jpg, .png, .jpeg"
-                          onChange={handleChange}
-                          type="file"
-                          required
-                        />
+                        <div style={{ textAlign: "center" }}>
+                          <input
+                            accept=".jpg, .png, .jpeg"
+                            onChange={handleChange}
+                            type="file"
+                            name="uploadfile"
+                            id="img"
+                            style={{ display: "none" }}
+                          />
+                          <label className="blog-thumbImage" htmlFor="img">
+                            Upload Thumbnail Image
+                          </label>
+                        </div>
+                      </div>
+                      <div style={{ margin: "4px 0px" }}>
+                        <label>Blog Template</label>
                         <select
                           onChange={(event) => setTemplate(event.target.value)}
                           value={template}
+                          style={{ float: "right", width: 220 }}
                         >
                           <option value="template_with_headerimage">
                             Blog with Header Image
@@ -246,31 +253,31 @@ const Newpost = () => {
                             Blog without Header Image
                           </option>
                         </select>
+                      </div>
+                      <div style={{ marginBottom: "4px" }}>
+                        <label>Blog Category</label>
                         <select
                           onChange={(event) => setCategory(event.target.value)}
                           value={category}
+                          style={{ float: "right", width: 220 }}
                         >
-                          <option value="All">All</option>
-                          <option value="Blogs">Blogs</option>
-                          <option value="Yoga">Yoga</option>
+                          <option value="all">All</option>
+                          <option value="blogs">Blogs</option>
+                          <option value="yoga">Yoga</option>
                         </select>
                       </div>
-                      <div className="text-center-black">
-                        <p>SELECT BLOG CATEGORY</p>
-                      </div>
+
                       <Multiselect
                         options={blogCategoryOptions}
                         selectedValues={catSelectedValues}
                         onSelect={onCatSelect}
                         onRemove={onCatRemove}
-                        placeholder="+ Add Categories"
+                        placeholder="+ Add Sub Categories"
                         id="catOption"
                         isObject={false}
                         className="catDrowpdown"
                       />
-                      <div className="text-center-black">
-                        <p>SELECT BLOG TAGS</p>
-                      </div>
+
                       <Multiselect
                         options={blogTagsOptions}
                         selectedValues={tagSelectedValues}
@@ -294,7 +301,7 @@ const Newpost = () => {
                         />
                       </div>
                       <SunEditor
-                        height="60vh"
+                        height="50vh"
                         setDefaultStyle="font-family: Arial; font-size: 16px;"
                         placeholder="Write your content here ...."
                         onChange={handleEditorChange}

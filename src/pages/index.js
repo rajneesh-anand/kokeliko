@@ -1,9 +1,7 @@
 import React from "react";
 import ScrollToTop from "../components/scroll-to-top";
 import SEO from "../components/seo";
-import QuteContainer from "../containers/global/global-qute";
-import PortfolioContainer from "../containers/global/portfolio";
-import IntroContainer from "../containers/home/intro";
+
 import Footer from "../layouts/footer";
 import Header from "../layouts/header";
 import Layout from "../layouts";
@@ -13,10 +11,7 @@ const HomePage = ({ blogData }) => {
   return (
     <React.Fragment>
       <Layout>
-        <SEO
-          title="KokeLiko – Photography"
-          canonical={process.env.PUBLIC_URL}
-        />
+        <SEO title="KokeLiko | Home" canonical={process.env.PUBLIC_URL} />
         <div className="wrapper home-default-wrapper">
           <Header classOption="hb-border" />
           <div className="main-content">
@@ -36,7 +31,7 @@ export const getServerSideProps = async ({ query }) => {
   // Fetch data from external API
   try {
     const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/blog?page=${page}`
+      `${process.env.NEXTAUTH_URL}/api/articles?page=${page}`
     );
     if (res.status !== 200) {
       throw new Error("Failed to fetch");

@@ -40,27 +40,26 @@ function SinglePostForEdit({ post }) {
   const [html, setHtml] = useState("");
   const [message, setMessage] = useState("");
   const [session, loading] = useSession();
+  const [category, setCategory] = useState(blogData.category);
   const [template, setTemplate] = useState(blogData.template);
   const [tags, setTags] = useState(blogData.tags);
-  const [categories, setCategories] = useState(blogData.categories);
+  const [subCat, setSubCat] = useState(blogData.subCategories);
+
   const [isProcessing, setProcessingTo] = useState(false);
   const [isDrafting, setDraftingTo] = useState(false);
-
-  const tagSelectedValues = ["Nature", "People"];
-  const catSelectedValues = ["New Added", "People"];
 
   const onTagSelect = (event) => {
     setTags(event);
   };
   const onCatSelect = (event) => {
-    setCategories(event);
+    setSubCat(event);
   };
 
   const onTagRemove = (event) => {
     setTags(event);
   };
   const onCatRemove = (event) => {
-    setCategories(event);
+    setSubCat(event);
   };
 
   const handleEditorChange = (content) => {
@@ -82,17 +81,16 @@ function SinglePostForEdit({ post }) {
       const formData = new FormData();
       formData.append("image", selectedImage);
       formData.append("title", data.title);
+      formData.append("category", category);
       formData.append(
-        "categories",
-        categories.length === 0
-          ? JSON.stringify(catSelectedValues)
-          : JSON.stringify(categories)
+        "subCategories",
+        subCat.length === 0
+          ? JSON.stringify(blogData.subCategories)
+          : JSON.stringify(subCat)
       );
       formData.append(
         "tags",
-        tags.length === 0
-          ? JSON.stringify(tagSelectedValues)
-          : JSON.stringify(tags)
+        tags.length === 0 ? JSON.stringify(blogData.tags) : JSON.stringify(tags)
       );
       formData.append("content", !html ? data.content : html);
       formData.append(
@@ -139,17 +137,16 @@ function SinglePostForEdit({ post }) {
       const formData = new FormData();
       formData.append("image", selectedImage);
       formData.append("title", data.title);
+      formData.append("category", category);
       formData.append(
-        "categories",
-        categories.length === 0
-          ? JSON.stringify(catSelectedValues)
-          : JSON.stringify(categories)
+        "subCategories",
+        subCat.length === 0
+          ? JSON.stringify(blogData.subCategories)
+          : JSON.stringify(subCat)
       );
       formData.append(
         "tags",
-        tags.length === 0
-          ? JSON.stringify(tagSelectedValues)
-          : JSON.stringify(tags)
+        tags.length === 0 ? JSON.stringify(blogData.tags) : JSON.stringify(tags)
       );
       formData.append("content", !html ? data.content : html);
       formData.append(
@@ -167,7 +164,7 @@ function SinglePostForEdit({ post }) {
       formData.append("author", session?.user?.email);
 
       const result = await fetch(
-        `https://nodappserver.herokuapp.com/api/post/${blogData.id}`,
+        ` https://nodappserver.herokuapp.com/api/post/${blogData.id}`,
         {
           method: "POST",
           body: formData,
@@ -253,6 +250,15 @@ function SinglePostForEdit({ post }) {
                           Blog without Header Image
                         </option>
                       </select>
+
+                      <select
+                        onChange={(event) => setCategory(event.target.value)}
+                        value={category}
+                      >
+                        <option value="all">All</option>
+                        <option value="blogs">Blogs</option>
+                        <option value="yoga">Yoga</option>
+                      </select>
                     </form>
                   </div>
                   <div className="text-center-black">
@@ -260,10 +266,10 @@ function SinglePostForEdit({ post }) {
                   </div>
                   <Multiselect
                     options={blogCategoryOptions} // Options to display in the dropdown
-                    selectedValues={blogData.categories} // Preselected value to persist in dropdown
+                    selectedValues={blogData.subCategories} // Preselected value to persist in dropdown
                     onSelect={onCatSelect} // Function will trigger on select event
                     onRemove={onCatRemove} // Function will trigger on remove event
-                    placeholder="+ Add Categories"
+                    placeholder="+ Add Sub Categories"
                     id="catOption"
                     isObject={false}
                     className="catDropdown"

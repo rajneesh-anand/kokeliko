@@ -16,7 +16,7 @@ const BlogDetailsContainer = ({ data }) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-  const cate = data.categories.map((value, i) => {
+  const cate = data.subCategories.map((value, i) => {
     return (
       <Link
         className="category"
@@ -24,7 +24,7 @@ const BlogDetailsContainer = ({ data }) => {
         key={i}
       >
         {value}
-        {i !== data.categories.length - 1 && ","}
+        {i !== data.subCategories.length - 1 && ","}
       </Link>
     );
   });

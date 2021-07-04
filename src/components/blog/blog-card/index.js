@@ -14,7 +14,7 @@ const BlogCard = ({ data }) => {
     return htmr(str.split(" ").splice(0, no_words).join(" "));
   };
 
-  const cate = data.categories.map((value, i) => {
+  const cate = data.subCategories.map((value, i) => {
     return (
       <Link
         className="category"
@@ -39,8 +39,7 @@ const BlogCard = ({ data }) => {
         />
       </div>
       <div className="card-body">
-        {/* <span className="tag tag-teal">Technology</span> */}
-        <h4>{data.title}</h4>
+        <h6>{data.title}</h6>
         <div>{truncate(data.content, 35)}</div>
         <div className="user">
           <img src={data.author.image} alt="profile image" />

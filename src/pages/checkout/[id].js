@@ -21,8 +21,8 @@ const StripeCheckout = ({ data }) => {
     return (
       <Layout>
         <SEO
-          title="Checkout | KokeLiko "
-          canonical={process.env.PUBLIC_URL + "/checkout"}
+          title={" Checkout | KokeLiko"}
+          canonical={`${process.env.PUBLIC_URL}/checkout`}
         />
         <div className="wrapper home-default-wrapper">
           <Header classOption="hb-border" />

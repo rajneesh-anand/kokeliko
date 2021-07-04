@@ -23,7 +23,7 @@ const PortfolioContainer = () => {
 
   // Isotope Categories list JS
 
-  const { categories } = useMasonry(
+  const { subCategories } = useMasonry(
     PortfolioData,
     ".portfolio-list",
     ".masonry-grid",
@@ -42,7 +42,7 @@ const PortfolioContainer = () => {
         <div className="row">
           <div className="col-12">
             <div className="messonry-button text-center mb-50">
-              <PortfolioFilter categories={categories} />
+              <PortfolioFilter categories={subCategories} />
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@ const PortfolioContainer = () => {
             PortfolioData.map((portfolio) => (
               <div
                 key={portfolio._id}
-                className={`col masonry-grid mb-30 ${portfolio.categories
+                className={`col masonry-grid mb-30 ${portfolio.subCategories
                   .map((cat) => slugify(cat))
                   .join(" ")}`}
               >

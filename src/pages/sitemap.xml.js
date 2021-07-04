@@ -24,23 +24,26 @@ export const getServerSideProps = async ({ res }) => {
 
   const baseUrl = {
     development: "http://localhost:3000",
-    production: "https://vic.vercel.app",
+    production: "https://kokeliko.vercel.app",
   }[process.env.NODE_ENV];
 
   const staticPages = [
-    "https://vic.vercel.app/about",
-    "https://vic.vercel.app/contact",
-    "https://vic.vercel.app/blogs",
-    "https://vic.vercel.app/shop",
-    "https://vic.vercel.app/photos",
-    "https://vic.vercel.app/privacy",
-    "https://vic.vercel.app/termsofuse",
-    "https://vic.vercel.app/user/newpost",
-    "https://vic.vercel.app/user/account",
-    "https://vic.vercel.app/user/product",
-    "https://vic.vercel.app/user/upload",
-    "https://vic.vercel.app/auth/signin",
-    "https://vic.vercel.app/movie",
+    "https://kokeliko.vercel.app/about",
+    "https://kokeliko.vercel.app/contact",
+    "https://kokeliko.vercel.app/articles/spirituality",
+    "https://kokeliko.vercel.app/articles/yoga",
+    "https://kokeliko.vercel.app/articles/meditation",
+    "https://kokeliko.vercel.app/articles/travel",
+    "https://kokeliko.vercel.app/shop",
+    "https://kokeliko.vercel.app/photos",
+    "https://kokeliko.vercel.app/privacypolicy",
+    "https://kokeliko.vercel.app/termsofuse",
+    "https://kokeliko.vercel.app/user/newpost",
+    "https://kokeliko.vercel.app/user/account",
+    "https://kokeliko.vercel.app/user/product",
+    "https://kokeliko.vercel.app/user/upload/video",
+    "https://kokeliko.vercel.app/auth/signin",
+    "https://kokeliko.vercel.app/movie",
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
