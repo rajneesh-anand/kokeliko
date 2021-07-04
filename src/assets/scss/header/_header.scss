@@ -782,16 +782,13 @@
   display: flex;
   justify-content: center;  
   a{
-    margin-right: 8px;
+    margin-right: 16px;
     text-transform: uppercase;
-    font-weight: 700;
-    .active-link{     
-      color: #03121b;
-      text-decoration: underline;
-     
-    } 
-    
+    font-weight: 700;   
   }
+  .active-link{     
+    color: rgb(3, 83, 83);        
+  } 
   @media #{$xs-device} {
     display: none;
     

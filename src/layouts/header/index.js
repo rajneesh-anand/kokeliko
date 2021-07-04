@@ -63,6 +63,14 @@ const Header = ({ classOption }) => {
               <div className="topNav">
                 <div>
                   <ActiveLink
+                    href="/articles/spirituality"
+                    activeClassName="active-link"
+                  >
+                    <a>Spirituality</a>
+                  </ActiveLink>
+                </div>
+                <div>
+                  <ActiveLink
                     href="/articles/Meditation"
                     activeClassName="active-link"
                   >

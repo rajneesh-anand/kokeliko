@@ -41,10 +41,10 @@ const SideBarMenu = ({ show, handleClose }) => {
       show={show}
       onHide={handleClose}
       placement="start"
-      style={{ width: "250px" }}
+      style={{ width: "260px" }}
     >
       <OffcanvasHeader>
-        <OffcanvasTitle style={{ width: "100%" }}>
+        <OffcanvasTitle style={{ width: "100%", fontFamily: "Poppins" }}>
           {!session ? (
             <>
               <div className="text-center">
@@ -76,7 +76,7 @@ const SideBarMenu = ({ show, handleClose }) => {
                   }}
                 />
               </div>
-              <div className="text-center">
+              <div className="text-center" style={{ fontSize: 14 }}>
                 <p>{session.user.name}</p>
               </div>
               <div className="profile-sidebar-slider">
@@ -94,8 +94,8 @@ const SideBarMenu = ({ show, handleClose }) => {
         <div className="asside-navigation-area">
           <ul className="asside-menu">
             <li className="item">
-              <Link href="/">
-                <a>Home</a>
+              <Link href="/articles/spirituality">
+                <a>Spirituality</a>
               </Link>
             </li>
             {/* <li className="dropdown-submenu">
@@ -124,28 +124,43 @@ const SideBarMenu = ({ show, handleClose }) => {
             </li>
            */}
             <li>
-              <Link href="/about">
-                <a>About</a>
+              <Link href="/articles/Meditation">
+                <a>Meditation</a>
               </Link>
             </li>
             <li>
-              <Link href="/blogs">
-                <a>Blogs</a>
+              <Link href="/articles/yoga">
+                <a>Yoga</a>
               </Link>
             </li>
             <li>
-              <Link href="/movie">
-                <a>Movie</a>
+              <Link href="/articles/ayurveda">
+                <a>Ayurveda</a>
               </Link>
             </li>
             <li>
-              <Link href="/contact">
-                <a>Contact</a>
+              <Link href="/articles/travel">
+                <a>Travel</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/articles/tantra">
+                <a>Tantra</a>
               </Link>
             </li>
             <li>
               <Link href="/shop">
                 <a>Shop</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/query">
+                <a>Send Your Queries ?</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/about">
+                <a>About Us</a>
               </Link>
             </li>
           </ul>

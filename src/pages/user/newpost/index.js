@@ -33,8 +33,8 @@ const Newpost = () => {
   const [subCat, setSubCat] = useState([]);
   const [isProcessing, setProcessingTo] = useState(false);
   const [isDrafting, setDraftingTo] = useState(false);
-  const [template, setTemplate] = useState("template_with_headerimage");
-  const [category, setCategory] = useState("All");
+  const [template, setTemplate] = useState("template_without_headerimage");
+  const [category, setCategory] = useState("yoga");
 
   const tagSelectedValues = ["Yoga"];
   const catSelectedValues = ["Yoga"];
@@ -261,9 +261,12 @@ const Newpost = () => {
                           value={category}
                           style={{ float: "right", width: 220 }}
                         >
-                          <option value="all">All</option>
-                          <option value="blogs">Blogs</option>
                           <option value="yoga">Yoga</option>
+                          <option value="meditation">Meditation</option>
+                          <option value="ayurveda">Ayurveda</option>
+                          <option value="travel">Travel</option>
+                          <option value="tantra">Tantra</option>
+                          <option value="spirituality">Spirituality</option>
                         </select>
                       </div>
 

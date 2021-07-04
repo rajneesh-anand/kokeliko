@@ -27,10 +27,10 @@ const StripeCheckout = ({ data }) => {
         <div className="wrapper home-default-wrapper">
           <Header classOption="hb-border" />
           <div className="main-content">
-            <div className="text-center-black">
+            <div className="hv-center">
               <p>Please Sign In to Buy the Product </p>
               <Link href="/auth/signin">
-                <a>Sign In</a>
+                <a className="blue-button">Sign In</a>
               </Link>
             </div>
           </div>

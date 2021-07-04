@@ -2733,8 +2733,15 @@ iframe {
     width: 100%;
   }
 }
-
+.popover{
+  border-radius: 0px !important;
+}
+.popover-header{
+  font-size: 0.875rem !important;
+  font-family: 'Poppins' !important;
+}
 .profile-buttons {
+  margin-bottom: 0px !important;
   a {
     width: 100%;
   }
