@@ -30,7 +30,7 @@ const Account = ({ blogData }) => {
           <div className="hv-center">
             <p>Please SignIn To Access Your Account </p>
             <Link href="/auth/signin">
-              <a>Sign In</a>
+              <a className="blue-button">Sign In</a>
             </Link>
           </div>
         </div>
@@ -104,7 +104,7 @@ export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
 
   if (!session) {
-    return { props: { blogData: [] } };
+    return { props: { blogData: JSON.stringify([]) } };
   }
 
   const blogs = await prisma.post.findMany({

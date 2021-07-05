@@ -1,7 +1,5 @@
 import React from "react";
-import ScrollToTop from "../components/scroll-to-top";
 import SEO from "../components/seo";
-
 import Footer from "../layouts/footer";
 import Header from "../layouts/header";
 import Layout from "../layouts";
@@ -18,12 +16,12 @@ const HomePage = ({ blogData }) => {
             <BlogList blogData={blogData} />
           </div>
           <Footer />
-          <ScrollToTop />
         </div>
       </Layout>
     </React.Fragment>
   );
 };
+
 export const getServerSideProps = async ({ query }) => {
   // Fetch the first page as default
   const page = query.page || 1;
@@ -44,4 +42,5 @@ export const getServerSideProps = async ({ query }) => {
   // Pass data to the page via props
   return { props: { blogData } };
 };
+
 export default HomePage;

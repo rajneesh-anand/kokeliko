@@ -6,7 +6,6 @@ import SEO from "../../../components/seo";
 import Footer from "../../../layouts/footer";
 import Header from "../../../layouts/header";
 import Layout from "../../../layouts";
-import ScrollToTop from "../../../components/scroll-to-top";
 import dynamic from "next/dynamic";
 import SunEditor, { buttonList } from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
@@ -182,33 +181,35 @@ function SinglePostForEdit({ post }) {
     }
   };
 
-  if (!session) {
-    return (
-      <Layout>
-        <SEO
-          title="Edit Blog | KokeLiko "
-          canonical={process.env.PUBLIC_URL + "/drafts"}
-        />
-        <div className="wrapper home-default-wrapper">
-          <Header classOption="hb-border" />
-          <div className="main-content">
-            <div className="text-center-black">
-              <p>Please Sign In to view this page </p>
-              <Link href="/auth/signin">
-                <a>Sign In</a>
-              </Link>
-            </div>
-          </div>
-          <Footer />
-          <ScrollToTop />
-        </div>
-      </Layout>
-    );
-  }
-  return (
+  return loading ? (
+    <div className="hv-center">
+      <div className="spinner-border text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  ) : !session ? (
     <Layout>
       <SEO
-        title="New Blog | KokeLiko "
+        title="My Account | KokeLiko "
+        canonical={process.env.PUBLIC_URL + "/user/account"}
+      />
+      <div className="wrapper home-default-wrapper">
+        <Header classOption="hb-border" />
+        <div className="main-content">
+          <div className="hv-center">
+            <p>Please SignIn To Access Your Account </p>
+            <Link href="/auth/signin">
+              <a className="blue-button">Sign In</a>
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </Layout>
+  ) : (
+    <Layout>
+      <SEO
+        title="Update Blog | KokeLiko "
         canonical={process.env.PUBLIC_URL + "/user/newpost"}
       />
       <div className="wrapper home-default-wrapper">
@@ -216,32 +217,36 @@ function SinglePostForEdit({ post }) {
         <div className="main-content">
           <div className="container">
             {message === "" ? (
-              <div className="row">
-                <div className="col-sm-6 col-md-6 col-lg-4">
-                  <div className="text-center-black">
-                    <p>SELECT BLOG THUMBNAIL IMAGE</p>
-                  </div>
-                  <div className="img-style">
-                    <img
-                      src={
-                        selectedImage
-                          ? URL.createObjectURL(selectedImage)
-                          : blogData.image
-                      }
-                      alt={selectedImage ? selectedImage.name : null}
-                      height={280}
-                    />
-
-                    <form>
-                      <input
-                        accept=".jpg, .png, .jpeg"
-                        onChange={handleChange}
-                        type="file"
-                        required
+              <form>
+                <div className="row">
+                  <div className="col-sm-6 col-md-6 col-lg-4">
+                    <div className="img-style">
+                      <img
+                        src={blogData.image}
+                        alt={blogData.title}
+                        height={180}
                       />
+                      <div style={{ textAlign: "center" }}>
+                        <input
+                          accept=".jpg, .png, .jpeg"
+                          onChange={handleChange}
+                          type="file"
+                          name="uploadfile"
+                          id="img"
+                          style={{ display: "none" }}
+                        />
+                        <label className="blog-thumbImage" htmlFor="img">
+                          Upload Thumbnail Image
+                        </label>
+                      </div>
+                    </div>
+
+                    <div style={{ margin: "4px 0px" }}>
+                      <label>Blog Template</label>
                       <select
                         onChange={(event) => setTemplate(event.target.value)}
                         value={template}
+                        style={{ float: "right", width: 220 }}
                       >
                         <option value="template_with_headerimage">
                           Blog with Header Image
@@ -250,78 +255,82 @@ function SinglePostForEdit({ post }) {
                           Blog without Header Image
                         </option>
                       </select>
-
+                    </div>
+                    <div style={{ marginBottom: "4px" }}>
+                      <label>Blog Category</label>
                       <select
                         onChange={(event) => setCategory(event.target.value)}
                         value={category}
+                        style={{ float: "right", width: 220 }}
                       >
-                        <option value="all">All</option>
-                        <option value="blogs">Blogs</option>
                         <option value="yoga">Yoga</option>
+                        <option value="meditation">Meditation</option>
+                        <option value="ayurveda">Ayurveda</option>
+                        <option value="travel">Travel</option>
+                        <option value="tantra">Tantra</option>
+                        <option value="spirituality">Spirituality</option>
                       </select>
-                    </form>
-                  </div>
-                  <div className="text-center-black">
-                    <p>SELECT BLOG CATEGORY</p>
-                  </div>
-                  <Multiselect
-                    options={blogCategoryOptions} // Options to display in the dropdown
-                    selectedValues={blogData.subCategories} // Preselected value to persist in dropdown
-                    onSelect={onCatSelect} // Function will trigger on select event
-                    onRemove={onCatRemove} // Function will trigger on remove event
-                    placeholder="+ Add Sub Categories"
-                    id="catOption"
-                    isObject={false}
-                    className="catDropdown"
-                  />
-                  <div className="text-center-black">
-                    <p>SELECT BLOG TAGS</p>
-                  </div>
-                  <Multiselect
-                    options={blogTagsOptions} // Options to display in the dropdown
-                    selectedValues={blogData.tags} // Preselected value to persist in dropdown
-                    onSelect={onTagSelect} // Function will trigger on select event
-                    onRemove={onTagRemove} // Function will trigger on remove event
-                    placeholder="+ Add Tags"
-                    id="tagOption"
-                    isObject={false}
-                    className="tagDropdown"
-                  />
-                </div>
-                <div className="col-sm-6 col-md-6 col-lg-8">
-                  <div className="img-style">
-                    <input
-                      type="text"
-                      name="title"
-                      value={data.title}
-                      onChange={(e) =>
-                        setData({ ...data, title: e.target.value })
-                      }
-                      placeholder="Blog Title ..."
-                      required
+                    </div>
+
+                    <Multiselect
+                      options={blogCategoryOptions}
+                      selectedValues={blogData.subCategories}
+                      onSelect={onCatSelect}
+                      onRemove={onCatRemove}
+                      placeholder="+ Add Sub Categories"
+                      id="catOption"
+                      isObject={false}
+                      className="catDropdown"
+                    />
+                    <div className="text-center-black">
+                      <p>SELECT BLOG TAGS</p>
+                    </div>
+                    <Multiselect
+                      options={blogTagsOptions}
+                      selectedValues={blogData.tags}
+                      onSelect={onTagSelect}
+                      onRemove={onTagRemove}
+                      placeholder="+ Add Tags"
+                      id="tagOption"
+                      isObject={false}
+                      className="tagDropdown"
                     />
                   </div>
-                  <SunEditor
-                    height="60vh"
-                    setDefaultStyle="font-family: Arial; font-size: 16px;"
-                    placeholder="Write your content here ...."
-                    onChange={handleEditorChange}
-                    defaultValue={data.content}
-                    setOptions={{
-                      buttonList: buttonList.complex,
-                    }}
-                    required
-                  />
-                  <div style={{ justifyContent: "flex-end" }}>
-                    <button className="blue-button" onClick={draftPost}>
-                      {isDrafting ? "Updating..." : `Draft`}
-                    </button>
-                    <button className="blue-button" onClick={publishPost}>
-                      {isProcessing ? "Updating..." : `Publish`}
-                    </button>
+                  <div className="col-sm-6 col-md-6 col-lg-8">
+                    <div className="img-style">
+                      <input
+                        type="text"
+                        name="title"
+                        value={data.title}
+                        onChange={(e) =>
+                          setData({ ...data, title: e.target.value })
+                        }
+                        placeholder="Blog Title ..."
+                        required
+                      />
+                    </div>
+                    <SunEditor
+                      height="60vh"
+                      setDefaultStyle="font-family: Arial; font-size: 16px;"
+                      placeholder="Write your content here ...."
+                      onChange={handleEditorChange}
+                      defaultValue={data.content}
+                      setOptions={{
+                        buttonList: buttonList.complex,
+                      }}
+                      required
+                    />
+                    <div style={{ justifyContent: "flex-end" }}>
+                      <button className="blue-button" onClick={draftPost}>
+                        {isDrafting ? "Updating..." : `Draft`}
+                      </button>
+                      <button className="blue-button" onClick={publishPost}>
+                        {isProcessing ? "Updating..." : `Publish`}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </form>
             ) : (
               <div className="text-center-black">
                 <p>{message}</p>
@@ -329,7 +338,7 @@ function SinglePostForEdit({ post }) {
                 <Link href="/user/newpost">
                   <a className="blue-button">New Blog</a>
                 </Link>
-                <Link href="/blogs">
+                <Link href="/">
                   <a className="blue-button">Goto Blogs Page</a>
                 </Link>
               </div>
@@ -337,7 +346,6 @@ function SinglePostForEdit({ post }) {
           </div>
         </div>
         <Footer />
-        <ScrollToTop />
       </div>
     </Layout>
   );
@@ -346,7 +354,7 @@ export async function getServerSideProps({ params, req, res }) {
   const session = await getSession({ req });
   if (!session) {
     res.statusCode = 403;
-    return { props: { post: {} } };
+    return { props: { post: JSON.stringify([]) } };
   }
   try {
     const { id } = params;
@@ -355,7 +363,7 @@ export async function getServerSideProps({ params, req, res }) {
         id: parseInt(id),
       },
     });
-    console.log(post);
+
     return {
       props: { post: JSON.stringify(post) },
     };

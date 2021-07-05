@@ -70,11 +70,11 @@ const BlogDetailsContainer = ({ data }) => {
 
           <div className="bread-crumbs">
             <Link href={process.env.PUBLIC_URL + "/"}>
-              <a>Home</a>
+              <a>home</a>
             </Link>
             <span>&#8250;</span>
-            <Link href={process.env.PUBLIC_URL + "/blogs"}>
-              <a>Blogs</a>
+            <Link href={`${process.env.PUBLIC_URL}/articles/${data.category}`}>
+              <a>{data.category}</a>
             </Link>
             <span>&#8250;</span>
             <span className="active">{data.title}</span>

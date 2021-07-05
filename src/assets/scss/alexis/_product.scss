@@ -1,9 +1,7 @@
-.gallery {
-  margin-top: 16px;
-  margin-bottom: 56px;
+
   .content {
     // box-sizing: border-box;
-    background-color: rgb(255, 255, 255);
+    // background-color: rgb(255, 255, 255);
     float: left;
     text-align: center;
     // border-radius: 10px;
@@ -36,10 +34,10 @@
 
     .name {
       text-align: center;
-      color: #bf2705;
+      color: #212529;
       padding: 0 8px;
-      font-weight: 500;
-      font-size: 16px;
+      font-weight: 400;
+      font-size: 13px;
     }
     .desc {
       text-align: center;
@@ -49,7 +47,7 @@
     }
 
     h6 {
-      font-size: 26px;
+      font-size: 24px;
       text-align: center;
       color: #222f3e;
       margin: 0;
@@ -111,4 +109,4 @@
       background-color: #2183a2;
     }
   }
-}
+

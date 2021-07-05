@@ -1,15 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import BlogContainer from "../../containers/blog/blog-grid";
-import ScrollToTop from "../../components/scroll-to-top";
 import SEO from "../../components/seo";
 import Footer from "../../layouts/footer";
 import Header from "../../layouts/header";
 import Layout from "../../layouts";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
 
 const BlogsPage = ({ blogData }) => {
   const router = useRouter();
+  const [session, loading] = useSession();
   const { type } = router.query;
 
   return blogData.data.length === 0 ? (
@@ -23,9 +24,15 @@ const BlogsPage = ({ blogData }) => {
         <div className="main-content">
           <div className="hv-center">
             <h6>There is nothing here ! Write &amp; Share your own blog</h6>
-            <Link href="/user/newpost">
-              <a className="blue-button">Publish Your Blog</a>
-            </Link>
+            {session ? (
+              <Link href="/user/newpost">
+                <a className="blue-button">Publish Your Blog</a>
+              </Link>
+            ) : (
+              <Link href="/auth/signin">
+                <a className="blue-button">Sign In to publish your blog</a>
+              </Link>
+            )}
           </div>
         </div>
         <Footer />
@@ -43,7 +50,6 @@ const BlogsPage = ({ blogData }) => {
           <BlogContainer blogData={blogData} />
         </div>
         <Footer />
-        <ScrollToTop />
       </div>
     </Layout>
   );

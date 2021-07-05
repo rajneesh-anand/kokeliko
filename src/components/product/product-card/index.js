@@ -3,9 +3,8 @@ import Link from "next/link";
 
 const ProductCard = ({ data }) => {
   return (
-    <div className="col-sm-6 col-md-6 col-lg-3 content">
+    <div className="content">
       <img src={data.image} />
-
       <p className="name">{data.name}</p>
       <p className="desc">{data.description}</p>
       <h6>${data.price}</h6>

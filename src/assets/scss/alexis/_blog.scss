@@ -46,11 +46,11 @@
 }
 
 .blog-area {
-  // border-top: solid 1px #ccc;
+
   &.blog-masonry-area {
-    padding: 0 0 100px;
+    padding: 0 0 64px;
     @media #{$md-device} {
-      padding: 0 0 80px;
+      padding: 0 0 64px;
     }
     @media #{$sm-device} {
       padding: 0 0 60px;
@@ -476,31 +476,7 @@
       }
     }
   }
-  .social-icons {
-    color: $black-999;
-    font-size: 14px;
-    letter-spacing: 0.35px;
-    line-height: 1;
-    margin-bottom: 51px;
-    margin-left: auto;
-    span {
-      color: $black;
-      font-weight: $font-weight-bold;
-      margin-right: 16px;
-      text-transform: uppercase;
-    }
-    a {
-      color: $black-999;
-      font-size: 16px;
-      margin-right: 13.75px;
-      &:hover {
-        color: $black;
-      }
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
+ 
   .comment-area {
     border-top: 1px solid #e5e5e5;
     padding-top: 24px;

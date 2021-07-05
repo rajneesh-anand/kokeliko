@@ -73,8 +73,6 @@ const BlogList = ({ blogData }) => {
     ".blog-filter-menu",
     ".blog-filter-menu button"
   );
-  console.log(blogs);
-  console.log(categories);
 
   return (
     <>

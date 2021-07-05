@@ -1,8 +1,7 @@
 import React from "react";
-import ScrollToTop from "../../components/scroll-to-top";
 import SEO from "../../components/seo";
 import ContactContainer from "../../containers/contact";
-import MapContainer from "../../containers/global/map";
+// import MapContainer from "../../containers/global/map";
 import Footer from "../../layouts/footer";
 import Header from "../../layouts/header";
 import Layout from "../../layouts";
@@ -19,10 +18,9 @@ const Contact = () => {
           <Header classOption="hb-border" />
           <div className="main-content">
             <ContactContainer />
-            <MapContainer />
+            {/* <MapContainer /> */}
           </div>
           <Footer />
-          <ScrollToTop />
         </div>
       </Layout>
     </React.Fragment>

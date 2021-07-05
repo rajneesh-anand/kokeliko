@@ -86,7 +86,6 @@
         }
       }
       .header-action-area {
-
         button,
         a {
           color: $white;
@@ -494,6 +493,18 @@
     display: inline;
     width: auto;
   }
+  @media #{$xs-device} {
+    display: inline;
+    width: auto;
+  }
+  @media #{$sm-device} {
+    display: inline;
+    width: auto;
+  }
+  @media #{$md-device} {
+    display: inline;
+    width: auto;
+  }
   button,
   a {
     color: $body-color;
@@ -790,6 +801,14 @@
     color: rgb(3, 83, 83);        
   } 
   @media #{$xs-device} {
+    display: none;
+    
+  }
+  @media #{$sm-device} {
+    display: none;
+    
+  }
+  @media #{$md-device} {
     display: none;
     
   }

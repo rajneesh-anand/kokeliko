@@ -5,7 +5,7 @@ import SEO from "../../../components/seo";
 import Footer from "../../../layouts/footer";
 import Header from "../../../layouts/header";
 import Layout from "../../../layouts";
-import ScrollToTop from "../../../components/scroll-to-top";
+
 import { useSession } from "next-auth/client";
 import dynamic from "next/dynamic";
 import SunEditor, { buttonList } from "suneditor-react";
@@ -196,7 +196,6 @@ const Newpost = () => {
             </div>
           </div>
           <Footer />
-          <ScrollToTop />
         </div>
       </Layout>
     </React.Fragment>
@@ -337,7 +336,7 @@ const Newpost = () => {
                   <Link href="/user/newpost">
                     <a className="blue-button">New Blog</a>
                   </Link>
-                  <Link href="/blogs">
+                  <Link href="/">
                     <a className="blue-button">Goto Blogs Page</a>
                   </Link>
                 </div>
@@ -345,7 +344,6 @@ const Newpost = () => {
             </div>
           </div>
           <Footer />
-          <ScrollToTop />
         </div>
       </Layout>
     </React.Fragment>

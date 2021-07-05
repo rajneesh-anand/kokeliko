@@ -8,11 +8,9 @@ import SEO from "../../components/seo";
 import Footer from "../../layouts/footer";
 import Header from "../../layouts/header";
 import Layout from "../../layouts";
-import ScrollToTop from "../../components/scroll-to-top";
 
 const BlogDetails = ({ data }) => {
   const result = JSON.parse(data);
-  console.log(result.template);
 
   return result ? (
     <Layout>
@@ -32,7 +30,6 @@ const BlogDetails = ({ data }) => {
           </div>
         </div>
         <Footer />
-        <ScrollToTop />
       </div>
     </Layout>
   ) : (
@@ -48,7 +45,6 @@ const BlogDetails = ({ data }) => {
           </div>
         </div>
         <Footer />
-        <ScrollToTop />
       </div>
     </Layout>
   );

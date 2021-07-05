@@ -34,7 +34,7 @@ const BlogDetailsWithoutImage = ({ data }) => {
         <div className="post-details-body">
           <div className="blog-title">{data.title}</div>
           <div className="user">
-            <img src={data.author.image} alt="profile image" />
+            <img src={data.author.image} alt="profileimage" />
             <div className="user-info">
               <small>{data.author.name}</small>
               <small>{formatDate(data.createdAt)}</small>
@@ -60,11 +60,11 @@ const BlogDetailsWithoutImage = ({ data }) => {
 
           <div className="bread-crumbs">
             <Link href={process.env.PUBLIC_URL + "/"}>
-              <a>Home</a>
+              <a>home</a>
             </Link>
             <span>&#8250;</span>
-            <Link href={process.env.PUBLIC_URL + "/blogs"}>
-              <a>Blogs</a>
+            <Link href={`${process.env.PUBLIC_URL}/articles/${data.category}`}>
+              <a>{data.category}</a>
             </Link>
             <span>&#8250;</span>
             <span className="active">{data.title}</span>
