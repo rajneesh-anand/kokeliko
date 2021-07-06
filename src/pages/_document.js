@@ -12,15 +12,16 @@ class MyDocument extends Document {
           <link rel="icon" href="/fav.png" />
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=G-L55RZMPEQ3`}
+            src={`https://www.googletagmanager.com/gtag/js?id='G-93NWLELNJZ'`}
           />
+
           <script
             dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-L55RZMPEQ3', {
+            gtag('config', 'G-93NWLELNJZ', {
               page_path: window.location.pathname,
             });
           `,

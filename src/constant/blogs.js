@@ -12,11 +12,11 @@ export const blogTagsOptions = [
   "Mobile",
   "Spirituality",
   "Health",
+  "Meditation"
 ];
 
 export const blogCategoryOptions = [
-  "New Added",
-  "News",
+   "News",
   "Sports",
   "Science",
   "Yoga",
@@ -29,4 +29,6 @@ export const blogCategoryOptions = [
   "Mobile",
   "Health",
   "Spirituality",
+  "Asana",
+  "Anxiety",
 ];

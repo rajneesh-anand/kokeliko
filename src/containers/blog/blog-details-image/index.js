@@ -78,7 +78,7 @@ const BlogDetailsWithoutImage = ({ data }) => {
             <h4 className="title">Leave a comment</h4>
             <div className="comment-form-wrap">
               <Comment
-                url={`https://vic.vercel.app/read/${data.id}/${data.slug}`}
+                url={`https://kokeliko.vercel.app/read/${data.id}/${data.slug}`}
                 id={data.id}
                 title={data.title}
               />

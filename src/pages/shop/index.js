@@ -1,6 +1,6 @@
 import React from "react";
 import ShopContainer from "../../containers/shop/shop-grid";
-import ScrollToTop from "../../components/scroll-to-top";
+
 import SEO from "../../components/seo";
 import Footer from "../../layouts/footer";
 import Header from "../../layouts/header";
@@ -20,7 +20,7 @@ const ShopPage = ({ shopData }) => {
             <ShopContainer shopData={shopData} />
           </div>
           <Footer />
-          <ScrollToTop />
+       
         </div>
       </Layout>
     </React.Fragment>
