@@ -331,7 +331,7 @@ const Newpost = () => {
                   </div>
                 </form>
               ) : (
-                <div className="text-center-black">
+                <div className="hv-center">
                   <p>{message}</p>
                   <Link href="/user/newpost">
                     <a className="blue-button">New Blog</a>

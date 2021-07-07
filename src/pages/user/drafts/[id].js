@@ -325,14 +325,14 @@ function SinglePostForEdit({ post }) {
                         {isDrafting ? "Updating..." : `Draft`}
                       </button>
                       <button className="blue-button" onClick={publishPost}>
-                        {isProcessing ? "Updating..." : `Publish`}
+                        {isProcessing ? "Updating..." : `Update`}
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
             ) : (
-              <div className="text-center-black">
+              <div className="hv-center">
                 <p>{message}</p>
 
                 <Link href="/user/newpost">

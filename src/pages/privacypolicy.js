@@ -10,7 +10,7 @@ const PrivacyPolicyPage = () => {
       />
       <div className="container">
         <div className="row">
-          <h4>Pricay Page</h4>
+          <h4>Privacy Policy</h4>
         </div>
       </div>
     </>

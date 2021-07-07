@@ -10,7 +10,7 @@ const TermsOfUsePage = () => {
       />
       <div className="container">
         <div className="row">
-          <h4>Pricay Page</h4>
+          <h4>Terms of Service</h4>
         </div>
       </div>
     </>
