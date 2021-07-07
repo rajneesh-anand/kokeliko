@@ -334,13 +334,14 @@ function SinglePostForEdit({ post }) {
             ) : (
               <div className="hv-center">
                 <p>{message}</p>
-
-                <Link href="/user/newpost">
-                  <a className="blue-button">New Blog</a>
-                </Link>
-                <Link href="/">
-                  <a className="blue-button">Goto Blogs Page</a>
-                </Link>
+                <div>
+                  <Link href="/user/newpost">
+                    <a className="blue-button">New Blog</a>
+                  </Link>
+                  <Link href="/">
+                    <a className="blue-button">Goto Blogs Page</a>
+                  </Link>
+                </div>
               </div>
             )}
           </div>
