@@ -10,6 +10,7 @@ const SEO = ({ title, description, canonical, css, js, image }) => (
       name="viewport"
       content="width=device-width,minimum-scale=1,initial-scale=1"
     />
+
     <meta name="og:type" property="og:type" content="website" />
     <meta name="og:image" property="og:image" content="/og.png" />
     <meta name="og:title" property="og:title" content={title} />
@@ -27,16 +28,8 @@ const SEO = ({ title, description, canonical, css, js, image }) => (
       property="twitter:description"
       content={description}
     />
-    <meta
-      name="twitter:site"
-      property="twitter:site"
-      content="@victoriastudio"
-    />
-    <meta
-      name="twitter:creator"
-      property="twitter:site"
-      content="@victoriastudio"
-    />
+    <meta name="twitter:site" property="twitter:site" content="@kokeliko" />
+    <meta name="twitter:creator" property="twitter:site" content="@kokeliko" />
 
     <meta name="twitter:image" property="twitter:image" content="/og.png" />
 
