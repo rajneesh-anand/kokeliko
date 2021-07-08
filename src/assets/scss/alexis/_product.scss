@@ -25,7 +25,7 @@
     // }
 
     img {
-      height: 250px;
+       height: 120px;
       text-align: center;
       margin: 0 auto;
       display: block;
@@ -34,10 +34,12 @@
 
     .name {
       text-align: center;
-      color: #212529;
+      color: #051c33;
       padding: 0 8px;
-      font-weight: 400;
+      font-weight: 600;
       font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 16px !important;
     }
     .desc {
       text-align: center;
@@ -61,6 +63,8 @@
     .buy-now {
       text-align: center;
       margin: 10px 0px;
+      display: flex;
+    justify-content: space-between;
     }
     a {
       text-decoration: none;
@@ -70,7 +74,19 @@
       padding: 4px 10px;
       border: solid 1px teal;
       cursor: pointer;
-      margin-bottom: 8px;
+      // margin-bottom: 8px;
+    }
+
+    .buy-button {
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      background-color: #2183a2;
+      height: 37px;
+      width: 116px;
+      border: solid 1px teal;
+      cursor: pointer;
+      margin-left: 8px;
     }
     ul {
       list-style-type: none;

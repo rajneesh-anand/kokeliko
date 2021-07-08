@@ -53,6 +53,23 @@ model Product {
   inStock Boolean @default(true) 
 }
 
+
+
+model Orders {
+  id        Int     @default(autoincrement()) @id
+  OrderNumber     String?
+  Name        String
+  Email       String
+  Address   String[]
+  TotalProducts Int
+  TotalAmount Decimal
+  ProductDetails String[]
+  PaymentID String
+  createdAt     DateTime  @default(now()) 
+  
+ 
+}
+
 model User {
   id            Int       @default(autoincrement()) @id
   name          String?
@@ -62,7 +79,8 @@ model User {
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   posts         Post[]
-   movies        Movie[]
+  movies        Movie[]
+ 
 
   @@map(name: "users")
 }

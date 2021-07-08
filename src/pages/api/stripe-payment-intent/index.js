@@ -6,11 +6,11 @@ export default async (req, res) => {
   if (req.method === "POST") {
     const { name, address, email, amount } = req.body;
     console.log(req.body);
-    const amt = JSON.parse(amount);
-    console.log(amt);
+    // const amt = JSON.parse(amount);
+    // console.log(amt);
     try {
       const paymentIntent = await stripe.paymentIntents.create({
-        description: "Victoria Shop Payment",
+        description: "Kokeliko Shop Payment",
         shipping: {
           name: name,
           address: {
@@ -18,10 +18,10 @@ export default async (req, res) => {
             postal_code: address.postal_code,
             city: address.city,
             state: address.state,
-            country: "US",
+            country: address.country,
           },
         },
-        amount: amt * 100,
+        amount: amount * 100,
         currency: "usd",
         payment_method_types: ["card"],
       });

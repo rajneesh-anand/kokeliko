@@ -1,16 +1,22 @@
 import PropTypes from "prop-types";
 import { Fragment, useEffect, useState } from "react";
-import HamburgerMenu from "../../components/hamburger-menu";
 import Logo from "../../components/logo";
 import Profile from "../../components/profile";
 import PopupSearch from "../../components/popup-search";
 import SideBarMenu from "../../components/sidebar-menu";
+import SideBarCart from "../../components/sidebar-cart";
 import ActiveLink from "../../utils/activeLink";
+import { useCart } from "../../contexts/cart/use-cart";
 
 const Header = ({ classOption }) => {
+  const { cartItemsCount } = useCart();
   const [show, setShow] = useState(false);
+  const [showCart, setShowCart] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleCloseCart = () => setShowCart(false);
+  const handleShowCart = () => setShowCart(true);
 
   const [ofcanvasShow, setOffcanvasShow] = useState(false);
   const onCanvasHandler = () => {
@@ -121,6 +127,13 @@ const Header = ({ classOption }) => {
                 </div>
               </div>
             </div>
+            <div className="col-auto">
+              {cartItemsCount > 0 && (
+                <button className="cartIconHeader" onClick={handleShowCart}>
+                  {cartItemsCount}
+                </button>
+              )}
+            </div>
 
             <div className="col-auto">
               <Profile />
@@ -129,8 +142,7 @@ const Header = ({ classOption }) => {
         </div>
       </header>
       <SideBarMenu show={show} handleClose={handleClose} />
-      {/* <PopupSearch show={searchbarShow} onClose={onSearchHandler} />
-      <HamburgerMenu show={ofcanvasShow} onClose={onCanvasHandler} /> */}
+      <SideBarCart show={showCart} handleClose={handleCloseCart} />
     </Fragment>
   );
 };

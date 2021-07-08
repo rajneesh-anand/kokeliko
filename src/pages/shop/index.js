@@ -1,12 +1,12 @@
 import React from "react";
 import ShopContainer from "../../containers/shop/shop-grid";
-
 import SEO from "../../components/seo";
 import Footer from "../../layouts/footer";
 import Header from "../../layouts/header";
 import Layout from "../../layouts";
-
+import { useCart } from "../../contexts/cart/use-cart";
 const ShopPage = ({ shopData }) => {
+  const { cartItemsCount, calculatePrice } = useCart();
   return (
     <React.Fragment>
       <Layout>
@@ -20,7 +20,6 @@ const ShopPage = ({ shopData }) => {
             <ShopContainer shopData={shopData} />
           </div>
           <Footer />
-       
         </div>
       </Layout>
     </React.Fragment>

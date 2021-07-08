@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { CARD_OPTIONS } from "../../utils/stripe";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useSession } from "next-auth/client";
+import { useCart } from "../../contexts/cart/use-cart";
+import Link from "next/link";
 
-const StripeCheckoutForm = ({ data }) => {
+const StripeCheckoutForm = () => {
   const [isProcessing, setProcessingTo] = useState(false);
   const [checkoutError, setCheckoutError] = useState();
-  const [session, loading] = useSession();
+  const [session] = useSession();
+  const { cartItemsCount, calculatePrice, items, clearCart } = useCart();
+  const router = useRouter();
 
   const {
     register,
@@ -42,8 +46,9 @@ const StripeCheckoutForm = ({ data }) => {
         line1: inputdata.address,
         state: inputdata.state,
         postal_code: inputdata.zip,
+        country: inputdata.country,
       },
-      amount: data.price,
+      amount: calculatePrice(),
     };
 
     console.log(postData);
@@ -71,6 +76,7 @@ const StripeCheckoutForm = ({ data }) => {
             line1: inputdata.address,
             state: inputdata.state,
             postal_code: inputdata.zip,
+            country: inputdata.country,
           },
         },
       });
@@ -89,16 +95,50 @@ const StripeCheckoutForm = ({ data }) => {
         setCheckoutError(error.message);
         setProcessingTo(false);
         return;
-      }
+      } else {
+        // // On successful payment, save records to database and redirect to confirmation page.
+        const orderData = {
+          order_number: "Kokelio_order_001",
+          name: inputdata.name,
+          email: session.user.email,
+          address: {
+            city: inputdata.city,
+            line1: inputdata.address,
+            state: inputdata.state,
+            postal_code: inputdata.zip,
+            contry: inputdata.country,
+          },
+          total_products: cartItemsCount,
+          total_amount: calculatePrice(),
+          product_details: items,
+          payment_id: paymentMethodReq.paymentMethod.id,
+        };
 
-      // // On successful payment, redirect to thank you page.
-      await Router.push("/payment/success");
+        const orders = await fetch("/api/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderData),
+        });
+        const ordersResponse = await orders.json();
+        if ((ordersResponse.msg = "success")) {
+          setProcessingTo(false);
+          clearCart();
+          router.push(
+            `/payment/success?order=${ordersResponse.data.OrderNumber}`,
+            {
+              shallow: true,
+            }
+          );
+        }
+      }
     } catch (err) {
       setCheckoutError(err.message);
     }
   };
 
-  return (
+  return cartItemsCount > 0 ? (
     <div>
       <form
         method="POST"
@@ -170,6 +210,20 @@ const StripeCheckoutForm = ({ data }) => {
               {errors.zip && <p>{errors.zip.message}</p>}
             </div>
           </div>
+
+          <div className="col-6">
+            <div className="form-group">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Country"
+                {...register("country", {
+                  required: "Country is required",
+                })}
+              />
+              {errors.country && <p>{errors.country.message}</p>}
+            </div>
+          </div>
         </div>
 
         <hr />
@@ -186,13 +240,20 @@ const StripeCheckoutForm = ({ data }) => {
             type="submit"
             disabled={isProcessing || !stripe}
           >
-            {isProcessing ? "Processing..." : `PAY $ ${data.price}`}
+            {isProcessing ? "Processing..." : `PAY $ ${calculatePrice()}`}
           </button>
         </div>
       </form>
       {checkoutError ? (
         <div style={{ color: "red" }}>{checkoutError}</div>
       ) : null}
+    </div>
+  ) : (
+    <div className="hv-center">
+      <p>Your shopping cart is empty , Please add items in your Cart </p>
+      <Link href="/shop">
+        <a className="blue-button">Goto Shop Page</a>
+      </Link>
     </div>
   );
 };
