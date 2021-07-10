@@ -4,15 +4,23 @@ import SEO from "../../components/seo";
 import Footer from "../../layouts/footer";
 import Header from "../../layouts/header";
 import Layout from "../../layouts";
+import { useRouter } from "next/router";
 
 export default function SignIn({ csrfToken }) {
   const [email, setEmail] = useState("");
   const [session, loading] = useSession();
+  const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     signIn("email", { email: email });
   };
+
+  useEffect(() => {
+    if (session) {
+      router.push(window.localStorage.getItem("callback-origin"));
+    }
+  }, [session]);
 
   return loading ? (
     <div className="hv-center">
@@ -21,14 +29,14 @@ export default function SignIn({ csrfToken }) {
       </div>
     </div>
   ) : (
-    <Layout>
-      <SEO
-        title="Login | KokeLiko"
-        canonical={`${process.env.PUBLIC_URL}/auth/signin`}
-      />
-      <div className="wrapper about-page-wrapper">
-        <Header classOption="hb-border" />
-        <div className="main-content">
+    !session && (
+      <Layout>
+        <SEO
+          title="Sign In | KokeLiko"
+          canonical={`${process.env.PUBLIC_URL}/auth/signin`}
+        />
+        <div className="wrapper">
+          <Header classOption="hb-border" />
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-md-6 col-lg-6">
@@ -38,14 +46,7 @@ export default function SignIn({ csrfToken }) {
                   </div>
 
                   <div className="commonStyle">
-                    <button
-                      className="google"
-                      onClick={() =>
-                        signIn("google", {
-                          callbackUrl: "https://kokeliko.vercel.app",
-                        })
-                      }
-                    >
+                    <button className="google" onClick={() => signIn("google")}>
                       <span
                         className="fab fa-google fa-lg"
                         aria-hidden="true"
@@ -117,25 +118,24 @@ export default function SignIn({ csrfToken }) {
               </div>
             </div>
           </div>
+          <Footer />
         </div>
-
-        <Footer />
-      </div>
-    </Layout>
+      </Layout>
+    )
   );
 }
 
 export async function getServerSideProps(context) {
   const csrfToken = await getCsrfToken(context);
-  const session = await getSession(context);
-  if (session) {
-    return {
-      redirect: {
-        destination: "/user/account",
-        permanent: false,
-      },
-    };
-  }
+  // const session = await getSession(context);
+  // if (session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/user/account",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   return {
     props: { csrfToken },

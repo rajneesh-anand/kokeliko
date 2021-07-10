@@ -2,9 +2,13 @@ import PropTypes from "prop-types";
 import { useCart } from "../../../contexts/cart/use-cart";
 import { Counter } from "../../../components/counter/counter";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const ProductCard = ({ data }) => {
-  const { addItem, removeItem, getItem, isInCart } = useCart();
+  const { addItem, removeItem, getItem, isInCart, items } = useCart();
+  const itemIndex = items.findIndex((item) => item.id === data.id);
+  console.log(items[itemIndex]);
+
   const router = useRouter();
   const handleAddClick = (e) => {
     e.stopPropagation();
@@ -12,6 +16,9 @@ const ProductCard = ({ data }) => {
   };
   const handleRemoveClick = (e) => {
     e.stopPropagation();
+    if (data.minimumQuantity >= items[itemIndex].quantity) {
+      return;
+    }
     removeItem(data);
   };
   const handleBuyNow = (e) => {
@@ -30,17 +37,22 @@ const ProductCard = ({ data }) => {
           Buy Now
         </button>
         {!isInCart(data.id) ? (
-          <button className="buy-button" onClick={handleAddClick}>
+          <button className="buy-button" onClick={() => addItem(data)}>
             Add to Cart
           </button>
         ) : (
-          <Counter
-            value={getItem(data.id).quantity}
-            onDecrement={handleRemoveClick}
-            onIncrement={handleAddClick}
-          />
+          // <Counter
+          //   value={items[itemIndex].quantity}
+          //   onIncrement={handleAddClick}
+          //   onDecrement={handleRemoveClick}
+          // />
+          <button className="buy-button-added">Item Added</button>
         )}
       </div>
+
+      <Link href={process.env.PUBLIC_URL + `/product/${data.id}/${data.slug}`}>
+        <a className="blue-button">Detail</a>
+      </Link>
     </div>
   );
 };

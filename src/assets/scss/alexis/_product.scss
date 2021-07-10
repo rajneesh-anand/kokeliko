@@ -64,7 +64,7 @@
       text-align: center;
       margin: 10px 0px;
       display: flex;
-    justify-content: space-between;
+    justify-content: center;
     }
     a {
       text-decoration: none;
@@ -85,6 +85,18 @@
       height: 37px;
       width: 116px;
       border: solid 1px teal;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .buy-button-added {
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      background-color: rgb(10, 49, 49);
+      height: 37px;
+      width: 116px;
+      border: solid 1px rgb(4, 26, 26);
       cursor: pointer;
       margin-left: 8px;
     }

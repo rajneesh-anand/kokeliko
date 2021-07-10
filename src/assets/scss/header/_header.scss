@@ -233,9 +233,9 @@
   // Header Default
   &.header-default {
     background-color: $white;
-    padding: 6px 0 6px;
-    position: relative;
+    padding: 6px 0 6px;  
     z-index: 999;
+    border-bottom: 1px solid #ddd;
     @media #{$md-device} {
       padding: 8px 0 8px;
     }
@@ -857,5 +857,20 @@
         font-size: 15px;
       }
     }
+  }
+}
+
+.header-profile{
+  @media #{$xs-device} {
+    display: none;
+    
+  }
+  @media #{$sm-device} {
+    display: none;
+    
+  }
+  @media #{$md-device} {
+    display: none;
+    
   }
 }

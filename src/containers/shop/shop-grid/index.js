@@ -64,28 +64,24 @@ const ShopContainer = ({ shopData }) => {
 
   return (
     <>
-      <div className="blog-area blog-masonry-area">
-        <div className="container">
-          <div className="row post-items-style1">
-            {products.length > 0 &&
-              products.map((product, i) => {
-                return (
-                  <div key={product.id} className="col-sm-3 productList">
-                    <ProductCard data={product} />
-                  </div>
-                );
-              })}
+      <div className="row post-items-style1">
+        {products.length > 0 &&
+          products.map((product, i) => {
+            return (
+              <div key={product.id} className="col-sm-3 productList">
+                <ProductCard data={product} />
+              </div>
+            );
+          })}
+      </div>
+
+      {loading && (
+        <div className="hv-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="sr-only">Loading...</span>
           </div>
         </div>
-
-        {loading && (
-          <div className="hv-center">
-            <div className="spinner-border text-primary" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </>
   );
 };

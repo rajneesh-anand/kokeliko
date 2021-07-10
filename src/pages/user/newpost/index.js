@@ -5,7 +5,6 @@ import SEO from "../../../components/seo";
 import Footer from "../../../layouts/footer";
 import Header from "../../../layouts/header";
 import Layout from "../../../layouts";
-
 import { useSession } from "next-auth/client";
 import dynamic from "next/dynamic";
 import SunEditor, { buttonList } from "suneditor-react";
@@ -100,6 +99,7 @@ const Newpost = () => {
 
       const result = await fetch(
         "https://nodappserver.herokuapp.com/api/publish",
+
         {
           method: "POST",
           body: formData,

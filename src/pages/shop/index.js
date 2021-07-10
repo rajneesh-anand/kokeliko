@@ -14,9 +14,9 @@ const ShopPage = ({ shopData }) => {
           title="Shop | KokeLiko "
           canonical={process.env.PUBLIC_URL + "/shop"}
         />
-        <div className="wrapper home-default-wrapper">
+        <div className="wrapper">
           <Header classOption="hb-border" />
-          <div className="main-content">
+          <div className="container">
             <ShopContainer shopData={shopData} />
           </div>
           <Footer />

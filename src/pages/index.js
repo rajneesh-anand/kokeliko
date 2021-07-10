@@ -7,18 +7,16 @@ import BlogList from "../containers/blog-list";
 
 const HomePage = ({ blogData }) => {
   return (
-    <React.Fragment>
-      <Layout>
-        <SEO title="KokeLiko | Home" canonical={process.env.PUBLIC_URL} />
-        <div className="wrapper home-default-wrapper">
-          <Header classOption="hb-border" />
-          <div className="main-content">
-            <BlogList blogData={blogData} />
-          </div>
-          <Footer />
+    <Layout>
+      <SEO title="KokeLiko | Home" canonical={process.env.PUBLIC_URL} />
+      <div className="wrapper">
+        <Header classOption="hb-border" />
+        <div className="container">
+          <BlogList blogData={blogData} />
         </div>
-      </Layout>
-    </React.Fragment>
+        <Footer />
+      </div>
+    </Layout>
   );
 };
 

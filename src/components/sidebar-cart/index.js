@@ -8,8 +8,10 @@ import { CartItem } from "./CartItem";
 import { useCart } from "../../contexts/cart/use-cart";
 import Coupon from "../coupon";
 import { PromoCode, CouponBoxWrapper, CouponCode } from "./Cart-Style";
+import { MdRemoveShoppingCart } from "react-icons/md";
+import { CURRENCY } from "../../constant/currency";
 
-const SideBarMenu = ({ show, handleClose }) => {
+const SideBarCart = ({ show, handleClose }) => {
   const {
     items,
     coupon,
@@ -18,6 +20,7 @@ const SideBarMenu = ({ show, handleClose }) => {
     removeItemFromCart,
     cartItemsCount,
     calculatePrice,
+    getItem,
   } = useCart();
 
   const [hasCoupon, setCoupon] = useState(false);
@@ -27,25 +30,39 @@ const SideBarMenu = ({ show, handleClose }) => {
       show={show}
       onHide={handleClose}
       placement="end"
-      style={{ width: "400px" }}
+      className="cart-sidebar"
     >
-      <OffcanvasHeader>
-        <OffcanvasTitle></OffcanvasTitle>
+      <OffcanvasHeader className="cart-header">
+        <OffcanvasTitle>Shopping Cart</OffcanvasTitle>
+        <button
+          className="btn btn-sm btn-primary"
+          type="button"
+          onClick={handleClose}
+        />
       </OffcanvasHeader>
 
       <OffcanvasBody>
         {!!cartItemsCount ? (
           items.map((item) => (
-            <CartItem
-              key={`cartItem-${item.id}`}
-              onIncrement={() => addItem(item)}
-              onDecrement={() => removeItem(item)}
-              onRemove={() => removeItemFromCart(item)}
-              data={item}
-            />
+            <div key={item.id}>
+              <CartItem
+                onIncrement={() => addItem(item)}
+                onDecrement={() => removeItem(item)}
+                onRemove={() => removeItemFromCart(item)}
+                data={item}
+              />
+            </div>
           ))
         ) : (
-          <p>No Product</p>
+          <div style={{ textAlign: "center" }}>
+            <MdRemoveShoppingCart
+              style={{ height: 64, width: 64, color: "grey" }}
+            />
+            <p>Your cart is empty , Please Add products in your cart.</p>
+            <Link href="/shop">
+              <a className="blue-button">Add Product</a>
+            </Link>
+          </div>
         )}
 
         <div>
@@ -56,7 +73,7 @@ const SideBarMenu = ({ show, handleClose }) => {
                   <>
                     {!hasCoupon ? (
                       <button onClick={() => setCoupon((prev) => !prev)}>
-                        Have a special code?
+                        Apply coupon code ?
                       </button>
                     ) : (
                       <CouponBoxWrapper>
@@ -79,7 +96,10 @@ const SideBarMenu = ({ show, handleClose }) => {
 
               <Link href="/checkout">
                 <div className="checkout-footer">
-                  <a>Place Order {calculatePrice()} </a>
+                  <a>
+                    Place Order {CURRENCY.INR}
+                    {calculatePrice()}
+                  </a>
                 </div>
               </Link>
             </>
@@ -90,4 +110,4 @@ const SideBarMenu = ({ show, handleClose }) => {
   );
 };
 
-export default SideBarMenu;
+export default SideBarCart;

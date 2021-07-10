@@ -190,9 +190,9 @@
 .product-form {
   margin-top: 12px;
   .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 8px;
     @media #{$sm-device} {
-      margin-bottom: 15px;
+      margin-bottom: 8px;
     }
     .form-control {
       background-clip: inherit;
@@ -200,9 +200,9 @@
       border-radius: 2px;
       color: $black;
       font-size: 14px;
-      height: 45px;
+      height: 40px;
       letter-spacing: 0;
-      padding: 12px 19px;
+      padding: 4px 19px;
       @include placeholder {
         color: $black-999;
       }

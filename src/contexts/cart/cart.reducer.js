@@ -17,13 +17,15 @@ export const cartItemsTotalPrice = (items, coupon = null) => {
 };
 // cartItems, cartItemToAdd
 const addItemToCart = (state, action) => {
+  // console.log(`stateItem ${state.items[0].minimumQuantity}`);
   const existingCartItemIndex = state.items.findIndex(
     (item) => item.id === action.payload.id
   );
+  // console.log(existingCartItemIndex);
 
   if (existingCartItemIndex > -1) {
     const newState = [...state.items];
-    newState[existingCartItemIndex].quantity += action.payload.quantity;
+    newState[existingCartItemIndex].quantity += 1;
     return newState;
   }
   return [...state.items, action.payload];
@@ -49,23 +51,23 @@ const clearItemFromCart = (state, action) => {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'REHYDRATE':
+    case "REHYDRATE":
       return { ...state, ...action.payload };
-    case 'TOGGLE_CART':
+    case "TOGGLE_CART":
       return { ...state, isOpen: !state.isOpen };
-    case 'ADD_ITEM':
+    case "ADD_ITEM":
       return { ...state, items: addItemToCart(state, action) };
-    case 'REMOVE_ITEM':
+    case "REMOVE_ITEM":
       return { ...state, items: removeItemFromCart(state, action) };
-    case 'CLEAR_ITEM_FROM_CART':
+    case "CLEAR_ITEM_FROM_CART":
       return { ...state, items: clearItemFromCart(state, action) };
-    case 'CLEAR_CART':
+    case "CLEAR_CART":
       return { ...state, items: [] };
-    case 'APPLY_COUPON':
+    case "APPLY_COUPON":
       return { ...state, coupon: action.payload };
-    case 'REMOVE_COUPON':
+    case "REMOVE_COUPON":
       return { ...state, coupon: null };
-    case 'TOGGLE_RESTAURANT':
+    case "TOGGLE_RESTAURANT":
       return { ...state, isRestaurant: !state.isRestaurant };
     default:
       throw new Error(`Unknown action: ${action.type}`);

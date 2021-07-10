@@ -3,7 +3,13 @@
   Common CSS
 -----------------------------------------------------------------------
 */
+.wrapper{
+  display: grid;
+    grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+    
 
+}
 
 .home-default-wrapper {
   position: relative;
@@ -774,17 +780,12 @@ iframe {
   }
 }
 
-.hv-center {
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // margin-right: -50%;
-  // transform: translate(-50%, -50%);
+.hv-center { 
 
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
+  height: 100%;
   flex-direction: column;
   text-align: center;
 }

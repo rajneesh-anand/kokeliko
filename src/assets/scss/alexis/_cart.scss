@@ -48,3 +48,21 @@
     border: 1px solid teal;
     width:28px
 }
+
+.cart-sidebar {
+    width: 450px;
+    @media #{$xs-device} {
+        width: 304px;
+      }
+      @media #{$xxs-device} {
+        width: 320px;
+      }
+    .cart-header{
+        background-color: #ffdeb8;
+        button{
+            border-radius: 50%;
+            height: 24px;
+            width: 24px;
+        }
+    }
+}

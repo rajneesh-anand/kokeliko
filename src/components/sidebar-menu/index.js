@@ -170,7 +170,7 @@ const SideBarMenu = ({ show, handleClose }) => {
       <div className="side-footer">
         <ul className="widget-social-icons">
           <li className="social-text">
-            <span>follow us on social</span>
+            <span>Follow us on social</span>
           </li>
           <li>
             <a

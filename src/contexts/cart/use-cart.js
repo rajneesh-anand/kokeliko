@@ -12,7 +12,7 @@ const INITIAL_STATE = {
 const useCartActions = (initialCart = INITIAL_STATE) => {
   const [state, dispatch] = useReducer(reducer, initialCart);
 
-  const addItemHandler = (item, quantity = 1) => {
+  const addItemHandler = (item, quantity = item.minimumQuantity) => {
     dispatch({ type: "ADD_ITEM", payload: { ...item, quantity } });
   };
 

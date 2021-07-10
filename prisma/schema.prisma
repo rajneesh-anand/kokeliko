@@ -46,10 +46,18 @@ model Movie {
 model Product {
   id       Int     @default(autoincrement()) @id
   name     String?
+  slug String?
   image    String?
-  description String ?
-  price    Decimal
-  discount Int?
+  description String?
+  category    String?
+  subCategory   String[]
+  size  String?
+  weight  Decimal?  
+  price    Decimal 
+  discount Decimal?
+  gst Decimal?
+  minimumQuantity Int?
+  usage String?
   inStock Boolean @default(true) 
 }
 
@@ -60,8 +68,12 @@ model Orders {
   OrderNumber     String?
   Name        String
   Email       String
+  Contact String?
   Address   String[]
   TotalProducts Int
+  Amount Decimal
+  Tax Decimal?
+  ShippingCharge  Decimal ?
   TotalAmount Decimal
   ProductDetails String[]
   PaymentID String

@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import { Fragment, useEffect, useState } from "react";
 import Logo from "../../components/logo";
 import Profile from "../../components/profile";
-import PopupSearch from "../../components/popup-search";
 import SideBarMenu from "../../components/sidebar-menu";
 import SideBarCart from "../../components/sidebar-cart";
 import ActiveLink from "../../utils/activeLink";
 import { useCart } from "../../contexts/cart/use-cart";
+import { GiShoppingBag } from "react-icons/gi";
 
 const Header = ({ classOption }) => {
   const { cartItemsCount } = useCart();
@@ -120,22 +120,45 @@ const Header = ({ classOption }) => {
                     <a>Shop</a>
                   </ActiveLink>
                 </div>
-                <div>
+                {/* <div>
                   <ActiveLink href="/query" activeClassName="active-link">
                     <a>Send Your Queries ?</a>
                   </ActiveLink>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="col-auto">
               {cartItemsCount > 0 && (
-                <button className="cartIconHeader" onClick={handleShowCart}>
-                  {cartItemsCount}
+                <button
+                  style={{
+                    border: "none",
+                    backgroundColor: "white",
+                    position: "relative",
+                  }}
+                  onClick={handleShowCart}
+                >
+                  <GiShoppingBag
+                    style={{
+                      height: 28,
+                      width: 28,
+                      color: "teal",
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: 18,
+                      paddingTop: 8,
+                      color: "white",
+                      fontSize: 13,
+                    }}
+                  >
+                    {cartItemsCount}
+                  </span>
                 </button>
               )}
             </div>
-
-            <div className="col-auto">
+            <div className="col-auto header-profile">
               <Profile />
             </div>
           </div>

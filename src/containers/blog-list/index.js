@@ -76,30 +76,22 @@ const BlogList = ({ blogData }) => {
 
   return (
     <>
-      <div className="blog-area blog-masonry-area">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12 text-center">
-              <BlogFilter categories={categories} />
-            </div>
-          </div>
-          <div className="row masonryGrid post-items-style1">
-            {blogs.length > 0 &&
-              blogs.map((blog, i) => {
-                return (
-                  <div
-                    key={blog.id}
-                    className={`col-lg-12  blogList masonry-item ${blog.subCategories
-                      .map((cat) => slugify(cat))
-                      .join(" ")}`}
-                  >
-                    <BlogCardMain data={blog} />
-                  </div>
-                );
-              })}
-          </div>
+      <div className="row">
+        <div className="col-lg-12 text-center">
+          <BlogFilter categories={categories} />
         </div>
       </div>
+      <div className="row masonryGrid post-items-style1">
+        {blogs.length > 0 &&
+          blogs.map((blog) => {
+            return (
+              <div key={blog.id} className="col-lg-12  blogList masonry-item ">
+                <BlogCardMain data={blog} />
+              </div>
+            );
+          })}
+      </div>
+
       {loading && (
         <div className="hv-center">
           <div className="spinner-border text-primary" role="status">

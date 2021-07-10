@@ -1,5 +1,5 @@
-import React from "react";
-import { useSession, getSession } from "next-auth/client";
+import React, { useEffect } from "react";
+import { useSession } from "next-auth/client";
 import Link from "next/link";
 import SEO from "../../components/seo";
 import Footer from "../../layouts/footer";
@@ -7,12 +7,18 @@ import Header from "../../layouts/header";
 import Layout from "../../layouts";
 import prisma from "../../lib/prisma";
 import Table from "react-bootstrap/Table";
+import { useCart } from "../../contexts/cart/use-cart";
 
 const Success = ({ data }) => {
   console.log(JSON.parse(data));
   const [session, loading] = useSession();
   const orderData = JSON.parse(data);
   const ProductDetails = JSON.parse(orderData.ProductDetails);
+  const { clearCart } = useCart();
+
+  useEffect(() => {
+    clearCart();
+  }, []);
 
   return loading ? (
     <div className="hv-center">

@@ -37,6 +37,15 @@ export const CounterBox = styled.div(
         backgroundColor: "gray.200",
         color: "text.bold",
       },
+      smallHorizontal: {
+        backgroundColor: "gray.200",
+        color: "white",
+        fontSize: "13px",
+        fontWeight: "400",
+        marginLeft: 0,
+        width: 60,
+        height: 24,
+      },
       lightVertical: {
         width: 30,
         height: 90,
@@ -85,6 +94,10 @@ export const CounterButton = styled.button(
       },
       lightVertical: {
         color: "text.regular",
+      },
+      smallHorizontal: {
+        padding: 1,
+        fontSize: 13,
       },
     },
   })
