@@ -77,7 +77,7 @@ const Header = ({ classOption }) => {
                 </div>
                 <div>
                   <ActiveLink
-                    href="/articles/Meditation"
+                    href="/articles/meditation"
                     activeClassName="active-link"
                   >
                     <a>Meditation</a>

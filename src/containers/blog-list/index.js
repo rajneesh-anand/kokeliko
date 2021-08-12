@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import BlogFilter from "../../components/blog/blog-filter";
 import BlogCardMain from "../../components/blog-card-main";
 import useMasonry from "../../hooks/use-masonry";
-import { slugify } from "../../utils";
 import Router, { useRouter } from "next/router";
+import Loading from "components/loading";
+import { slugify } from "../../utils";
 
-const BlogList = ({ blogData }) => {
+const BlogList = ({ data }) => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -13,15 +14,15 @@ const BlogList = ({ blogData }) => {
   const stopLoading = () => setLoading(false);
 
   useEffect(() => {
-    if (blogData) {
+    if (data) {
       // Error check
-      if (blogData.error) {
+      if (data.error) {
         // Handle error
       } else {
-        setBlogs(blogData.data);
+        setBlogs(data.data);
       }
     }
-  }, [blogData]);
+  }, [data]);
 
   // Router event handler
   useEffect(() => {
@@ -44,19 +45,16 @@ const BlogList = ({ blogData }) => {
   const handleScroll = () => {
     // To get page offset of last user
     const lastUserLoaded = document.querySelector(
-      ".post-items-style1 > .blogList:last-child"
+      ".portfolio-list > .masonry-grid:last-child"
     );
     if (lastUserLoaded) {
       const lastUserLoadedOffset =
         lastUserLoaded.offsetTop + lastUserLoaded.clientHeight;
       const pageOffset = window.pageYOffset + window.innerHeight;
       if (pageOffset > lastUserLoadedOffset) {
-        // Stops loading
-        /* IMPORTANT: Add !loading  */
-        if (blogData.curPage < blogData.maxPage && !loading) {
-          // Trigger fetch
+        if (data.curPage < data.maxPage && !loading) {
           const query = router.query;
-          query.page = parseInt(blogData.curPage) + 1;
+          query.page = parseInt(data.curPage) + 1;
           router.push({
             pathname: router.pathname,
             query: query,
@@ -68,37 +66,36 @@ const BlogList = ({ blogData }) => {
 
   const { categories } = useMasonry(
     blogs,
-    ".masonryGrid",
-    ".masonry-item",
-    ".blog-filter-menu",
-    ".blog-filter-menu button"
+    ".portfolio-list",
+    ".masonry-grid",
+    ".messonry-button",
+    ".messonry-button button"
   );
 
   return (
     <>
       <div className="row">
-        <div className="col-lg-12 text-center">
-          <BlogFilter categories={categories} />
-        </div>
-      </div>
-      <div className="row masonryGrid post-items-style1">
-        {blogs.length > 0 &&
-          blogs.map((blog) => {
-            return (
-              <div key={blog.id} className="col-lg-12  blogList masonry-item ">
-                <BlogCardMain data={blog} />
-              </div>
-            );
-          })}
-      </div>
-
-      {loading && (
-        <div className="hv-center">
-          <div className="spinner-border text-primary" role="status">
-            <span className="sr-only">Loading...</span>
+        <div className="col-12">
+          <div className="messonry-button text-center mb-8">
+            <BlogFilter categories={categories} />
           </div>
         </div>
-      )}
+      </div>
+
+      <div className="row portfolio-list">
+        {blogs.map((item) => (
+          <div
+            key={item.id}
+            className={`col masonry-grid  ${item.subCategories
+              .map((cat) => slugify(cat))
+              .join(" ")}`}
+          >
+            <BlogCardMain data={item} />
+          </div>
+        ))}
+      </div>
+
+      {loading && <Loading />}
     </>
   );
 };

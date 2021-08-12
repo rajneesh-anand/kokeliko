@@ -1,18 +1,12 @@
 import imagesloaded from "imagesloaded";
-// import Isotope from "isotope-layout";
 import { useEffect, useState } from "react";
-import { flatDeep } from "../utils";
+import { flatDeep } from "utils";
 
-const useMasonry = (
-  PortfolioData,
-  masonryListWrap,
-  masonryGrid,
-  btnWrap,
-  btn
-) => {
+const useMasonry = (data, masonryListWrap, masonryGrid, btnWrap, btn) => {
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    const mixCategories = PortfolioData.map((item) => {
+    const mixCategories = data.map((item) => {
       return item.subCategories.map((cat) => cat);
     });
     const allCat = flatDeep(mixCategories, Infinity);
@@ -49,7 +43,7 @@ const useMasonry = (
         });
       });
     });
-  }, [btn, btnWrap, masonryGrid, masonryListWrap, PortfolioData]);
+  }, [btn, btnWrap, masonryGrid, masonryListWrap, data]);
   return { categories };
 };
 

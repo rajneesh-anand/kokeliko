@@ -1,22 +1,16 @@
 import { Provider } from "next-auth/client";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import * as ga from "../lib/ga";
-import { CartProvider } from "../contexts/cart/use-cart";
+import * as ga from "lib/ga";
+import { CartProvider } from "contexts/cart/use-cart";
 import AOS from "aos";
 // CSS
 import "aos/dist/aos.css";
-import "suneditor/dist/css/suneditor.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../assets/css/icofont.css";
-import "../assets/css/animate.css";
-import "../assets/css/elegantIcons.css";
-import "lightgallery.js/dist/css/lightgallery.css";
+import "react-toastify/dist/ReactToastify.css";
+
 //SCSS
-import "../assets/scss/style.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/swiper.scss";
-import "swiper/components/pagination/pagination.scss";
+import "assets/scss/styles.scss";
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();

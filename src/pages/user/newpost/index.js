@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import slugify from "slugify";
-import SEO from "../../../components/seo";
-import Footer from "../../../layouts/footer";
-import Header from "../../../layouts/header";
-import Layout from "../../../layouts";
-import { useSession } from "next-auth/client";
+import SEO from "components/seo";
+import Footer from "layouts/footer";
+import Header from "layouts/header";
+import Layout from "layouts";
+import { useSession, getSession } from "next-auth/client";
 import dynamic from "next/dynamic";
-import SunEditor, { buttonList } from "suneditor-react";
-import { blogTagsOptions } from "../../../constant/blogs";
-import { blogCategoryOptions } from "../../../constant/blogs";
-// const SunEditor = dynamic(() => import("suneditor-react"), {
-//   ssr: false,
-// });
+import { blogTagsOptions, blogCategoryOptions } from "constant/blogs";
+import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Multiselect = dynamic(
   () =>
@@ -22,18 +23,24 @@ const Multiselect = dynamic(
   }
 );
 
-const Newpost = () => {
-  const [selectedImage, setSelectedImage] = useState();
-  const [html, setHtml] = useState("");
-  const [message, setMessage] = useState("");
+const NewpostPage = () => {
   const [session, loading] = useSession();
-  const [title, setTitle] = useState("");
+  const editorRef = useRef();
+  const { CKEditor, ClassicEditor } = editorRef.current || {};
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const [message, setMessage] = useState();
+  const [blogContent, setBlogContent] = useState("");
+  const [thumbImage, setThumbImage] = useState();
   const [tags, setTags] = useState([]);
   const [subCat, setSubCat] = useState([]);
   const [isProcessing, setProcessingTo] = useState(false);
-  const [isDrafting, setDraftingTo] = useState(false);
-  const [template, setTemplate] = useState("template_without_headerimage");
-  const [category, setCategory] = useState("yoga");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onBlur",
+  });
 
   const tagSelectedValues = ["Yoga"];
   const catSelectedValues = ["Yoga"];
@@ -52,304 +59,309 @@ const Newpost = () => {
     setSubCat(event);
   };
 
-  const handleEditorChange = (content) => {
-    setHtml(content);
-  };
-
-  const handleChange = (event) => {
-    setSelectedImage(event.target.files[0]);
-  };
-
-  const draftPost = async (e) => {
-    e.preventDefault();
-
-    if (title === "" || html === "") {
-      return;
+  useEffect(() => {
+    editorRef.current = {
+      CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
+      ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
+    };
+    setEditorLoaded(true);
+    if (message === "success") {
+      toast.success("Blog post published !");
     }
-    setDraftingTo(true);
-
-    try {
-      const formData = new FormData();
-      formData.append("image", selectedImage);
-      formData.append("title", title);
-      formData.append("category", category);
-      formData.append(
-        "subCategories",
-        subCat.length === 0
-          ? JSON.stringify(catSelectedValues)
-          : JSON.stringify(subCat)
-      );
-      formData.append(
-        "tags",
-        tags.length === 0
-          ? JSON.stringify(tagSelectedValues)
-          : JSON.stringify(tags)
-      );
-      formData.append("content", html);
-      formData.append("template", template);
-      formData.append(
-        "slug",
-        slugify(title, {
-          remove: /[*+~.()'"!:@,]/g,
-          lower: true,
-        })
-      );
-      formData.append("published", false);
-      formData.append("author", session?.user?.email);
-
-      const result = await fetch(
-        "https://nodappserver.herokuapp.com/api/publish",
-
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const resultJson = await result.json();
-      // console.log(resultJson);
-      if (resultJson.msg === "success") {
-        setDraftingTo(false);
-        setMessage("Your Blog is drafted successfully");
-      }
-    } catch (error) {
-      console.error(error);
+    if (message === "failed") {
+      toast.error("Oops something went wrong !");
     }
-  };
+  }, [message]);
 
-  const publishPost = async (e) => {
-    e.preventDefault();
-    if (title === "" || html === "") {
-      return;
-    }
+  const onPublish = async (data) => {
     setProcessingTo(true);
+    setMessage("");
+    const formData = new FormData();
+    formData.append("image", thumbImage);
+    formData.append("title", data.blog_title);
+    formData.append("category", data.blog_category);
+    formData.append(
+      "subCategories",
+      subCat.length === 0
+        ? JSON.stringify(catSelectedValues)
+        : JSON.stringify(subCat)
+    );
+    formData.append(
+      "tags",
+      tags.length === 0
+        ? JSON.stringify(tagSelectedValues)
+        : JSON.stringify(tags)
+    );
+    formData.append("content", blogContent);
+    formData.append("template", data.blog_template);
+    formData.append(
+      "slug",
+      slugify(data.blog_title, {
+        remove: /[*+~.()'"!:@,]/g,
+        lower: true,
+      })
+    );
+    formData.append("published", true);
+    formData.append("author", session?.user?.email);
 
     try {
-      const formData = new FormData();
-      formData.append("image", selectedImage);
-      formData.append("title", title);
-      formData.append("category", category);
-      formData.append(
-        "subCategories",
-        subCat.length === 0
-          ? JSON.stringify(catSelectedValues)
-          : JSON.stringify(subCat)
-      );
-      formData.append(
-        "tags",
-        tags.length === 0
-          ? JSON.stringify(tagSelectedValues)
-          : JSON.stringify(tags)
-      );
-      formData.append("content", html);
-      formData.append("template", template);
-      formData.append(
-        "slug",
-        slugify(title, {
-          remove: /[*+~.()'"!:@,]/g,
-          lower: true,
-        })
-      );
-      formData.append("published", true);
-      formData.append("author", session?.user?.email);
-
-      const result = await fetch(
-        "https://nodappserver.herokuapp.com/api/publish",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const resultJson = await result.json();
-      // console.log(resultJson);
-      if (resultJson.msg === "success") {
+      const result = await fetch(`${process.env.API_URL}/publish`, {
+        method: "POST",
+        body: formData,
+      });
+      console.log(result.status);
+      if (result.status >= 400 && result.status < 600) {
+        throw new Error("Bad response from server");
+      } else {
         setProcessingTo(false);
-        setMessage("Your Blog is published successfully");
+        setMessage("success");
+        setThumbImage(null);
       }
     } catch (error) {
-      console.error(error);
+      setProcessingTo(false);
+      setMessage("failed");
     }
   };
 
-  return loading ? (
-    <div className="hv-center">
-      <div className="spinner-border text-primary" role="status">
-        <span className="sr-only">Loading...</span>
+  const onDraft = async (data) => {
+    setProcessingTo(true);
+    setMessage("");
+    const formData = new FormData();
+    formData.append("image", thumbImage);
+    formData.append("title", data.blog_title);
+    formData.append("category", data.blog_category);
+    formData.append(
+      "subCategories",
+      subCat.length === 0
+        ? JSON.stringify(catSelectedValues)
+        : JSON.stringify(subCat)
+    );
+    formData.append(
+      "tags",
+      tags.length === 0
+        ? JSON.stringify(tagSelectedValues)
+        : JSON.stringify(tags)
+    );
+    formData.append("content", blogContent);
+    formData.append("template", data.blog_template);
+    formData.append(
+      "slug",
+      slugify(data.blog_title, {
+        remove: /[*+~.()'"!:@,]/g,
+        lower: true,
+      })
+    );
+    formData.append("published", false);
+    formData.append("author", session?.user?.email);
+
+    try {
+      const result = await fetch(`${process.env.API_URL}/publish`, {
+        method: "POST",
+        body: formData,
+      });
+      console.log(result.status);
+      if (result.status >= 400 && result.status < 600) {
+        throw new Error("Bad response from server");
+      } else {
+        setProcessingTo(false);
+        setMessage("success");
+        setThumbImage(null);
+      }
+    } catch (error) {
+      setProcessingTo(false);
+      setMessage("failed");
+    }
+  };
+
+  return (
+    <Layout>
+      <SEO
+        title="New Blog | KokeLiko "
+        canonical={process.env.PUBLIC_URL + "/user/newpost"}
+      />
+      <div className="wrapper">
+        <Header />
+        <div className="container">
+          {message && (
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+          )}
+
+          <Form>
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Blog Post Thumb Image
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  type="file"
+                  accept=".jpg, .png, .jpeg"
+                  onChange={(event) => {
+                    setThumbImage(event.target.files[0]);
+                  }}
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Blog Post Title
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  type="text"
+                  placeholder=" Blog Title "
+                  {...register("blog_title", {
+                    required: " Blog title is required ! ",
+                  })}
+                />
+                {errors.blog_title && (
+                  <Form.Label style={{ color: "red" }}>
+                    {errors.blog_title.message}
+                  </Form.Label>
+                )}
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Blog Post Category
+              </Form.Label>
+              <Col sm="10">
+                <Form.Select className="me-sm-2" {...register("blog_category")}>
+                  {blogCategoryOptions.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Blog Sub Categories
+              </Form.Label>
+              <Col sm="10">
+                <Multiselect
+                  options={blogCategoryOptions}
+                  selectedValues={catSelectedValues}
+                  onSelect={onCatSelect}
+                  onRemove={onCatRemove}
+                  placeholder="+ Add Sub Categories"
+                  id="catOption"
+                  isObject={false}
+                  className="catDrowpdown"
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Blog Tags
+              </Form.Label>
+              <Col sm="10">
+                <Multiselect
+                  options={blogTagsOptions}
+                  selectedValues={tagSelectedValues}
+                  onSelect={onTagSelect}
+                  onRemove={onTagRemove}
+                  placeholder="+ Add Tags"
+                  id="tagOption"
+                  isObject={false}
+                  className="tagDrowpdown"
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Blog Template
+              </Form.Label>
+              <Col sm="10">
+                <Form.Select className="me-sm-2" {...register("blog_template")}>
+                  <option value="blogpost_with_thumbImage">
+                    Blog with Thumb Image
+                  </option>
+                  <option value="blogpost_without_thumbImage">
+                    Blog without Thumb Image
+                  </option>
+                </Form.Select>
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Blog Post Content
+              </Form.Label>
+              <Col sm="10">
+                {editorLoaded ? (
+                  <CKEditor
+                    editor={ClassicEditor}
+                    data={blogContent}
+                    onReady={(editor) => {
+                      console.log("Editor is ready to use!", editor);
+                    }}
+                    config={{ height: 400 }}
+                    onChange={(event, editor) => {
+                      editor.editing.view.change((writer) => {
+                        writer.setStyle(
+                          "height",
+                          "500px",
+                          editor.editing.view.document.getRoot()
+                        );
+                      });
+                      const data = editor.getData();
+                      setBlogContent(data);
+                    }}
+                  />
+                ) : (
+                  <p>editor..</p>
+                )}
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Col sm={{ span: 10, offset: 2 }}>
+                <Button variant="primary" onClick={handleSubmit(onPublish)}>
+                  {isProcessing ? "Publishing ..." : `Publish`}
+                </Button>
+                <Button variant="primary" onClick={handleSubmit(onDraft)}>
+                  {isProcessing ? "Drafting ..." : `Draft`}
+                </Button>
+              </Col>
+            </Form.Group>
+          </Form>
+        </div>
+        <Footer />
       </div>
-    </div>
-  ) : !session ? (
-    <React.Fragment>
-      <Layout>
-        <SEO
-          title="New Blog | KokeLiko "
-          canonical={process.env.PUBLIC_URL + "/user/newpost"}
-        />
-        <div className="wrapper home-default-wrapper">
-          <Header classOption="hb-border" />
-          <div className="main-content">
-            <div className="hv-center">
-              <div className="text-center">
-                <p>Please Sign In to publish your blogs </p>
-                <Link href="/auth/signin">
-                  <a className="blue-button">Sign In</a>
-                </Link>
-              </div>
-            </div>
-          </div>
-          <Footer />
-        </div>
-      </Layout>
-    </React.Fragment>
-  ) : (
-    <React.Fragment>
-      <Layout>
-        <SEO
-          title="New Blog | KokeLiko "
-          canonical={process.env.PUBLIC_URL + "/user/newpost"}
-        />
-        <div className="wrapper home-default-wrapper">
-          <Header classOption="hb-border" />
-          <div className="main-content">
-            <div className="container">
-              {message === "" ? (
-                <form>
-                  <div className="row">
-                    <div className="col-sm-6 col-md-6 col-lg-4">
-                      <div className="img-style">
-                        <img
-                          src={
-                            selectedImage
-                              ? URL.createObjectURL(selectedImage)
-                              : null
-                          }
-                          alt={selectedImage ? selectedImage.name : null}
-                          height={180}
-                        />
-                        <div style={{ textAlign: "center" }}>
-                          <input
-                            accept=".jpg, .png, .jpeg"
-                            onChange={handleChange}
-                            type="file"
-                            name="uploadfile"
-                            id="img"
-                            style={{ display: "none" }}
-                          />
-                          <label className="blog-thumbImage" htmlFor="img">
-                            Upload Thumbnail Image
-                          </label>
-                        </div>
-                      </div>
-                      <div style={{ margin: "4px 0px" }}>
-                        <label>Blog Template</label>
-                        <select
-                          onChange={(event) => setTemplate(event.target.value)}
-                          value={template}
-                          style={{ float: "right", width: 220 }}
-                        >
-                          <option value="template_with_headerimage">
-                            Blog with Header Image
-                          </option>
-                          <option value="template_without_headerimage">
-                            Blog without Header Image
-                          </option>
-                        </select>
-                      </div>
-                      <div style={{ marginBottom: "4px" }}>
-                        <label>Blog Category</label>
-                        <select
-                          onChange={(event) => setCategory(event.target.value)}
-                          value={category}
-                          style={{ float: "right", width: 220 }}
-                        >
-                          <option value="yoga">Yoga</option>
-                          <option value="meditation">Meditation</option>
-                          <option value="ayurveda">Ayurveda</option>
-                          <option value="travel">Travel</option>
-                          <option value="tantra">Tantra</option>
-                          <option value="spirituality">Spirituality</option>
-                        </select>
-                      </div>
-
-                      <Multiselect
-                        options={blogCategoryOptions}
-                        selectedValues={catSelectedValues}
-                        onSelect={onCatSelect}
-                        onRemove={onCatRemove}
-                        placeholder="+ Add Sub Categories"
-                        id="catOption"
-                        isObject={false}
-                        className="catDrowpdown"
-                      />
-
-                      <Multiselect
-                        options={blogTagsOptions}
-                        selectedValues={tagSelectedValues}
-                        onSelect={onTagSelect}
-                        onRemove={onTagRemove}
-                        placeholder="+ Add Tags"
-                        id="tagOption"
-                        isObject={false}
-                        className="tagDrowpdown"
-                      />
-                    </div>
-                    <div className="col-sm-6 col-md-6 col-lg-8">
-                      <div className="img-style">
-                        <input
-                          type="text"
-                          name="title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
-                          placeholder="Blog Title ..."
-                          required
-                        />
-                      </div>
-                      <SunEditor
-                        height="50vh"
-                        setDefaultStyle="font-family: Arial; font-size: 16px;"
-                        placeholder="Write your content here ...."
-                        onChange={handleEditorChange}
-                        setOptions={{
-                          buttonList: buttonList.complex,
-                        }}
-                      />
-                      <div style={{ justifyContent: "flex-end" }}>
-                        <button
-                          className="blue-button"
-                          type="submit"
-                          onClick={draftPost}
-                        >
-                          {isDrafting ? "Drafting ..." : `Draft`}
-                        </button>
-                        <button
-                          type="submit"
-                          className="blue-button"
-                          onClick={publishPost}
-                        >
-                          {isProcessing ? "Publishing ..." : `Publish`}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              ) : (
-                <div className="hv-center">
-                  <p>{message}</p>
-                  <div>
-                    <Link href="/user/newpost">
-                      <a className="blue-button">New Blog</a>
-                    </Link>
-                    <Link href="/">
-                      <a className="blue-button">Goto Blogs Page</a>
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-          <Footer />
-        </div>
-      </Layout>
-    </React.Fragment>
+    </Layout>
   );
 };
 
-export default Newpost;
+export default NewpostPage;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

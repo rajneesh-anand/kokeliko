@@ -16,7 +16,7 @@ const DraftCardLeftImage = ({ data }) => {
   }
 
   const publishBlog = async (id) => {
-    await fetch(`https://nodappserver.herokuapp.com/api/publish/${id}/true`, {
+    await fetch(`/api/publish/${id}`, {
       method: "PUT",
     });
     await Router.push("/user/drafts");

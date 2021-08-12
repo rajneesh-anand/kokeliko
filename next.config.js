@@ -1,13 +1,13 @@
 const isProd = process.env.NODE_ENV === "production";
 
-const assetPrefix = isProd
-  ? "https://kokeliko.vercel.app"
-  : "http://localhost:3000";
+const apiUrl = isProd
+  ? " https://nodappserver.herokuapp.com/api"
+  : "http://localhost:8080/api";
 
 module.exports = {
   env: {
     PUBLIC_URL: "",
-    baseUrl: assetPrefix,
+    API_URL: apiUrl,
   },
   images: {
     domains: ["res.cloudinary.com"],

@@ -19,8 +19,6 @@ export default async function handler(req, res) {
 
     const totalBlogs = blog.length;
 
-    // console.log(blog);
-
     res.status(200).json({
       msg: "success",
       data: blog,

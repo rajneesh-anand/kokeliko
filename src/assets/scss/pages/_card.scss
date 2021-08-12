@@ -9,6 +9,14 @@
     height:260px;
     width:100%;
     object-fit: cover;
+
+    @media #{$xs-device} {
+      height:160px;
+    }
+  
+    @media #{$xxs-device} {
+      height:160px;
+    }
   }
 
   @media #{$xs-device} {
@@ -139,7 +147,7 @@
     }
     .user-info small {
       color: #545d7a;
-      margin: 0px 8px;
+      // margin: 0px 8px;
       @media #{$xxs-device} {     
         font-size: 12px;  
         margin: 0px 2px;
@@ -270,9 +278,9 @@
   display: inline-block;
   &:hover {
     cursor: pointer;
-    background-color: #ffffff;
-    color: #002e5b;
-    border: 1px solid teal;
+     background-color: #011120;
+    color: white;
+    // border: 1px solid teal;
   }
 }
 .anchorList {

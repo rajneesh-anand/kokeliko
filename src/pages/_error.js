@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 
 function Error({ statusCode }) {
@@ -14,11 +13,9 @@ function Error({ statusCode }) {
             >
               ERROR {statusCode}
             </h1>
-            <h6 className="mt-0 mb-2 text-body">
-              Sorry, nothing found here !
-            </h6>
-            <Link href="/" as={`${process.env.baseUrl}`}>
-              <button>Go back home</button>
+            <h6 className="mt-0 mb-2 text-body">Sorry, nothing found here !</h6>
+            <Link href="/">
+              <a>Go back home</a>
             </Link>
           </div>
         </div>
@@ -35,8 +32,8 @@ function Error({ statusCode }) {
             <h6 className="mt-0 mb-2 text-body">
               Oops ! An unexpected error has occurred
             </h6>
-            <Link href="/" as={`${process.env.baseUrl}`}>
-               <button>Go back home</button>
+            <Link href="/">
+              <a>Go back home</a>
             </Link>
           </div>
         </div>

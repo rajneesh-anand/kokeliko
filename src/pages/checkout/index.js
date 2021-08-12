@@ -28,7 +28,7 @@ const StripeCheckout = () => {
 
   useEffect(() => {
     if (!session) {
-      window.localStorage.setItem("callback-origin", window.location.pathname);
+    
       router.push("/auth/signin");
     }
   }, []);

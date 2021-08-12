@@ -16,7 +16,7 @@ const BlogsPage = ({ blogData }) => {
   return blogData.data.length === 0 ? (
     <Layout>
       <SEO
-        title={`${type} | KokeLiko`}
+        title={`${type[0].toUpperCase()}${type.slice(1)} | KokeLiko`}
         canonical={`${process.env.PUBLIC_URL}/articles/${type}`}
       />
       <div className="wrapper home-default-wrapper">

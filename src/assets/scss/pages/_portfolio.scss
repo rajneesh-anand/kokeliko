@@ -535,48 +535,41 @@
     }
 }
 
+
+
+
 .messonry-button {
+    margin-top: 8px;
     button {
         background-color: transparent;
         border: 0;
         padding: 0;
         border: 0 none;
-        position: relative;
+        position: relative;        
+        margin: 4px;
         span {
             position: relative;
             display: inline-block;
             padding: 5px 20px;
             &.filter-text {
                 text-transform: uppercase;
-                font-weight: 600;
+                font-weight: 500;
                 line-height: 1.58;
-                font-size: 16px;
+                font-size: 12.5px;
                 color: $body-color;
+                 border: 1px solid #000000;
                 -webkit-transition: all 0.3s
                     cubic-bezier(0.645, 0.045, 0.355, 1);
                 transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-            }
-        }
-        &:hover {
-            span {
-                &.filter-counter {
-                    visibility: visible;
-                    opacity: 1;
-                    -webkit-transform: translate(-50%, -100%);
-                    -ms-transform: translate(-50%, -100%);
-                    transform: translate(-50%, -100%);
-                }
-                &.filter-text {
-                    color: $theme-color;
+
+                &.is-checked{
+                    color:red;
+                    border: 1px solid red;
+                  
+                    
                 }
             }
         }
-        &.is-checked {
-            span {
-                &.filter-text {
-                    color: $theme-color;
-                }
-            }
-        }
+       
     }
 }

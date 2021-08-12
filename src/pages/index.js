@@ -1,18 +1,28 @@
 import React from "react";
-import SEO from "../components/seo";
-import Footer from "../layouts/footer";
-import Header from "../layouts/header";
-import Layout from "../layouts";
-import BlogList from "../containers/blog-list";
+import SEO from "components/seo";
+import Footer from "layouts/footer";
+import Header from "layouts/header";
+import Layout from "layouts";
+import BlogList from "containers/blog-list";
+import Message from "components/message";
 
 const HomePage = ({ blogData }) => {
+  console.log(blogData);
   return (
     <Layout>
       <SEO title="KokeLiko | Home" canonical={process.env.PUBLIC_URL} />
       <div className="wrapper">
-        <Header classOption="hb-border" />
+        <Header />
         <div className="container">
-          <BlogList blogData={blogData} />
+          {blogData.data.length > 0 ? (
+            <BlogList data={blogData} />
+          ) : (
+            <Message
+              title="No Post Available !"
+              url="/user/newpost"
+              btnText="Write &amp; Share Blog"
+            />
+          )}
         </div>
         <Footer />
       </div>
@@ -33,7 +43,7 @@ export const getServerSideProps = async ({ query }) => {
       throw new Error("Failed to fetch");
     }
     blogData = await res.json();
-    // console.log(blogData);
+    console.log(blogData);
   } catch (err) {
     blogData = { error: { message: err.message } };
   }

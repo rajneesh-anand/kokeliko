@@ -104,14 +104,18 @@ const Drafts = ({ blogData }) => {
   );
 };
 
-export const getServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
-
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
   if (!session) {
-    return { props: { blogData: null } };
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
   }
 
-  const drafts = await prisma.post.findMany({
+  const blogs = await prisma.post.findMany({
     where: {
       author: { email: session.user.email },
       published: false,
@@ -122,13 +126,10 @@ export const getServerSideProps = async ({ req, res }) => {
       },
     },
   });
-
   return {
     props: {
-      blogData:
-        drafts.length != 0 ? JSON.stringify(drafts) : JSON.stringify([]),
+      blogData: blogs.length != 0 ? JSON.stringify(blogs) : JSON.stringify([]),
     },
   };
 };
-
 export default Drafts;

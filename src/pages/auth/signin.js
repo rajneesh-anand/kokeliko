@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { signIn, getCsrfToken, getSession, useSession } from "next-auth/client";
-import SEO from "../../components/seo";
-import Footer from "../../layouts/footer";
-import Header from "../../layouts/header";
-import Layout from "../../layouts";
+import SEO from "components/seo";
+import Footer from "layouts/footer";
+import Header from "layouts/header";
+import Layout from "layouts";
 import { useRouter } from "next/router";
+import Loading from "components/loading";
+import { AiFillGoogleCircle } from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa";
 
 export default function SignIn({ csrfToken }) {
   const [email, setEmail] = useState("");
@@ -16,18 +19,8 @@ export default function SignIn({ csrfToken }) {
     signIn("email", { email: email });
   };
 
-  useEffect(() => {
-    if (session) {
-      router.push(window.localStorage.getItem("callback-origin"));
-    }
-  }, [session]);
-
   return loading ? (
-    <div className="hv-center">
-      <div className="spinner-border text-primary" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-    </div>
+    <Loading />
   ) : (
     !session && (
       <Layout>
@@ -42,15 +35,19 @@ export default function SignIn({ csrfToken }) {
               <div className="col-md-6 col-lg-6">
                 <div className="signBlock">
                   <div className="commonStyle">
-                    <p>SignIn KokeLiko</p>
+                    <p>Sign In</p>
                   </div>
 
                   <div className="commonStyle">
-                    <button className="google" onClick={() => signIn("google")}>
-                      <span
-                        className="fab fa-google fa-lg"
-                        aria-hidden="true"
-                      ></span>{" "}
+                    <button
+                      className="google"
+                      onClick={() =>
+                        signIn("google", {
+                          callbackUrl: "https://kokeliko.vercel.app",
+                        })
+                      }
+                    >
+                      <AiFillGoogleCircle />
                       Login with Google
                     </button>
                   </div>
@@ -64,10 +61,7 @@ export default function SignIn({ csrfToken }) {
                         })
                       }
                     >
-                      <span
-                        className="fab fa-facebook fa-lg"
-                        aria-hidden="true"
-                      ></span>{" "}
+                      <FaFacebook />
                       Login with Facebook
                     </button>
                   </div>
@@ -96,7 +90,7 @@ export default function SignIn({ csrfToken }) {
                   </form>
                   <div className="text-center">
                     <p>
-                      By Login, you agree to KokeLiko
+                      By Login, you agree to Gulshan Shop
                       <a
                         href={process.env.PUBLIC_URL + "/termsofuse"}
                         target="_blank"

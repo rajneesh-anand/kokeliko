@@ -16,7 +16,7 @@ const BlogCardLeftImage = ({ data }) => {
   }
 
   const unpublishBlog = async (id) => {
-    await fetch(`https://nodappserver.herokuapp.com/api/publish/${id}/false`, {
+    await fetch(`/api/unpublish/${id}`, {
       method: "PUT",
     });
     await Router.push("/user/account");

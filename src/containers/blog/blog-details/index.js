@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import SwiperCore, { Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import SwiperCore, { Pagination } from "swiper";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import BlogTag from "../../../components/blog/blog-tag";
 import Comment from "../../../components/comment";
 import { slugify } from "../../../utils";
@@ -9,7 +9,7 @@ import htmr from "htmr";
 import Image from "next/image";
 import SocialIcon from "../../../components/social-icon";
 
-SwiperCore.use([Pagination]);
+// SwiperCore.use([Pagination]);
 
 const BlogDetailsContainer = ({ data }) => {
   const formatDate = (dateString) => {
@@ -52,25 +52,25 @@ const BlogDetailsContainer = ({ data }) => {
             <div className="social-icons">
               <SocialIcon
                 path="https://www.facebook.com/"
-                icon="icofont-facebook"
+                icon="fab fa-facebook"
               />
-              <SocialIcon path="https://twitter.com/" icon="icofont-twitter" />
+              <SocialIcon path="https://twitter.com/" icon="fab fa-twitter" />
 
               <SocialIcon
                 path="https://www.pinterest.com"
-                icon="social_pinterest"
+                icon="fab fa-pinterest-square"
               />
               <SocialIcon
                 path="https://www.instagram.com/"
-                icon="icofont-instagram"
+                icon="fab fa-instagram-square"
               />
-              <SocialIcon path="https://rss.com/" icon="social_rss" />
+              <SocialIcon path="https://rss.com/" icon="fas fa-rss-square" />
             </div>
           </div>
 
           <div className="bread-crumbs">
             <Link href={process.env.PUBLIC_URL + "/"}>
-              <a>home</a>
+              <a>Home</a>
             </Link>
             <span>&#8250;</span>
             <Link href={`${process.env.PUBLIC_URL}/articles/${data.category}`}>

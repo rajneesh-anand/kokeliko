@@ -21,13 +21,12 @@ export const AnchorButton = styled.a`
   border: none;
   text-align: center;
   font-weight: lighter;
-  margin: 5px 8px;
-  padding: 5px 10px;
+  margin: 5px 16px;
+  padding: 5px 16px;
   display: inline-block;
   &:hover {
     cursor: pointer;
-    background-color: #ffffff;
-    color: #002e5b;
-    border: 1px solid teal;
+    background-color: #020c17;
+    color: #ffffff !important;
   }
 `;

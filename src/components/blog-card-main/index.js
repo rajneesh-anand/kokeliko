@@ -36,22 +36,19 @@ const BlogCardMain = ({ data }) => {
               <div className="social-icons">
                 <SocialIcon
                   path="https://www.facebook.com/"
-                  icon="icofont-facebook"
+                  icon="fab fa-facebook"
                 />
-                <SocialIcon
-                  path="https://twitter.com/"
-                  icon="icofont-twitter"
-                />
+                <SocialIcon path="https://twitter.com/" icon="fab fa-twitter" />
 
                 <SocialIcon
                   path="https://www.pinterest.com"
-                  icon="social_pinterest"
+                  icon="fab fa-pinterest-square"
                 />
                 <SocialIcon
                   path="https://www.instagram.com/"
-                  icon="icofont-instagram"
+                  icon="fab fa-instagram-square"
                 />
-                <SocialIcon path="https://rss.com/" icon="social_rss" />
+                <SocialIcon path="https://rss.com/" icon="fas fa-rss-square" />
               </div>
             </div>
 

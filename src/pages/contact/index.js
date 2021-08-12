@@ -18,7 +18,6 @@ const Contact = () => {
           <Header classOption="hb-border" />
           <div className="main-content">
             <ContactContainer />
-            {/* <MapContainer /> */}
           </div>
           <Footer />
         </div>
