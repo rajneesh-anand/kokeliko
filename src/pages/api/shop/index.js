@@ -1,21 +1,22 @@
-import prisma from "../../../lib/prisma";
+import prisma from "@/libs/prisma";
 
 export default async function handler(req, res) {
-  const curPage = req.query.page || 1;
-  const perPage = 10;
+  const query = req.query;
+  const page = parseInt(query.page) || 1;
+  const limit = parseInt(query.limit) || 20;
+  const startIndex = (page - 1) * limit;
+  const totalCount = await prisma.product.count();
 
   try {
     const product = await prisma.product.findMany({
-      take: perPage * curPage,
+      take: limit,
+      skip: startIndex,
     });
-
-    const totalProducts = product.length;
 
     res.status(200).json({
       msg: "success",
       data: product,
-      curPage: curPage,
-      maxPage: Math.ceil(totalProducts / perPage),
+      maxPage: Math.ceil(totalCount / limit),
     });
   } catch (error) {
     console.log(error);

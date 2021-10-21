@@ -1,6 +1,6 @@
 import { IncomingForm } from "formidable";
 import { promises as fs } from "fs";
-import prisma from "../../lib/prisma";
+import prisma from "../../libs/prisma";
 import { getSession } from "next-auth/client";
 import DatauriParser from "datauri/parser";
 const path = require("path");

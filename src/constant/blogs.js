@@ -26,32 +26,4 @@ export const blogTagsOptions = [
   "Fitness",
 ];
 
-export const blogCategoryOptions = [
-  "News",
-  "Sports",
-  "Science",
-  "Yoga",
-  "People",
-  "Nature",
-  "City",
-  "Jobs",
-  "Travel",
-  "Fashion",
-  "Mobile",
-  "Health",
-  "Spirituality",
-  "Asana",
-  "Anxiety",
-  "Tantra",
-  "Ayurveda",
-  "Skin",
-  "Hair",
-  "Acne",
-  "Weight Loss",
-  "Chakra",
-  "Massage",
-  "Sexual Healing",
-  "Immunity",
-  "Fitness",
-  "Strength",
-];
+export const blogCategoryOptions = ["yoga", "spirituality", "meditation"];

@@ -5,9 +5,9 @@ import SEO from "../components/seo";
 import BlogItemContainer from "../containers/blog/blog-item";
 import PageTitleContainerTwo from "../containers/global/page-title-two";
 import BlogData from "../data/blog.json";
-import Footer from "../layouts/footer";
-import Header from "../layouts/header/index";
-import Layout from "../layouts/index";
+import Footer from "../layout/footer";
+import Header from "../layout/header/index";
+import Layout from "../layout/index";
 import { slugify } from "../utils";
 
 const BlogCategory = ({

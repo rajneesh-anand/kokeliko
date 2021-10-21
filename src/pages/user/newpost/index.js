@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Link from "next/link";
-import slugify from "slugify";
-import SEO from "components/seo";
-import Footer from "layouts/footer";
-import Header from "layouts/header";
-import Layout from "layouts";
+import { slugify } from "@/utils/index";
+import SEO from "@/components/seo";
+import Footer from "@/layout/footer";
+import Header from "@/layout/header";
+import Layout from "@/layout/index";
 import { useSession, getSession } from "next-auth/client";
 import dynamic from "next/dynamic";
-import { blogTagsOptions, blogCategoryOptions } from "constant/blogs";
+import { blogTagsOptions, blogCategoryOptions } from "../../../constant/blogs";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
@@ -66,7 +65,7 @@ const NewpostPage = () => {
     };
     setEditorLoaded(true);
     if (message === "success") {
-      toast.success("Blog post published !");
+      toast.success("Blog published successfully !");
     }
     if (message === "failed") {
       toast.error("Oops something went wrong !");
@@ -94,18 +93,12 @@ const NewpostPage = () => {
     );
     formData.append("content", blogContent);
     formData.append("template", data.blog_template);
-    formData.append(
-      "slug",
-      slugify(data.blog_title, {
-        remove: /[*+~.()'"!:@,]/g,
-        lower: true,
-      })
-    );
+    formData.append("slug", slugify(data.blog_title));
     formData.append("published", true);
     formData.append("author", session?.user?.email);
 
     try {
-      const result = await fetch(`${process.env.API_URL}/publish`, {
+      const result = await fetch(`${process.env.API_URL}/blog`, {
         method: "POST",
         body: formData,
       });
@@ -144,18 +137,12 @@ const NewpostPage = () => {
     );
     formData.append("content", blogContent);
     formData.append("template", data.blog_template);
-    formData.append(
-      "slug",
-      slugify(data.blog_title, {
-        remove: /[*+~.()'"!:@,]/g,
-        lower: true,
-      })
-    );
+    formData.append("slug", slugify(data.blog_title));
     formData.append("published", false);
     formData.append("author", session?.user?.email);
 
     try {
-      const result = await fetch(`${process.env.API_URL}/publish`, {
+      const result = await fetch(`${process.env.API_URL}/blog`, {
         method: "POST",
         body: formData,
       });
@@ -177,7 +164,7 @@ const NewpostPage = () => {
     <Layout>
       <SEO
         title="New Blog | KokeLiko "
-        canonical={process.env.PUBLIC_URL + "/user/newpost"}
+        canonical={`${process.env.PUBLIC_URL}/user/newpost`}
       />
       <div className="wrapper">
         <Header />
@@ -196,151 +183,159 @@ const NewpostPage = () => {
             />
           )}
 
-          <Form>
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Post Thumb Image
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  type="file"
-                  accept=".jpg, .png, .jpeg"
-                  onChange={(event) => {
-                    setThumbImage(event.target.files[0]);
-                  }}
-                />
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Post Title
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  type="text"
-                  placeholder=" Blog Title "
-                  {...register("blog_title", {
-                    required: " Blog title is required ! ",
-                  })}
-                />
-                {errors.blog_title && (
-                  <Form.Label style={{ color: "red" }}>
-                    {errors.blog_title.message}
-                  </Form.Label>
-                )}
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Post Category
-              </Form.Label>
-              <Col sm="10">
-                <Form.Select className="me-sm-2" {...register("blog_category")}>
-                  {blogCategoryOptions.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Sub Categories
-              </Form.Label>
-              <Col sm="10">
-                <Multiselect
-                  options={blogCategoryOptions}
-                  selectedValues={catSelectedValues}
-                  onSelect={onCatSelect}
-                  onRemove={onCatRemove}
-                  placeholder="+ Add Sub Categories"
-                  id="catOption"
-                  isObject={false}
-                  className="catDrowpdown"
-                />
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Tags
-              </Form.Label>
-              <Col sm="10">
-                <Multiselect
-                  options={blogTagsOptions}
-                  selectedValues={tagSelectedValues}
-                  onSelect={onTagSelect}
-                  onRemove={onTagRemove}
-                  placeholder="+ Add Tags"
-                  id="tagOption"
-                  isObject={false}
-                  className="tagDrowpdown"
-                />
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Template
-              </Form.Label>
-              <Col sm="10">
-                <Form.Select className="me-sm-2" {...register("blog_template")}>
-                  <option value="blogpost_with_thumbImage">
-                    Blog with Thumb Image
-                  </option>
-                  <option value="blogpost_without_thumbImage">
-                    Blog without Thumb Image
-                  </option>
-                </Form.Select>
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Post Content
-              </Form.Label>
-              <Col sm="10">
-                {editorLoaded ? (
-                  <CKEditor
-                    editor={ClassicEditor}
-                    data={blogContent}
-                    onReady={(editor) => {
-                      console.log("Editor is ready to use!", editor);
-                    }}
-                    config={{ height: 400 }}
-                    onChange={(event, editor) => {
-                      editor.editing.view.change((writer) => {
-                        writer.setStyle(
-                          "height",
-                          "500px",
-                          editor.editing.view.document.getRoot()
-                        );
-                      });
-                      const data = editor.getData();
-                      setBlogContent(data);
+          <div className="newblog-form ptb-50">
+            <Form>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Thumbnail Image
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Control
+                    type="file"
+                    accept=".jpg, .png, .jpeg"
+                    onChange={(event) => {
+                      setThumbImage(event.target.files[0]);
                     }}
                   />
-                ) : (
-                  <p>editor..</p>
-                )}
-              </Col>
-            </Form.Group>
+                </Col>
+              </Form.Group>
 
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={{ span: 10, offset: 2 }}>
-                <Button variant="primary" onClick={handleSubmit(onPublish)}>
-                  {isProcessing ? "Publishing ..." : `Publish`}
-                </Button>
-                <Button variant="primary" onClick={handleSubmit(onDraft)}>
-                  {isProcessing ? "Drafting ..." : `Draft`}
-                </Button>
-              </Col>
-            </Form.Group>
-          </Form>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Title *
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Control
+                    type="text"
+                    placeholder=" Blog Title "
+                    {...register("blog_title", {
+                      required: " Blog title is required ! ",
+                    })}
+                  />
+                  {errors.blog_title && (
+                    <Form.Label style={{ color: "red" }}>
+                      {errors.blog_title.message}
+                    </Form.Label>
+                  )}
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Category
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Select
+                    className="me-sm-2"
+                    {...register("blog_category")}
+                  >
+                    {blogCategoryOptions.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Sub-Categories
+                </Form.Label>
+                <Col sm="10">
+                  <Multiselect
+                    options={blogCategoryOptions}
+                    selectedValues={catSelectedValues}
+                    onSelect={onCatSelect}
+                    onRemove={onCatRemove}
+                    placeholder="+ Add Sub Categories"
+                    id="catOption"
+                    isObject={false}
+                    className="catDrowpdown"
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Tags
+                </Form.Label>
+                <Col sm="10">
+                  <Multiselect
+                    options={blogTagsOptions}
+                    selectedValues={tagSelectedValues}
+                    onSelect={onTagSelect}
+                    onRemove={onTagRemove}
+                    placeholder="+ Add Tags"
+                    id="tagOption"
+                    isObject={false}
+                    className="tagDrowpdown"
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Template
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Select
+                    className="me-sm-2"
+                    {...register("blog_template")}
+                  >
+                    <option value="blogpost_with_thumbImage">
+                      Blog with Thumb Image
+                    </option>
+                    <option value="blogpost_without_thumbImage">
+                      Blog without Thumb Image
+                    </option>
+                  </Form.Select>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Content *
+                </Form.Label>
+                <Col sm="10">
+                  {editorLoaded ? (
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={blogContent}
+                      onReady={(editor) => {
+                        console.log("Editor is ready to use!", editor);
+                      }}
+                      config={{ height: 400 }}
+                      onChange={(event, editor) => {
+                        editor.editing.view.change((writer) => {
+                          writer.setStyle(
+                            "height",
+                            "500px",
+                            editor.editing.view.document.getRoot()
+                          );
+                        });
+                        const data = editor.getData();
+                        setBlogContent(data);
+                      }}
+                    />
+                  ) : (
+                    <p>editor..</p>
+                  )}
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Col sm={{ span: 10, offset: 2 }}>
+                  <Button variant="primary" onClick={handleSubmit(onPublish)}>
+                    {isProcessing ? "Publishing ..." : `Publish`}
+                  </Button>
+                  <Button variant="primary" onClick={handleSubmit(onDraft)}>
+                    {isProcessing ? "Drafting ..." : `Draft`}
+                  </Button>
+                </Col>
+              </Form.Group>
+            </Form>
+          </div>
         </div>
         <Footer />
       </div>

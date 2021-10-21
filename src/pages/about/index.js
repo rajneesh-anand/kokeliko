@@ -4,9 +4,9 @@ import SEO from "../../components/seo";
 import AboutService from "../../containers/about/about-service";
 import TeamContainer from "../../containers/about/team";
 import PageTitleContainer from "../../containers/global/page-title";
-import Footer from "../../layouts/footer";
-import Header from "../../layouts/header";
-import Layout from "../../layouts";
+import Footer from "../../layout/footer";
+import Header from "../../layout/header";
+import Layout from "../../layout";
 
 const AboutPage = () => {
   return (

@@ -1,17 +1,20 @@
-import prisma from "../../../lib/prisma";
+import prisma from "@/libs/prisma";
 
 export default async function handler(req, res) {
-  const blogCategory = req.query.type;
-  console.log(`blogCategory ${blogCategory}`);
-  const curPage = req.query.page || 1;
-  const perPage = 10;
+  const category = req.query.type;
+  const query = req.query;
+  const page = parseInt(query.page) || 1;
+  const limit = parseInt(query.limit) || 20;
+  const startIndex = (page - 1) * limit;
+  const totalCount = await prisma.post.count();
 
   try {
-    const blog = await prisma.post.findMany({
-      take: perPage * curPage,
+    const product = await prisma.post.findMany({
+      take: limit,
+      skip: startIndex,
       where: {
         published: true,
-        category: blogCategory,
+        category: category,
       },
       include: {
         author: {
@@ -20,15 +23,10 @@ export default async function handler(req, res) {
       },
     });
 
-    const totalBlogs = blog.length;
-
-    // console.log(blog);
-
     res.status(200).json({
       msg: "success",
-      data: blog,
-      curPage: curPage,
-      maxPage: Math.ceil(totalBlogs / perPage),
+      data: product,
+      maxPage: Math.ceil(totalCount / limit),
     });
   } catch (error) {
     console.log(error);

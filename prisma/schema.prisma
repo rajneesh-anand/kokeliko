@@ -94,7 +94,6 @@ model User {
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   posts         Post[]
   movies        Movie[]
- 
 
   @@map(name: "users")
 }

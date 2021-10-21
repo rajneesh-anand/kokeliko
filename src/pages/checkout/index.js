@@ -2,71 +2,61 @@ import React, { useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import StripeCheckoutForm from "../../components/stripe-checkout-form";
-
-import { useSession } from "next-auth/client";
-import Link from "next/link";
+import { getSession } from "next-auth/client";
 import SEO from "../../components/seo";
-import Footer from "../../layouts/footer";
-import Header from "../../layouts/header";
-import Layout from "../../layouts";
-import { useRouter } from "next/router";
+import Footer from "../../layout/footer";
+import Header from "../../layout/header";
+import Layout from "../../layout";
 import { useCart } from "../../contexts/cart/use-cart";
-
-import {
-  MessageBox,
-  MessageTitle,
-  AnchorButton,
-} from "../../components/messagebox";
+import Message from "components/message";
 
 const StripeCheckout = () => {
-  const router = useRouter();
   const { cartItemsCount } = useCart();
   const stripePromise = loadStripe(
     `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`
   );
-  const [session, loading] = useSession();
 
-  useEffect(() => {
-    if (!session) {
-    
-      router.push("/auth/signin");
-    }
-  }, []);
-
-  return loading ? (
-    <div className="spinner-border text-primary" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
-  ) : (
-    session && (
-      <Layout>
-        <SEO
-          title="Checkout | KokeLiko "
-          canonical={process.env.PUBLIC_URL + "/checkout"}
-        />
-        <div className="wrapper">
-          <Header classOption="hb-border" />
-          <div className="container">
-            {cartItemsCount > 0 ? (
-              <Elements stripe={stripePromise}>
-                <StripeCheckoutForm />
-              </Elements>
-            ) : (
-              <MessageBox>
-                <MessageTitle>
-                  Your shopping cart is empty , Please add items in your cart
-                </MessageTitle>
-                <Link href="/shop">
-                  <AnchorButton>Goto Shop Page</AnchorButton>
-                </Link>
-              </MessageBox>
-            )}
-          </div>
-          <Footer />
+  return (
+    <Layout>
+      <SEO
+        title="Checkout | KokeLiko "
+        canonical={process.env.PUBLIC_URL + "/checkout"}
+      />
+      <div className="wrapper">
+        <Header />
+        <div className="container">
+          {cartItemsCount > 0 ? (
+            <Elements stripe={stripePromise}>
+              <StripeCheckoutForm />
+            </Elements>
+          ) : (
+            <Message
+              title="  Your shopping cart is empty , Please add items in your cart"
+              url="/shop"
+              btnText="Goto Shop Page"
+            />
+          )}
         </div>
-      </Layout>
-    )
+        <Footer />
+      </div>
+    </Layout>
   );
 };
 
 export default StripeCheckout;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import React from "react";
-import prisma from "../../lib/prisma";
+import prisma from "../../libs/prisma";
 import SEO from "../../components/seo";
-import Footer from "../../layouts/footer";
-import Header from "../../layouts/header";
-import Layout from "../../layouts";
+import Footer from "../../layout/footer";
+import Header from "../../layout/header";
+import Layout from "../../layout";
 
 const ProductDetailsPage = ({ data }) => {
   const result = JSON.parse(data);
@@ -15,8 +15,8 @@ const ProductDetailsPage = ({ data }) => {
         title={result.title}
         canonical={`${process.env.PUBLIC_URL}/product/${result.id}/${result.slug}`}
       />
-      <div className="wrapper home-default-wrapper">
-        <Header classOption="hb-border" />
+      <div className="wrapper ">
+        <Header />
         <div className="container">
           <h1>{result.name}</h1>
         </div>

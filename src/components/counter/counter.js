@@ -1,5 +1,5 @@
 import React from "react";
-import { Plus, Minus } from "../../assets/icons/PlusMinus";
+import { Plus, Minus } from "../../styles/icons/PlusMinus";
 import { CounterBox, CounterButton, CounterValue } from "./counter.style";
 
 export const Counter = ({ onDecrement, onIncrement, value, variant }) => {

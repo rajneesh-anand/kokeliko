@@ -1,11 +1,11 @@
 import React from "react";
 import { useSession, getSession } from "next-auth/client";
-import prisma from "../../../lib/prisma";
+import prisma from "../../../libs/prisma";
 import Link from "next/link";
 import SEO from "../../../components/seo";
-import Footer from "../../../layouts/footer";
-import Header from "../../../layouts/header";
-import Layout from "../../../layouts";
+import Footer from "../../../layout/footer";
+import Header from "../../../layout/header";
+import Layout from "../../../layout";
 // import ScrollToTop from "../../../components/scroll-to-top";
 import DraftCardLeftImage from "../../../components/draft-card";
 

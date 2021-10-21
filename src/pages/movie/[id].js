@@ -2,10 +2,10 @@ import React from "react";
 import ReactJWPlayer from "react-jw-player";
 import Link from "next/link";
 import SEO from "../../components/seo";
-import Footer from "../../layouts/footer";
-import Header from "../../layouts/header";
-import Layout from "../../layouts";
-import prisma from "../../lib/prisma";
+import Footer from "../../layout/footer";
+import Header from "../../layout/header";
+import Layout from "../../layout";
+import prisma from "../../libs/prisma";
 
 const MoviePlayerPage = ({ data }) => {
   const result = JSON.parse(data);

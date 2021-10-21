@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap');
+
+
+
+@import 'react-tabs/style/react-tabs.css';
+@import 'react-toastify/dist/ReactToastify.css';
+@import 'react-accessible-accordion/dist/fancy-example.css';
+@import 'react-modal-video/css/modal-video.min.css';
+@import 'react-image-lightbox/style.css';
+@import "aos/dist/aos.css";
+
+
+@import url(../css/animate.min.css);
+@import url(../css/bootstrap.min.css);
+@import url(../css/remixicon.css);
+@import url(../css/icofont.css);
+
+
+
+
+// Base
+@import "common/base";
+@import "common/variables";
+@import "common/mixins";
+
+// Common Styles
+@import "pages/common";
+// @import "pages/navbar";
+
+// Header
+@import "header/header";
+@import "header/search";
+
+// Banner Styles
+@import "pages/banner";
+
+// Components
+@import "pages/portfolio";
+@import "pages/about";
+@import "pages/team";
+@import "pages/testimonial";
+@import "pages/brand-logo";
+@import "pages/divider";
+@import "pages/icon-box";
+@import "pages/form";
+@import "pages/intro";
+@import "pages/login";
+@import "pages/card";
+@import "pages/product";
+@import "pages/cart";
+
+// Blog
+@import "pages/blog";
+
+// Contact
+@import "pages/contact";
+
+// Footer
+@import "footer/footer";

@@ -1,66 +1,41 @@
 import React from "react";
-import Link from "next/link";
-import { getClosest, getSiblings, slideToggle, slideUp } from "../../utils";
+import Link from "@/utils/activeLink";
 import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
 import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { signOut, useSession } from "next-auth/client";
 
-const SideBarMenu = ({ show, handleClose }) => {
+const SideMenu = ({ show, handleClose }) => {
   const [session] = useSession();
-  const onClickHandler = (e) => {
-    const target = e.currentTarget;
-    const parentEl = target.parentElement;
-    if (
-      parentEl?.classList.contains("menu-toggle") ||
-      target.classList.contains("menu-toggle")
-    ) {
-      const element = target.classList.contains("icon") ? parentEl : target;
-      const parent = getClosest(element, "li");
-      const childNodes = parent.childNodes;
-      const parentSiblings = getSiblings(parent);
-      parentSiblings.forEach((sibling) => {
-        const sibChildNodes = sibling.childNodes;
-        sibChildNodes.forEach((child) => {
-          if (child.nodeName === "UL") {
-            slideUp(child, 1000);
-          }
-        });
-      });
-      childNodes.forEach((child) => {
-        if (child.nodeName === "UL") {
-          slideToggle(child, 1000);
-        }
-      });
-    }
-  };
 
   return (
     <Offcanvas
       show={show}
       onHide={handleClose}
       placement="start"
-      style={{ width: "260px" }}
+      style={{ width: "296px" }}
     >
       <OffcanvasHeader>
-        <OffcanvasTitle style={{ width: "100%", fontFamily: "Poppins" }}>
+        <OffcanvasTitle style={{ width: "100%" }}>
           {!session ? (
             <>
               <div className="text-center">
-                <img
-                  src="/fav.png"
+                <i className="fas fa-user-circle" style={{ fontSize: 56 }}></i>
+                {/* <img
+                  src="/images/fav.png"
+                  className="rounded-circle"
                   style={{
                     width: "60px",
                     borderRadius: "50%",
-                    marginRight: 5,
+                    // marginRight: 5,
                   }}
-                />
+                /> */}
               </div>
 
-              <div className="profile-sidebar-slider">
+              <div className="text-center">
                 <Link href="/auth/signin">
-                  <a>Sign In</a>
+                  <a className="default-btn-sm">Sign In</a>
                 </Link>
               </div>
             </>
@@ -69,9 +44,9 @@ const SideBarMenu = ({ show, handleClose }) => {
               <div className="text-center">
                 <img
                   src={session.user.image}
+                  className="rounded-circle"
                   style={{
                     width: "60px",
-                    borderRadius: "50%",
                     marginRight: 5,
                   }}
                 />
@@ -79,7 +54,7 @@ const SideBarMenu = ({ show, handleClose }) => {
               <div className="text-center" style={{ fontSize: 14 }}>
                 <p>{session.user.name}</p>
               </div>
-              <div className="profile-sidebar-slider">
+              <div className="text-center">
                 <Link href="/user/account">
                   <a>My Account</a>
                 </Link>
@@ -90,119 +65,95 @@ const SideBarMenu = ({ show, handleClose }) => {
         </OffcanvasTitle>
       </OffcanvasHeader>
 
-      <OffcanvasBody style={{ backgroundColor: "#100f0f" }}>
-        <div className="asside-navigation-area">
-          <ul className="asside-menu">
-            <li className="item">
-              <Link href="/articles/spirituality">
-                <a>Spirituality</a>
+      <OffcanvasBody>
+        <nav>
+          <ul className="aside-menu">
+            <li>
+              <Link href="/services" activeClassName="active">
+                <a className="main-menu-link">Services</a>
               </Link>
             </li>
-            {/* <li className="dropdown-submenu">
-              <Link href="/portfolio">
-                <span>
-                  <a>Portfolio</a>
-                </span>
+            <li>
+              <Link href="/membership" activeClassName="active">
+                <a className="main-menu-link">Membership Plan</a>
               </Link>
-              <span
-                className="menu-toggle"
-                onClick={onClickHandler}
-                aria-hidden="true"
-              ></span>
-              <ul className="dropdown-nav">
+            </li>
+            <li>
+              <Link href="/products" activeClassName="active">
+                <a className="main-menu-link">Products Suggestion</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/courses" activeClassName="active">
+                <a className="main-menu-link">Online Seller Courses</a>
+              </Link>
+              <ul className="sub-menu">
                 <li>
-                  <Link href="/portfolio">
-                    <a>Portfolio</a>
+                  <Link className="sub-menu-link" href="/course/amazon-seller">
+                    <a> Amazon Seller Course</a>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/portfolio-details/1">
-                    <a>Portfolio Details</a>
+                  <Link
+                    className="sub-menu-link"
+                    href="/course/flipkart-seller"
+                  >
+                    <a> Flipkart Seller Course</a>
                   </Link>
                 </li>
               </ul>
             </li>
-           */}
             <li>
-              <Link href="/articles/Meditation">
-                <a>Meditation</a>
+              <Link
+                href={process.env.PUBLIC_URL + "/telephonic-consultation"}
+                activeClassName="active"
+              >
+                <a className="main-menu-link">Telephonic Consultancy</a>
               </Link>
             </li>
             <li>
-              <Link href="/articles/yoga">
-                <a>Yoga</a>
+              <Link
+                href={process.env.PUBLIC_URL + "/blogs"}
+                activeClassName="active"
+              >
+                <a className="main-menu-link">E-Commerce News Updates</a>
               </Link>
             </li>
+          </ul>
+        </nav>
+
+        <div className="aside-footer-area text-center ptb-50">
+          <ul className="social-links">
             <li>
-              <Link href="/articles/ayurveda">
-                <a>Ayurveda</a>
-              </Link>
+              <a href="https://www.facebook.com/" target="_blank">
+                <i className="ri-facebook-fill"></i>
+              </a>
             </li>
             <li>
-              <Link href="/articles/travel">
-                <a>Travel</a>
-              </Link>
+              <a href="https://twitter.com/" target="_blank">
+                <i className="ri-twitter-fill"></i>
+              </a>
             </li>
             <li>
-              <Link href="/articles/tantra">
-                <a>Tantra</a>
-              </Link>
+              <a href="https://www.linkedin.com/" target="_blank">
+                <i className="ri-linkedin-fill"></i>
+              </a>
             </li>
             <li>
-              <Link href="/shop">
-                <a>Shop</a>
-              </Link>
+              <a href="https://www.messenger.com/" target="_blank">
+                <i className="ri-messenger-fill"></i>
+              </a>
             </li>
             <li>
-              <Link href="/query">
-                <a>Send Your Queries ?</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">
-                <a>About Us</a>
-              </Link>
+              <a href="https://github.com/" target="_blank">
+                <i className="ri-github-fill"></i>
+              </a>
             </li>
           </ul>
         </div>
       </OffcanvasBody>
-
-      <div className="side-footer">
-        <ul className="widget-social-icons">
-          <li className="social-text">
-            <span>Follow us on social</span>
-          </li>
-          <li>
-            <a
-              href="https://twitter.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="social_twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.facebook.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="social_facebook"></i>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="social_instagram"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
     </Offcanvas>
   );
 };
 
-export default SideBarMenu;
+export default SideMenu;

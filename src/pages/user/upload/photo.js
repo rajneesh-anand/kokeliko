@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SEO from "../../../components/seo";
-import Footer from "../../../layouts/footer";
-import Header from "../../../layouts/header";
-import Layout from "../../../layouts";
+import Footer from "../../../layout/footer";
+import Header from "../../../layout/header";
+import Layout from "../../../layout";
 import { useSession } from "next-auth/client";
 import Link from "next/link";
 import dynamic from "next/dynamic";

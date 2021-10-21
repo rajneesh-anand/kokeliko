@@ -1,49 +1,65 @@
 import React from "react";
-import ShopContainer from "../../containers/shop/shop-grid";
-import SEO from "../../components/seo";
-import Footer from "../../layouts/footer";
-import Header from "../../layouts/header";
-import Layout from "../../layouts";
-import { useCart } from "../../contexts/cart/use-cart";
-const ShopPage = ({ shopData }) => {
-  const { cartItemsCount, calculatePrice } = useCart();
+import SEO from "@/components/seo";
+import Footer from "@/layout/footer";
+import Header from "@/layout/header";
+import Layout from "@/layout/index";
+import BlogList from "@/containers/blog-list";
+import Message from "@/components/message";
+import Loading from "@/components/loading";
+import { usePaginatedData } from "@/utils/useRequest";
+
+const ShopPage = () => {
+  const {
+    result,
+    error,
+    isLoadingMore,
+    size,
+    setSize,
+    isReachingEnd,
+    isEmpty,
+  } = usePaginatedData("/api/shop");
+
   return (
-    <React.Fragment>
-      <Layout>
-        <SEO
-          title="Shop | KokeLiko "
-          canonical={process.env.PUBLIC_URL + "/shop"}
-        />
-        <div className="wrapper">
-          <Header classOption="hb-border" />
-          <div className="container">
-            <ShopContainer shopData={shopData} />
-          </div>
-          <Footer />
-        </div>
-      </Layout>
-    </React.Fragment>
+    <Layout>
+      <SEO
+        title="Shop | Kokeliko"
+        description="Explore the world of Yoga and Meditation"
+        canonical={`${process.env.PUBLIC_URL}/shop`}
+      />
+      <div className="wrapper">
+        <Header />
+
+        {isLoadingMore ? (
+          <Loading />
+        ) : isEmpty ? (
+          <Message
+            title="Nothing found here !"
+            url="/user/newpost"
+            btnText="Write &amp; Share Your Own Blog"
+          />
+        ) : (
+          <>
+            <BlogList data={result} />
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                {!isReachingEnd && (
+                  <button
+                    className="default-btn"
+                    disabled={isLoadingMore || isReachingEnd}
+                    onClick={() => setSize(size + 1)}
+                  >
+                    {isLoadingMore ? "Loading..." : "More Blogs"}
+                  </button>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+
+        <Footer />
+      </div>
+    </Layout>
   );
-};
-
-export const getServerSideProps = async ({ query }) => {
-  const page = query.page || 1;
-  let shopData = null;
-
-  try {
-    const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/shop?page=${page}`
-    );
-    if (res.status !== 200) {
-      throw new Error("Failed to fetch");
-    }
-
-    shopData = await res.json();
-  } catch (err) {
-    shopData = { error: { message: err.message } };
-  }
-
-  return { props: { shopData } };
 };
 
 export default ShopPage;

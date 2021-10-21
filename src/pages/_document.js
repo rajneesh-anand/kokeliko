@@ -32,6 +32,11 @@ class MyDocument extends Document {
             href="https://kit-pro.fontawesome.com/releases/v5.13.0/css/pro.min.css"
             rel="stylesheet"
           />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+          />
+
           <script
             type="text/javascript"
             src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"
