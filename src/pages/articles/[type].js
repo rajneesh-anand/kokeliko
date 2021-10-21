@@ -17,7 +17,7 @@ const ArticlePage = ({ articleType }) => {
     setSize,
     isReachingEnd,
     isEmpty,
-  } = usePaginatedData(`/api/articles/${articleType}`);
+  } = usePaginatedData(`${process.env.PUBLIC_URL}/api/articles/${articleType}`);
 
   return (
     <Layout>

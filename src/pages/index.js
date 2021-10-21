@@ -17,7 +17,7 @@ const HomePage = () => {
     setSize,
     isReachingEnd,
     isEmpty,
-  } = usePaginatedData("/api/blogs");
+  } = usePaginatedData(`${process.env.PUBLIC_URL}/api/blogs`);
 
   return (
     <Layout>

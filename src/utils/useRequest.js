@@ -6,7 +6,7 @@ const fetcher = (url) =>
     .then((res) => res.json())
     .then((prod) => prod.data);
 
-const PAGE_LIMIT = 12;
+const PAGE_LIMIT = 20;
 
 export const useGetData = (url) => {
   if (!url) {
