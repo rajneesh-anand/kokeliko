@@ -37,111 +37,105 @@ const Header = ({ classOption }) => {
   };
   return (
     <Fragment>
-      <header
-        className={`header-area header-default sticky-header ${classOption} ${
-          scroll > headerTop ? "sticky" : ""
-        }`}
-      >
+      <header className={`header-area ${scroll > headerTop ? "sticky" : ""}`}>
         <div className="container-fluid">
-          <div className="row">
-            <div className="header-content">
-              <div className="header-logo">
-                <Logo image="/img/logo.png" />
-              </div>
+          <div className="header-content">
+            <div className="header-logo">
+              <Logo image="/img/logo.png" />
+            </div>
 
-              <div className="d-flex flex-wrap align-items-center justify-content-between">
-                <MainMenu />
-              </div>
+            <div className="d-flex flex-wrap align-items-center justify-content-between">
+              <MainMenu />
+            </div>
 
-              {cartItemsCount > 0 && (
-                <div>
-                  <button
+            {cartItemsCount > 0 && (
+              <div>
+                <button
+                  style={{
+                    border: "none",
+                    backgroundColor: "white",
+                    position: "relative",
+                  }}
+                  onClick={handleShowCart}
+                >
+                  <GiShoppingBag
                     style={{
-                      border: "none",
-                      backgroundColor: "white",
-                      position: "relative",
+                      height: 28,
+                      width: 28,
+                      color: "teal",
                     }}
-                    onClick={handleShowCart}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: 18,
+                      paddingTop: 8,
+                      color: "white",
+                      fontSize: 13,
+                    }}
                   >
-                    <GiShoppingBag
-                      style={{
-                        height: 28,
-                        width: 28,
-                        color: "teal",
-                      }}
-                    />
-                    <span
-                      style={{
-                        position: "absolute",
-                        left: 18,
-                        paddingTop: 8,
-                        color: "white",
-                        fontSize: 13,
-                      }}
-                    >
-                      {cartItemsCount}
-                    </span>
-                  </button>
-                </div>
-              )}
-
-              {session ? (
-                <div className="logged-profile">
-                  <OverlayTrigger
-                    trigger="click"
-                    key="bottom"
-                    placement="bottom"
-                    rootClose
-                    overlay={
-                      <Popover id={`popover-positioned-bottom`}>
-                        <Popover.Body>
-                          <div className="profile-menu">
-                            <ul>
-                              <li>
-                                <Link
-                                  href="/user/account"
-                                  activeClassName="active"
-                                >
-                                  <a className="main-menu-link">My Account</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <Link
-                                  href="/user/course"
-                                  activeClassName="active"
-                                >
-                                  <a className="main-menu-link">My Blogs</a>
-                                </Link>
-                              </li>
-                              <li>
-                                <button onClick={() => signOut()}>
-                                  Sign Out
-                                </button>
-                              </li>
-                            </ul>
-                          </div>
-                        </Popover.Body>
-                      </Popover>
-                    }
-                  >
-                    <i className="fas fa-user-circle"></i>
-                  </OverlayTrigger>
-                </div>
-              ) : (
-                <div className="logged-profile">
-                  <Link href="/auth/signin">
-                    <a className="default-btn-sm">Sign In</a>
-                  </Link>
-                </div>
-              )}
-
-              <div className="hamburger-menu">
-                <button className="btn-menu" onClick={handleShow}>
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                    {cartItemsCount}
+                  </span>
                 </button>
               </div>
+            )}
+
+            {session ? (
+              <div className="logged-profile">
+                <OverlayTrigger
+                  trigger="click"
+                  key="bottom"
+                  placement="bottom"
+                  rootClose
+                  overlay={
+                    <Popover id={`popover-positioned-bottom`}>
+                      <Popover.Body>
+                        <div className="profile-menu">
+                          <ul>
+                            <li>
+                              <Link
+                                href="/user/account"
+                                activeClassName="active"
+                              >
+                                <a className="main-menu-link">My Account</a>
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="/user/course"
+                                activeClassName="active"
+                              >
+                                <a className="main-menu-link">My Blogs</a>
+                              </Link>
+                            </li>
+                            <li>
+                              <button onClick={() => signOut()}>
+                                Sign Out
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      </Popover.Body>
+                    </Popover>
+                  }
+                >
+                  <i className="fas fa-user-circle"></i>
+                </OverlayTrigger>
+              </div>
+            ) : (
+              <div className="logged-profile">
+                <Link href="/auth/signin">
+                  <a className="default-btn-sm">Sign In</a>
+                </Link>
+              </div>
+            )}
+
+            <div className="hamburger-menu">
+              <button className="btn-menu" onClick={handleShow}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
             </div>
           </div>
         </div>

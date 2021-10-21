@@ -22,15 +22,6 @@ const SideMenu = ({ show, handleClose }) => {
             <>
               <div className="text-center">
                 <i className="fas fa-user-circle" style={{ fontSize: 56 }}></i>
-                {/* <img
-                  src="/images/fav.png"
-                  className="rounded-circle"
-                  style={{
-                    width: "60px",
-                    borderRadius: "50%",
-                    // marginRight: 5,
-                  }}
-                /> */}
               </div>
 
               <div className="text-center">
@@ -40,27 +31,26 @@ const SideMenu = ({ show, handleClose }) => {
               </div>
             </>
           ) : (
-            <>
+            <div className="mobile-user-profile-detail">
               <div className="text-center">
                 <img
-                  src={session.user.image}
                   className="rounded-circle"
-                  style={{
-                    width: "60px",
-                    marginRight: 5,
-                  }}
+                  src={session.user.image}
+                  alt="profile-photo"
                 />
               </div>
-              <div className="text-center" style={{ fontSize: 14 }}>
+              <div className="text-center">
                 <p>{session.user.name}</p>
               </div>
               <div className="text-center">
                 <Link href="/user/account">
                   <a>My Account</a>
                 </Link>
+              </div>
+              <div className="text-center">
                 <button onClick={() => signOut()}>Sign Out</button>
               </div>
-            </>
+            </div>
           )}
         </OffcanvasTitle>
       </OffcanvasHeader>
@@ -69,54 +59,28 @@ const SideMenu = ({ show, handleClose }) => {
         <nav>
           <ul className="aside-menu">
             <li>
-              <Link href="/services" activeClassName="active">
-                <a className="main-menu-link">Services</a>
+              <Link href="/articles/spirituality" activeClassName="active">
+                <a className="main-menu-link">Spirituality</a>
               </Link>
             </li>
             <li>
-              <Link href="/membership" activeClassName="active">
-                <a className="main-menu-link">Membership Plan</a>
+              <Link href="/articles/meditation" activeClassName="active">
+                <a className="main-menu-link">Meditation</a>
               </Link>
             </li>
             <li>
-              <Link href="/products" activeClassName="active">
-                <a className="main-menu-link">Products Suggestion</a>
+              <Link href="/articles/yoga" activeClassName="active">
+                <a className="main-menu-link">Yoga</a>
               </Link>
             </li>
             <li>
-              <Link href="/courses" activeClassName="active">
-                <a className="main-menu-link">Online Seller Courses</a>
-              </Link>
-              <ul className="sub-menu">
-                <li>
-                  <Link className="sub-menu-link" href="/course/amazon-seller">
-                    <a> Amazon Seller Course</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="sub-menu-link"
-                    href="/course/flipkart-seller"
-                  >
-                    <a> Flipkart Seller Course</a>
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link
-                href={process.env.PUBLIC_URL + "/telephonic-consultation"}
-                activeClassName="active"
-              >
-                <a className="main-menu-link">Telephonic Consultancy</a>
+              <Link href="/shop" activeClassName="active">
+                <a className="main-menu-link">Shop</a>
               </Link>
             </li>
             <li>
-              <Link
-                href={process.env.PUBLIC_URL + "/blogs"}
-                activeClassName="active"
-              >
-                <a className="main-menu-link">E-Commerce News Updates</a>
+              <Link href="/query" activeClassName="active">
+                <a className="main-menu-link">Send Us Query ?</a>
               </Link>
             </li>
           </ul>

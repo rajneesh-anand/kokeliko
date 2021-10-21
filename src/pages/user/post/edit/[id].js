@@ -4,6 +4,7 @@ import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
+import Message from "@/components/message";
 import { useSession, getSession } from "next-auth/client";
 import dynamic from "next/dynamic";
 import { blogTagsOptions, blogCategoryOptions } from "@/constant/blogs";
@@ -24,13 +25,15 @@ const Multiselect = dynamic(
 
 const EditPostPage = ({ post }) => {
   const postData = JSON.parse(post);
-  console.log(postData);
+
   const [session, loading] = useSession();
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [message, setMessage] = useState();
-  const [blogContent, setBlogContent] = useState(postData.content);
+  const [blogContent, setBlogContent] = useState(
+    postData ? postData.content : null
+  );
   const [thumbImage, setThumbImage] = useState();
   const [tags, setTags] = useState([]);
   const [subCat, setSubCat] = useState([]);
@@ -114,7 +117,7 @@ const EditPostPage = ({ post }) => {
     }
   };
 
-  return (
+  return postData ? (
     <Layout>
       <SEO
         title="Edit Blog | KokeLiko "
@@ -137,156 +140,172 @@ const EditPostPage = ({ post }) => {
             />
           )}
 
-          <Form>
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Thumbnail Image
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  type="file"
-                  accept=".jpg, .png, .jpeg"
-                  onChange={(event) => {
-                    setThumbImage(event.target.files[0]);
-                  }}
-                />
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Title *
-              </Form.Label>
-              <Col sm="10">
-                <Form.Control
-                  type="text"
-                  defaultValue={postData.title}
-                  {...register("blog_title", {
-                    required: " Blog title is required ! ",
-                  })}
-                />
-                {errors.blog_title && (
-                  <Form.Label style={{ color: "red" }}>
-                    {errors.blog_title.message}
-                  </Form.Label>
-                )}
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Category
-              </Form.Label>
-              <Col sm="10">
-                <Form.Select
-                  className="me-sm-2"
-                  defaultValue={postData.category}
-                  {...register("blog_category")}
-                >
-                  {blogCategoryOptions.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Sub-Categories
-              </Form.Label>
-              <Col sm="10">
-                <Multiselect
-                  options={blogCategoryOptions}
-                  selectedValues={postData.subCategories}
-                  onSelect={onCatSelect}
-                  onRemove={onCatRemove}
-                  placeholder="+ Add Sub Categories"
-                  id="catOption"
-                  isObject={false}
-                  className="catDrowpdown"
-                />
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Tags
-              </Form.Label>
-              <Col sm="10">
-                <Multiselect
-                  options={blogTagsOptions}
-                  selectedValues={postData.tags}
-                  onSelect={onTagSelect}
-                  onRemove={onTagRemove}
-                  placeholder="+ Add Tags"
-                  id="tagOption"
-                  isObject={false}
-                  className="tagDrowpdown"
-                />
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Template
-              </Form.Label>
-              <Col sm="10">
-                <Form.Select
-                  className="me-sm-2"
-                  defaultValue={postData.template}
-                  {...register("blog_template")}
-                >
-                  <option value="blogpost_with_thumbImage">
-                    Blog with Thumb Image
-                  </option>
-                  <option value="blogpost_without_thumbImage">
-                    Blog without Thumb Image
-                  </option>
-                </Form.Select>
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm="2">
-                Blog Content
-              </Form.Label>
-              <Col sm="10">
-                {editorLoaded ? (
-                  <CKEditor
-                    editor={ClassicEditor}
-                    data={blogContent}
-                    onReady={(editor) => {
-                      console.log("Editor is ready to use!", editor);
-                    }}
-                    config={{ height: 400 }}
-                    onChange={(event, editor) => {
-                      editor.editing.view.change((writer) => {
-                        writer.setStyle(
-                          "height",
-                          "500px",
-                          editor.editing.view.document.getRoot()
-                        );
-                      });
-                      const data = editor.getData();
-                      setBlogContent(data);
+          <div className="newblog-form ptb-50">
+            <Form>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Thumbnail Image
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Control
+                    type="file"
+                    accept=".jpg, .png, .jpeg"
+                    onChange={(event) => {
+                      setThumbImage(event.target.files[0]);
                     }}
                   />
-                ) : (
-                  <p>editor..</p>
-                )}
-              </Col>
-            </Form.Group>
+                </Col>
+              </Form.Group>
 
-            <Form.Group as={Row} className="mb-3">
-              <Col sm={{ span: 10, offset: 2 }}>
-                <Button variant="primary" onClick={handleSubmit(onUpdate)}>
-                  {isProcessing ? "Updating ..." : `Update`}
-                </Button>
-              </Col>
-            </Form.Group>
-          </Form>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Title *
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Control
+                    type="text"
+                    defaultValue={postData.title}
+                    {...register("blog_title", {
+                      required: " Blog title is required ! ",
+                    })}
+                  />
+                  {errors.blog_title && (
+                    <Form.Label style={{ color: "red" }}>
+                      {errors.blog_title.message}
+                    </Form.Label>
+                  )}
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Category
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Select
+                    className="me-sm-2"
+                    defaultValue={postData.category}
+                    {...register("blog_category")}
+                  >
+                    {blogCategoryOptions.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Sub-Categories
+                </Form.Label>
+                <Col sm="10">
+                  <Multiselect
+                    options={blogCategoryOptions}
+                    selectedValues={postData.subCategories}
+                    onSelect={onCatSelect}
+                    onRemove={onCatRemove}
+                    placeholder="+ Add Sub Categories"
+                    id="catOption"
+                    isObject={false}
+                    className="catDrowpdown"
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Tags
+                </Form.Label>
+                <Col sm="10">
+                  <Multiselect
+                    options={blogTagsOptions}
+                    selectedValues={postData.tags}
+                    onSelect={onTagSelect}
+                    onRemove={onTagRemove}
+                    placeholder="+ Add Tags"
+                    id="tagOption"
+                    isObject={false}
+                    className="tagDrowpdown"
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Template
+                </Form.Label>
+                <Col sm="10">
+                  <Form.Select
+                    className="me-sm-2"
+                    defaultValue={postData.template}
+                    {...register("blog_template")}
+                  >
+                    <option value="blogpost_with_thumbImage">
+                      Blog with Thumb Image
+                    </option>
+                    <option value="blogpost_without_thumbImage">
+                      Blog without Thumb Image
+                    </option>
+                  </Form.Select>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Blog Content
+                </Form.Label>
+                <Col sm="10">
+                  {editorLoaded ? (
+                    <CKEditor
+                      editor={ClassicEditor}
+                      data={blogContent}
+                      onReady={(editor) => {
+                        console.log("Editor is ready to use!", editor);
+                      }}
+                      config={{ height: 400 }}
+                      onChange={(event, editor) => {
+                        editor.editing.view.change((writer) => {
+                          writer.setStyle(
+                            "height",
+                            "500px",
+                            editor.editing.view.document.getRoot()
+                          );
+                        });
+                        const data = editor.getData();
+                        setBlogContent(data);
+                      }}
+                    />
+                  ) : (
+                    <p>editor..</p>
+                  )}
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Col sm={{ span: 10, offset: 2 }}>
+                  <Button variant="primary" onClick={handleSubmit(onUpdate)}>
+                    {isProcessing ? "Updating ..." : `Update`}
+                  </Button>
+                </Col>
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </Layout>
+  ) : (
+    <Layout>
+      <SEO
+        title="Error : Not Found | KokeLiko "
+        canonical={`${process.env.PUBLIC_URL}/user/post/edit`}
+      />
+      <div className="wrapper">
+        <Header />
+        <div className="container">
+          <h6>Nothing here</h6>
         </div>
         <Footer />
       </div>
@@ -299,6 +318,7 @@ export default EditPostPage;
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   const postId = context.params.id;
+  const { res } = context;
 
   if (!session) {
     return {

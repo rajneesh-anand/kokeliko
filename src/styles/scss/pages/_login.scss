@@ -1,6 +1,4 @@
-
 .signin-area{
-
   .signin-google{
       button{
           border: 1px solid #ddd;
@@ -15,9 +13,9 @@
   .signin-facebook{
      
       i{
-          font-size: 24px;
-  vertical-align: middle;
-  color: white;
+            font-size: 24px;
+            vertical-align: middle;
+            color: white;
       }
       button{
           border: none;
@@ -96,7 +94,38 @@
               }
           }
       }
-  }
-
-  
+  }  
 } 
+
+.mobile-user-profile-detail{
+    img{
+        width: "60px";
+    }
+    button {
+          border: none;
+          font-family: "Roboto", 'sans-serif';        
+          padding: 6px 14px;
+          background-color: #4267B2;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 14px; 
+    }
+    p{
+        font-family: "Roboto", 'sans-serif';        
+          color: rgb(27, 26, 26);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 14px;  
+          font-weight: 500;
+    }
+    a{
+        font-family: "Roboto", 'sans-serif';        
+        color: rgb(27, 26, 26);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 12.5px;  
+        font-weight: 500;
+    }
+
+}
