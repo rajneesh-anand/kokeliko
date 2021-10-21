@@ -3,7 +3,7 @@ import prisma from "@/libs/prisma";
 export default async function handler(req, res) {
   const slug = req.query.slug;
   try {
-    const blogDetail = await prisma.courses.findFirst({
+    const blogDetail = await prisma.post.findFirst({
       where: {
         slug: slug,
       },

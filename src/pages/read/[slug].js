@@ -6,6 +6,7 @@ import Layout from "@/layout/index";
 import BlogDetail from "@/components/blog/blog-details";
 
 const SingleBlogPage = ({ blogDetail }) => {
+  console.log(blogDetail);
   return (
     <Layout>
       <SEO
