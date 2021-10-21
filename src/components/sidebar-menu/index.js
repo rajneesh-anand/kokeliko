@@ -21,12 +21,12 @@ const SideMenu = ({ show, handleClose }) => {
           {!session ? (
             <>
               <div className="text-center">
-                <i className="fas fa-user-circle" style={{ fontSize: 56 }}></i>
+                <i className="fas fa-user-circle" style={{ fontSize: 64 }}></i>
               </div>
 
               <div className="text-center">
                 <Link href="/auth/signin">
-                  <a className="default-btn-sm">Sign In</a>
+                  <a className="small-btn">Sign In</a>
                 </Link>
               </div>
             </>
@@ -48,7 +48,9 @@ const SideMenu = ({ show, handleClose }) => {
                 </Link>
               </div>
               <div className="text-center">
-                <button onClick={() => signOut()}>Sign Out</button>
+                <button className="small-btn" onClick={() => signOut()}>
+                  Sign Out
+                </button>
               </div>
             </div>
           )}
