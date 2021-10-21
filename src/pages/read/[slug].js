@@ -5,18 +5,17 @@ import Footer from "@/layout/footer";
 import Layout from "@/layout/index";
 import BlogDetail from "@/components/blog/blog-details";
 
-const SingleBlogPage = ({ data }) => {
-  const blog = JSON.parse(data);
+const SingleBlogPage = ({ blogDetail }) => {
   return (
     <Layout>
       <SEO
-        title={`${blog.title}`}
+        title={`${blogDetail.title}`}
         description="Amazon Flipkart Other E-Commerce Seller Platforms News and Updates"
-        canonical={`${process.env.PUBLIC_URL}/read/${blog.slug}`}
+        canonical={`${process.env.PUBLIC_URL}/read/${blogDetail.slug}`}
       />
       <div className="wrapper">
         <Header />
-        <BlogDetail data={blog} />
+        <BlogDetail data={blogDetail} />
 
         <Footer />
       </div>
@@ -25,6 +24,15 @@ const SingleBlogPage = ({ data }) => {
 };
 
 export default SingleBlogPage;
+
+export async function getServerSideProps({ params, req, res }) {
+  const { slug } = params;
+  const result = await fetch(`${process.env.PUBLIC_URL}/api/blog/${slug}`);
+  const data = await result.json();
+  return {
+    props: { blogDetail: data ? data.data : null },
+  };
+}
 
 export async function getServerSideProps({ params, req, res }) {
   try {
