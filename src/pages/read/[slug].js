@@ -33,32 +33,3 @@ export async function getServerSideProps({ params, req, res }) {
     props: { blogDetail: data ? data.data : null },
   };
 }
-
-export async function getServerSideProps({ params, req, res }) {
-  try {
-    const { slug } = params;
-    const post = await prisma.post.findFirst({
-      where: {
-        slug: slug,
-      },
-      include: {
-        author: {
-          select: { name: true, image: true },
-        },
-      },
-    });
-
-    return {
-      props: { data: JSON.stringify(post) },
-    };
-  } catch (error) {
-    res.statusCode = 404;
-    return {
-      props: {},
-    };
-  } finally {
-    async () => {
-      await prisma.$disconnect();
-    };
-  }
-}
