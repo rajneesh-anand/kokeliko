@@ -3,7 +3,7 @@ import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
-import BlogList from "@/containers/blog-list";
+import BlogList from "@/components/blog/blog-list";
 import Message from "@/components/message";
 import Loading from "@/components/loading";
 import { usePaginatedData } from "@/utils/useRequest";
