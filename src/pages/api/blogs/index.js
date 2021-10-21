@@ -11,6 +11,14 @@ export default async function handler(req, res) {
     const product = await prisma.post.findMany({
       take: limit,
       skip: startIndex,
+      where: {
+        published: true,
+      },
+      include: {
+        author: {
+          select: { name: true, image: true },
+        },
+      },
     });
 
     res.status(200).json({

@@ -4,7 +4,6 @@ import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
-import Message from "@/components/message";
 import { useSession, getSession } from "next-auth/client";
 import dynamic from "next/dynamic";
 import { blogTagsOptions, blogCategoryOptions } from "@/constant/blogs";
@@ -23,9 +22,8 @@ const Multiselect = dynamic(
   }
 );
 
-const EditPostPage = ({ post }) => {
-  const postData = JSON.parse(post);
-
+const EditPostPage = ({ data }) => {
+  const postData = data ? JSON.parse(data) : null;
   const [session, loading] = useSession();
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
@@ -318,7 +316,6 @@ export default EditPostPage;
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   const postId = context.params.id;
-  const { res } = context;
 
   if (!session) {
     return {
@@ -329,22 +326,14 @@ export async function getServerSideProps(context) {
     };
   }
 
-  try {
-    const post = await prisma.post.findFirst({
-      where: {
-        author: { email: session.user.email },
-        id: Number(postId),
-      },
-    });
+  const blogDetail = await prisma.post.findFirst({
+    where: {
+      author: { email: session.user.email },
+      id: Number(postId),
+    },
+  });
 
-    return {
-      props: { post: JSON.stringify(post) },
-    };
-  } catch {
-    res.statusCode = 404;
-  } finally {
-    async () => {
-      await prisma.$disconnect();
-    };
-  }
+  return {
+    props: { data: blogDetail ? JSON.stringify(blogDetail) : null },
+  };
 }
