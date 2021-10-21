@@ -1,47 +1,21 @@
 import React from "react";
 import { useSession, getSession } from "next-auth/client";
-import prisma from "../../../libs/prisma";
+import prisma from "@/libs/prisma";
 import Link from "next/link";
-import SEO from "../../../components/seo";
-import Footer from "../../../layout/footer";
-import Header from "../../../layout/header";
-import Layout from "../../../layout";
+import SEO from "@/components/seo";
+import Footer from "@/layout/footer";
+import Header from "@/layout/header";
+import Layout from "@/layout/index";
+import BlogListTwo from "@/components/blog/blog-list-two";
 
-import BlogCardLeftImage from "../../../components/blog-card";
-
-const Account = ({ blogData }) => {
+const AccountPage = ({ blogData }) => {
   const [session, loading] = useSession();
   const data = JSON.parse(blogData).length != 0 ? JSON.parse(blogData) : null;
-  return loading ? (
-    <div className="hv-center">
-      <div className="spinner-border text-primary" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-    </div>
-  ) : !session ? (
+  return (
     <Layout>
       <SEO
         title="My Account | KokeLiko "
-        canonical={process.env.PUBLIC_URL + "/user/account"}
-      />
-      <div className="wrapper home-default-wrapper">
-        <Header classOption="hb-border" />
-        <div className="main-content">
-          <div className="hv-center">
-            <p>Please SignIn To Access Your Account </p>
-            <Link href="/auth/signin">
-              <a className="blue-button">Sign In</a>
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    </Layout>
-  ) : (
-    <Layout>
-      <SEO
-        title="My Account | KokeLiko "
-        canonical={process.env.PUBLIC_URL + "/user/account"}
+        canonical={`${process.env.PUBLIC_URL}/user/account`}
       />
       <div className="wrapper">
         <Header />
@@ -50,7 +24,7 @@ const Account = ({ blogData }) => {
           <div className="row">
             <div className="col-lg-2 col-md-2 buttonList">
               <div>
-                <Link href="/user/newpost">
+                <Link href="/user/post/create">
                   <div className="buttonCol">
                     <a>Write New Blog</a>
                   </div>
@@ -80,7 +54,7 @@ const Account = ({ blogData }) => {
 
             <div className="col-lg-10 col-md-10 ">
               {data ? (
-                <BlogCardLeftImage data={data} />
+                <BlogListTwo data={data} />
               ) : (
                 <div className="hv-center">
                   <h6>Write &amp; Share your blog with the world </h6>
@@ -128,4 +102,4 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-export default Account;
+export default AccountPage;

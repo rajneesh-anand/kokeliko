@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Link from "next/link";
 import slugify from "slugify";
-import SEO from "components/seo";
+import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
-import Layout from "@/layout/";
+import Layout from "@/layout/index";
 import { useSession, getSession } from "next-auth/client";
 import dynamic from "next/dynamic";
-import { blogTagsOptions, blogCategoryOptions } from "constant/blogs";
+import { blogTagsOptions, blogCategoryOptions } from "@/constant/blogs";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
@@ -119,7 +118,7 @@ const EditPostPage = ({ post }) => {
     <Layout>
       <SEO
         title="Edit Blog | KokeLiko "
-        canonical={process.env.PUBLIC_URL + "/user/newpost"}
+        canonical={`${process.env.PUBLIC_URL}/user/post/edit/${postData.id}`}
       />
       <div className="wrapper">
         <Header />
@@ -141,7 +140,7 @@ const EditPostPage = ({ post }) => {
           <Form>
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm="2">
-                Blog Post Thumb Image
+                Blog Thumbnail Image
               </Form.Label>
               <Col sm="10">
                 <Form.Control
@@ -156,7 +155,7 @@ const EditPostPage = ({ post }) => {
 
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm="2">
-                Blog Post Title
+                Blog Title *
               </Form.Label>
               <Col sm="10">
                 <Form.Control
@@ -176,7 +175,7 @@ const EditPostPage = ({ post }) => {
 
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm="2">
-                Blog Post Category
+                Blog Category
               </Form.Label>
               <Col sm="10">
                 <Form.Select
@@ -195,7 +194,7 @@ const EditPostPage = ({ post }) => {
 
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm="2">
-                Blog Sub Categories
+                Blog Sub-Categories
               </Form.Label>
               <Col sm="10">
                 <Multiselect
@@ -251,7 +250,7 @@ const EditPostPage = ({ post }) => {
 
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm="2">
-                Blog Post Content
+                Blog Content
               </Form.Label>
               <Col sm="10">
                 {editorLoaded ? (
@@ -313,6 +312,7 @@ export async function getServerSideProps(context) {
   try {
     const post = await prisma.post.findFirst({
       where: {
+        author: { email: session.user.email },
         id: Number(postId),
       },
     });

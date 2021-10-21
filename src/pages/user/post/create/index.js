@@ -6,7 +6,10 @@ import Header from "@/layout/header";
 import Layout from "@/layout/index";
 import { useSession, getSession } from "next-auth/client";
 import dynamic from "next/dynamic";
-import { blogTagsOptions, blogCategoryOptions } from "../../../constant/blogs";
+import {
+  blogTagsOptions,
+  blogCategoryOptions,
+} from "../../../../constant/blogs";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
