@@ -88,8 +88,8 @@ const SideMenu = ({ show, handleClose }) => {
           </ul>
         </nav>
 
-        <div className="aside-footer-area text-center ptb-50">
-          <ul className="social-links">
+        <div className="aside-footer-area">
+          {/* <ul className="social-links">
             <li>
               <a href="https://www.facebook.com/" target="_blank">
                 <i className="ri-facebook-fill"></i>
@@ -115,7 +115,51 @@ const SideMenu = ({ show, handleClose }) => {
                 <i className="ri-github-fill"></i>
               </a>
             </li>
-          </ul>
+          </ul> */}
+
+          <div className="article-share">
+            <ul className="social">
+              <li>
+                <span>Follow Us </span>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/"
+                  className="facebook"
+                  target="_blank"
+                >
+                  <i className="ri-facebook-fill"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/"
+                  className="twitter"
+                  target="_blank"
+                >
+                  <i className="ri-linkedin-fill"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/"
+                  className="linkedin"
+                  target="_blank"
+                >
+                  <i className="ri-twitter-fill"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/"
+                  className="instagram"
+                  target="_blank"
+                >
+                  <i className="ri-instagram-line"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </OffcanvasBody>
     </Offcanvas>

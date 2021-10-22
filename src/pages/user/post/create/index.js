@@ -327,11 +327,16 @@ const NewpostPage = () => {
                 </Col>
               </Form.Group>
 
-              <Form.Group as={Row} className="mb-3">
+              <Form.Group as={Row} className="mb-3 text-center ">
                 <Col sm={{ span: 10, offset: 2 }}>
-                  <Button variant="primary" onClick={handleSubmit(onPublish)}>
+                  <Button
+                    variant="primary"
+                    onClick={handleSubmit(onPublish)}
+                    style={{ marginRight: 8 }}
+                  >
                     {isProcessing ? "Publishing ..." : `Publish`}
                   </Button>
+
                   <Button variant="primary" onClick={handleSubmit(onDraft)}>
                     {isProcessing ? "Drafting ..." : `Draft`}
                   </Button>
