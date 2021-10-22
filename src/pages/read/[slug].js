@@ -6,12 +6,12 @@ import Layout from "@/layout/index";
 import BlogDetail from "@/components/blog/blog-details";
 
 const SingleBlogPage = ({ blogDetail }) => {
-  console.log(blogDetail);
+  // console.log(blogDetail);
   return (
     <Layout>
       <SEO
         title={`${blogDetail.title}`}
-        description="Amazon Flipkart Other E-Commerce Seller Platforms News and Updates"
+        description="Explore the world of Yoga and Meditation"
         canonical={`${process.env.PUBLIC_URL}/read/${blogDetail.slug}`}
       />
       <div className="wrapper">

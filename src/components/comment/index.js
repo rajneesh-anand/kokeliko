@@ -2,8 +2,8 @@ import { DiscussionEmbed } from "disqus-react";
 import PropTypes from "prop-types";
 
 const Comment = ({ url, id, title }) => {
-  console.log(url);
-  const disqusShortname = "victoriastudio";
+  // console.log(url);
+  const disqusShortname = "kokeliko";
   const disqusConfig = {
     url: url,
     identifier: `${id}`,

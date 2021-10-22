@@ -257,6 +257,20 @@
             }
         }
     }
+
+    .article-tags {
+       
+        margin-top: 16px;
+        padding-top: 30px;
+        // align-items: center;
+        // border-top: 1px solid #eeeeee;
+        .widget-tags {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+    }
+
     .article-footer {
         display: flex;
         flex-wrap: wrap;
@@ -271,8 +285,18 @@
 
             img {
                 border-radius: 50%;
-                height: 65px;
-                width: 65px;
+                height: 48px;
+                width: 48px;
+
+                @media #{$xs-device} {
+                    height: 24px;
+                width: 24px;
+                  }
+                  @media #{$xxs-device} {
+                    height: 24px;
+                width: 24px;
+                  }
+
             }
             .title {
                 margin-left: 17px;
@@ -282,6 +306,12 @@
                     font-size: 16px;
                     margin-bottom: 5px;
                     color: var(--paragraphColor);
+                    @media #{$xs-device} {
+                        font-size: 12px;
+                      }
+                      @media #{$xxs-device} {
+                        font-size: 12px;
+                      }
 
                     a {
                         font-weight: 600;
@@ -325,7 +355,18 @@
                         text-align: center;
                         font-size: 16px;
                         margin-left: 2px;
-        
+
+                        @media #{$xs-device} {
+                            width: 24px;
+                            height: 24px;
+                            line-height: 24px;
+                          }
+                          @media #{$xxs-device} {
+                            width: 24px;
+                            height: 24px;
+                            line-height: 24px;
+                          }
+                        
                         &:hover {
                             color: var(--mainColor);
                             background-color: transparent;
@@ -376,7 +417,7 @@
         }
     }
     .related-post {
-        margin-top: 30px;
+        margin-top: 16px;
         padding-top: 30px;
         border-top: 1px solid #eeeeee;
     
@@ -589,4 +630,8 @@
             }
         }
     }
+}
+
+.comment-area{
+    margin-top: 24px;
 }

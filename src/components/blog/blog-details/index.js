@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import htmr from "htmr";
+import BlogTag from "../blog-tag";
+import Comment from "../../comment";
 
 const BlogDetails = ({ data }) => {
   const fomatDate = (date_value) => {
@@ -27,17 +29,18 @@ const BlogDetails = ({ data }) => {
                       <i className="ri-calendar-2-line"></i>
                       {fomatDate(data.createdAt)}
                     </li>
-                    {/* <li>
-                        <i className="ri-message-2-line"></i>
-                        <Link href="/blog-details">
-                          <a>(4) Comments</a>
-                        </Link>
-                      </li> */}
+                    <li>
+                      <i className="ri-time-line"></i>
+                      <span>5 Mins</span>
+                    </li>
                   </ul>
                 </div>
 
                 <h4>{data.title}</h4>
                 {htmr(data.content)}
+              </div>
+              <div className="article-tags">
+                <BlogTag tags={data.tags} />
               </div>
 
               <div className="article-footer">
@@ -96,6 +99,18 @@ const BlogDetails = ({ data }) => {
                   </ul>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="comment-area">
+            <h4 className="title text-center">Leave a comment</h4>
+            <div className="comment-form-wrap">
+              <Comment
+                url={`https://kokeliko.vercel.app/read/${data.slug}`}
+                id={data.id}
+                title={data.title}
+              />
             </div>
           </div>
         </div>
