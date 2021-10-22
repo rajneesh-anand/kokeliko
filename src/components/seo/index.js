@@ -22,11 +22,11 @@ const SEO = ({ title, description, canonical, css, js, image }) => (
     <meta
       property="og:image"
       itemProp="image"
-      content={`${process.env.PUBLIC_URL}/images/og.png`}
+      content={`${process.env.PUBLIC_URL}/og.png`}
     />
     <meta
       property="og:image:secure_url"
-      content={`${process.env.PUBLIC_URL}/images/og.png`}
+      content={`${process.env.PUBLIC_URL}/og.png`}
     />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="300" />
@@ -45,7 +45,7 @@ const SEO = ({ title, description, canonical, css, js, image }) => (
     <meta
       name="twitter:image"
       property="twitter:image"
-      content={`${process.env.PUBLIC_URL}/images/og.png`}
+      content={`${process.env.PUBLIC_URL}/og.png`}
     />
 
     {canonical && <link rel="canonical" href={`${canonical}`} />}

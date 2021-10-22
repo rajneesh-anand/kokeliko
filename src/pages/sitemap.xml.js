@@ -38,7 +38,7 @@ export const getServerSideProps = async ({ res }) => {
     "https://kokeliko.vercel.app/photos",
     "https://kokeliko.vercel.app/privacypolicy",
     "https://kokeliko.vercel.app/termsofuse",
-    "https://kokeliko.vercel.app/user/newpost",
+    "https://kokeliko.vercel.app/user/post/create",
     "https://kokeliko.vercel.app/user/account",
     "https://kokeliko.vercel.app/user/product",
     "https://kokeliko.vercel.app/user/upload/video",
@@ -67,7 +67,7 @@ export const getServerSideProps = async ({ res }) => {
             .map((blog) => {
               return `
               <url>
-                <loc>${baseUrl}/read/${blog.id}/${blog.slug}</loc>
+                <loc>${baseUrl}/read/${blog.slug}</loc>
                 <lastmod>${new Date().toISOString()}</lastmod>
                 <changefreq>weekly</changefreq>
                 <priority>1.0</priority>

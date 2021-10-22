@@ -33,8 +33,8 @@ const HomePage = () => {
           <Loading />
         ) : isEmpty ? (
           <Message
-            title="Nothing found here !"
-            url="/user/newpost"
+            title="There's nothing here !"
+            url="/user/post/create"
             btnText="Write &amp; Share Your Own Blog"
           />
         ) : (
