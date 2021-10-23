@@ -3,12 +3,12 @@ import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
-import ProductList from "@/components/product/product-list";
+import BlogList from "@/components/blog/blog-list";
 import Message from "@/components/message";
 import Loading from "@/components/loading";
 import { usePaginatedData } from "@/utils/useRequest";
 
-const ShopPage = () => {
+const ArticlePage = ({ articleType }) => {
   const {
     result,
     error,
@@ -17,14 +17,16 @@ const ShopPage = () => {
     setSize,
     isReachingEnd,
     isEmpty,
-  } = usePaginatedData("/api/shop");
+  } = usePaginatedData(`${process.env.PUBLIC_URL}/api/articles/${articleType}`);
 
   return (
     <Layout>
       <SEO
-        title="Shop | Kokeliko"
+        title={`${articleType[0].toUpperCase()}${articleType.slice(
+          1
+        )} | KokeLiko`}
         description="Explore the world of Yoga and Meditation"
-        canonical={`${process.env.PUBLIC_URL}/shop`}
+        canonical={`${process.env.PUBLIC_URL}/articles/${articleType}`}
       />
       <div className="wrapper">
         <Header />
@@ -33,13 +35,13 @@ const ShopPage = () => {
           <Loading />
         ) : isEmpty ? (
           <Message
-            title="Nothing found here !"
-            url="/user/newpost"
+            title="There's nothing here !"
+            url="/user/post/create"
             btnText="Write &amp; Share Your Own Blog"
           />
         ) : (
           <>
-            <ProductList data={result} />
+            <BlogList data={result} />
             <div className="row">
               <div className="col d-flex justify-content-center">
                 {!isReachingEnd && (
@@ -62,4 +64,11 @@ const ShopPage = () => {
   );
 };
 
-export default ShopPage;
+export default ArticlePage;
+
+export const getServerSideProps = async ({ params }) => {
+  const articleType = params.type;
+  return {
+    props: { articleType },
+  };
+};

@@ -2762,34 +2762,14 @@ iframe {
 // }
 
 .buttonList {
-  border-right: 1px solid #ddd;
+
   padding: 30px 0px;
-  @media #{$xs-device} {
-    padding: 30px 16px 8px;
+  border-bottom: 1px solid #ddd;
+   
+  a{
+    margin: 8px;
   }
-  @media #{$xxs-device} {   
-  
-    padding: 30px 16px 8px;
-  }
-  .buttonCol {
-    font-size: 16px;
-    text-align: center;
-    border: solid 1px darkgreen;
-    margin: 5px;
-    background-color: teal;
-    cursor: pointer;
-    a {
-      color: white !important;
-    }
-    @media #{$xs-device} {
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-    @media #{$xxs-device} {
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-  }
+ 
 }
 
 
@@ -2801,4 +2781,9 @@ iframe {
   @media #{$xxs-device} {
     flex-wrap: wrap !important;
   }
+}
+
+.info{
+  margin-top: 60px;
+  margin-bottom: 60px;
 }

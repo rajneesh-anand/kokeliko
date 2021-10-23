@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import htmr from "htmr";
 
-const BlogList = ({ data }) => {
+const OrderList = ({ data }) => {
   const fomatDate = (date_value) => {
     let date = new Date(date_value);
     return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
@@ -63,4 +63,4 @@ const BlogList = ({ data }) => {
   );
 };
 
-export default BlogList;
+export default OrderList;

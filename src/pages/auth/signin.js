@@ -11,7 +11,7 @@ const SignInPage = ({ csrfToken }) => {
     <Layout>
       <SEO
         title="Sign In | KokeLiko"
-        description="Sign In to ICPA Global Consultants"
+        description="Sign In to KokeLiko"
         canonical={`${process.env.PUBLIC_URL}/auth/signin`}
       />
       <div className="wrapper">

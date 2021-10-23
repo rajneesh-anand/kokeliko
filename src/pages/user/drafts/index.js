@@ -3,10 +3,11 @@ import { useSession, getSession } from "next-auth/client";
 import prisma from "@/libs/prisma";
 import Link from "next/link";
 import SEO from "@/components/seo";
+import Message from "@/components/message";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
-import BlogListTwo from "@/components/blog/blog-list-two";
+import BlogDraftList from "@/components/blog/blog-draft-list";
 
 const DraftPage = ({ blogData }) => {
   const [session, loading] = useSession();
@@ -22,48 +23,32 @@ const DraftPage = ({ blogData }) => {
 
         <div className="container">
           <div className="row">
-            <div className="col-lg-2 col-md-2 buttonList">
-              <div>
+            <div className="buttonList">
+              <div className="text-center">
                 <Link href="/user/post/create">
-                  <div className="buttonCol">
-                    <a>Write New Blog</a>
-                  </div>
+                  <a className="small-btn">Write New Blog</a>
                 </Link>
-                <Link href="/user/drafts">
-                  <div className="buttonCol">
-                    <a>Drafts Blog</a>
-                  </div>
-                </Link>
-                <Link href="/user/upload/photo">
-                  <div className="buttonCol">
-                    <a>Upload Photo</a>
-                  </div>
-                </Link>
-                <Link href="/user/upload/video">
-                  <div className="buttonCol">
-                    <a>Upload Movie</a>
-                  </div>
+                <Link href="/user/account">
+                  <a className="small-btn">Published Blogs</a>
                 </Link>
                 <Link href="/user/product">
-                  <div className="buttonCol">
-                    <a>Upload Product</a>
-                  </div>
+                  <a className="small-btn">Sell Your Product</a>
                 </Link>
               </div>
             </div>
-
-            <div className="col-lg-10 col-md-10 ">
-              {data ? (
-                <BlogListTwo data={data} />
-              ) : (
-                <div className="hv-center">
-                  <h6>Write &amp; Share your blog with the world </h6>
-                  <Link href="/user/newpost">
-                    <a className="blue-button">Publish Your Blog</a>
-                  </Link>
-                </div>
-              )}
-            </div>
+          </div>
+          <div className="row">
+            {data ? (
+              <BlogDraftList data={data} />
+            ) : (
+              <div className="info">
+                <Message
+                  title="You have not published any blog !"
+                  url="/user/post/create"
+                  btnText="Write &amp; Share Your Own Blog"
+                />
+              </div>
+            )}
           </div>
         </div>
 

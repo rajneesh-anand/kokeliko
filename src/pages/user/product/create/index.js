@@ -5,17 +5,14 @@ import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
 import { useSession, getSession } from "next-auth/client";
-import dynamic from "next/dynamic";
-import {
-  blogTagsOptions,
-  blogCategoryOptions,
-} from "../../../../constant/blogs";
+import { productCategoryOptions } from "@/constant/product";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import dynamic from "next/dynamic";
 
 const Multiselect = dynamic(
   () =>
@@ -25,16 +22,15 @@ const Multiselect = dynamic(
   }
 );
 
-const NewpostPage = () => {
+const ProductPage = () => {
   const [session, loading] = useSession();
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
   const [editorLoaded, setEditorLoaded] = useState(false);
   const [message, setMessage] = useState();
-  const [blogContent, setBlogContent] = useState("");
-  const [thumbImage, setThumbImage] = useState();
-  const [tags, setTags] = useState([]);
-  const [subCat, setSubCat] = useState([]);
+  const [usage, setUsage] = useState("");
+  const [productImage, setProductImage] = useState();
+  const [category, setCategory] = useState([]);
   const [isProcessing, setProcessingTo] = useState(false);
   const {
     register,
@@ -44,21 +40,14 @@ const NewpostPage = () => {
     mode: "onBlur",
   });
 
-  const tagSelectedValues = ["Yoga"];
-  const catSelectedValues = ["Yoga"];
+  const catSelectedValues = ["Automotive"];
 
-  const onTagSelect = (event) => {
-    setTags(event);
-  };
   const onCatSelect = (event) => {
-    setSubCat(event);
+    setCategory(event);
   };
 
-  const onTagRemove = (event) => {
-    setTags(event);
-  };
   const onCatRemove = (event) => {
-    setSubCat(event);
+    setCategory(event);
   };
 
   useEffect(() => {
@@ -68,96 +57,56 @@ const NewpostPage = () => {
     };
     setEditorLoaded(true);
     if (message === "success") {
-      toast.success("Blog published successfully !");
+      toast.success("Product Uploaded !");
     }
     if (message === "failed") {
       toast.error("Oops something went wrong !");
     }
   }, [message]);
 
-  const onPublish = async (data) => {
-    setProcessingTo(true);
-    setMessage("");
-    const formData = new FormData();
-    formData.append("image", thumbImage);
-    formData.append("title", data.blog_title);
-    formData.append("category", data.blog_category);
-    formData.append(
-      "subCategories",
-      subCat.length === 0
-        ? JSON.stringify(catSelectedValues)
-        : JSON.stringify(subCat)
-    );
-    formData.append(
-      "tags",
-      tags.length === 0
-        ? JSON.stringify(tagSelectedValues)
-        : JSON.stringify(tags)
-    );
-    formData.append("content", blogContent);
-    formData.append("template", data.blog_template);
-    formData.append("slug", slugify(data.blog_title));
-    formData.append("published", true);
-    formData.append("author", session?.user?.email);
-
-    try {
-      const result = await fetch(`${process.env.API_URL}/blog`, {
-        method: "POST",
-        body: formData,
-      });
-      console.log(result.status);
-      if (result.status >= 400 && result.status < 600) {
-        throw new Error("Bad response from server");
-      } else {
-        setProcessingTo(false);
-        setMessage("success");
-        setThumbImage(null);
-      }
-    } catch (error) {
-      setProcessingTo(false);
-      setMessage("failed");
+  const onSubmit = async (data) => {
+    if (!productImage) {
+      return;
     }
-  };
-
-  const onDraft = async (data) => {
     setProcessingTo(true);
-    setMessage("");
     const formData = new FormData();
-    formData.append("image", thumbImage);
-    formData.append("title", data.blog_title);
-    formData.append("category", data.blog_category);
+    formData.append("image", productImage);
+    formData.append("product_name", data.product_name);
+    formData.append("description", data.product_desc);
+    formData.append("size", data.size);
+    formData.append("weight", data.weight);
+    formData.append("price", data.price);
+    formData.append("sale_price", data.sale_price);
     formData.append(
-      "subCategories",
-      subCat.length === 0
+      "discount",
+      ((data.price - data.sale_price) / data.price) * 100
+    );
+    formData.append(
+      "category",
+      category.length === 0
         ? JSON.stringify(catSelectedValues)
-        : JSON.stringify(subCat)
+        : JSON.stringify(category)
     );
-    formData.append(
-      "tags",
-      tags.length === 0
-        ? JSON.stringify(tagSelectedValues)
-        : JSON.stringify(tags)
-    );
-    formData.append("content", blogContent);
-    formData.append("template", data.blog_template);
-    formData.append("slug", slugify(data.blog_title));
-    formData.append("published", false);
-    formData.append("author", session?.user?.email);
+    formData.append("stock", data.stock === "No" ? false : true);
+    formData.append("usage", usage);
+    formData.append("slug", slugify(data.product_name));
 
     try {
-      const result = await fetch(`${process.env.API_URL}/blog`, {
+      const result = await fetch(`${process.env.API_URL}/product`, {
         method: "POST",
         body: formData,
       });
-      console.log(result.status);
+
       if (result.status >= 400 && result.status < 600) {
+        console.log(result.status);
         throw new Error("Bad response from server");
       } else {
         setProcessingTo(false);
         setMessage("success");
-        setThumbImage(null);
+        setProductImage(null);
       }
     } catch (error) {
+      console.log(error);
       setProcessingTo(false);
       setMessage("failed");
     }
@@ -166,8 +115,8 @@ const NewpostPage = () => {
   return (
     <Layout>
       <SEO
-        title="New Blog | KokeLiko "
-        canonical={`${process.env.PUBLIC_URL}/user/post/create`}
+        title="New Product | KokeLiko "
+        canonical={`${process.env.PUBLIC_URL}/user/product/create`}
       />
       <div className="wrapper">
         <Header />
@@ -190,14 +139,14 @@ const NewpostPage = () => {
             <Form>
               <Form.Group as={Row} className="mb-3">
                 <Form.Label column sm="2">
-                  Blog Thumbnail Image
+                  Product Image
                 </Form.Label>
                 <Col sm="10">
                   <Form.Control
                     type="file"
                     accept=".jpg, .png, .jpeg"
                     onChange={(event) => {
-                      setThumbImage(event.target.files[0]);
+                      setProductImage(event.target.files[0]);
                     }}
                   />
                 </Col>
@@ -205,19 +154,19 @@ const NewpostPage = () => {
 
               <Form.Group as={Row} className="mb-3">
                 <Form.Label column sm="2">
-                  Blog Title *
+                  Product Name *
                 </Form.Label>
                 <Col sm="10">
                   <Form.Control
                     type="text"
-                    placeholder=" Blog Title "
-                    {...register("blog_title", {
-                      required: " Blog title is required ! ",
+                    placeholder=" Product Name"
+                    {...register("product_name", {
+                      required: " Product Name is required ! ",
                     })}
                   />
-                  {errors.blog_title && (
+                  {errors.product_name && (
                     <Form.Label style={{ color: "red" }}>
-                      {errors.blog_title.message}
+                      {errors.product_name.message}
                     </Form.Label>
                   )}
                 </Col>
@@ -225,33 +174,110 @@ const NewpostPage = () => {
 
               <Form.Group as={Row} className="mb-3">
                 <Form.Label column sm="2">
-                  Blog Category
+                  Product Description *
                 </Form.Label>
                 <Col sm="10">
-                  <Form.Select
-                    className="me-sm-2"
-                    {...register("blog_category")}
-                  >
-                    {blogCategoryOptions.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </Form.Select>
+                  <Form.Control
+                    type="text"
+                    placeholder=" Product Description"
+                    {...register("product_desc", {
+                      required: " Product Description is required ! ",
+                    })}
+                  />
+                  {errors.product_desc && (
+                    <Form.Label style={{ color: "red" }}>
+                      {errors.product_desc.message}
+                    </Form.Label>
+                  )}
                 </Col>
               </Form.Group>
 
               <Form.Group as={Row} className="mb-3">
                 <Form.Label column sm="2">
-                  Blog Sub-Categories
+                  Size
                 </Form.Label>
-                <Col sm="10">
+                <Col sm="4">
+                  <Form.Control
+                    type="text"
+                    placeholder=" Product Size"
+                    {...register("size")}
+                  />
+                </Col>
+                <Form.Label column sm="2">
+                  Weight
+                </Form.Label>
+                <Col sm="4">
+                  <Form.Control
+                    type="text"
+                    placeholder=" Product Weight (grams)"
+                    {...register("weight", {
+                      pattern: {
+                        value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
+                        message: "Accept only decimal numbers",
+                      },
+                    })}
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  M.R.P
+                </Form.Label>
+                <Col sm="4">
+                  <Form.Control
+                    type="text"
+                    placeholder="Maximum Reatil Price"
+                    {...register("price", {
+                      required: "MRP is required !",
+                      pattern: {
+                        value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
+                        message: "Accept only decimal numbers",
+                      },
+                    })}
+                  />
+                  {errors.price && (
+                    <Form.Label style={{ color: "red" }}>
+                      {errors.price.message}
+                    </Form.Label>
+                  )}
+                </Col>
+                <Form.Label column sm="2">
+                  Sale Price
+                </Form.Label>
+                <Col sm="4">
+                  <Form.Control
+                    type="text"
+                    placeholder=" Sale Price"
+                    {...register("sale_price", {
+                      pattern: {
+                        value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
+                        message: "Accept only decimal numbers",
+                      },
+                    })}
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm="2">
+                  Stock Available
+                </Form.Label>
+                <Col sm="4">
+                  <Form.Select className="me-sm-2" {...register("stock")}>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </Form.Select>
+                </Col>
+                <Form.Label column sm="2">
+                  Product Category
+                </Form.Label>
+                <Col sm="4">
                   <Multiselect
-                    options={blogCategoryOptions}
+                    options={productCategoryOptions}
                     selectedValues={catSelectedValues}
                     onSelect={onCatSelect}
                     onRemove={onCatRemove}
-                    placeholder="+ Add Sub Categories"
+                    placeholder="+ Add Category"
                     id="catOption"
                     isObject={false}
                     className="catDrowpdown"
@@ -261,50 +287,13 @@ const NewpostPage = () => {
 
               <Form.Group as={Row} className="mb-3">
                 <Form.Label column sm="2">
-                  Blog Tags
-                </Form.Label>
-                <Col sm="10">
-                  <Multiselect
-                    options={blogTagsOptions}
-                    selectedValues={tagSelectedValues}
-                    onSelect={onTagSelect}
-                    onRemove={onTagRemove}
-                    placeholder="+ Add Tags"
-                    id="tagOption"
-                    isObject={false}
-                    className="tagDrowpdown"
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Template
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Select
-                    className="me-sm-2"
-                    {...register("blog_template")}
-                  >
-                    <option value="blogpost_with_thumbImage">
-                      Blog with Thumb Image
-                    </option>
-                    <option value="blogpost_without_thumbImage">
-                      Blog without Thumb Image
-                    </option>
-                  </Form.Select>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Content *
+                  Product Usage
                 </Form.Label>
                 <Col sm="10">
                   {editorLoaded ? (
                     <CKEditor
                       editor={ClassicEditor}
-                      data={blogContent}
+                      data={usage}
                       onReady={(editor) => {
                         console.log("Editor is ready to use!", editor);
                       }}
@@ -313,12 +302,12 @@ const NewpostPage = () => {
                         editor.editing.view.change((writer) => {
                           writer.setStyle(
                             "height",
-                            "500px",
+                            "320px",
                             editor.editing.view.document.getRoot()
                           );
                         });
                         const data = editor.getData();
-                        setBlogContent(data);
+                        setUsage(data);
                       }}
                     />
                   ) : (
@@ -331,14 +320,10 @@ const NewpostPage = () => {
                 <Col sm={{ span: 10, offset: 2 }}>
                   <Button
                     variant="primary"
-                    onClick={handleSubmit(onPublish)}
+                    onClick={handleSubmit(onSubmit)}
                     style={{ marginRight: 8 }}
                   >
-                    {isProcessing ? "Publishing ..." : `Publish`}
-                  </Button>
-
-                  <Button variant="primary" onClick={handleSubmit(onDraft)}>
-                    {isProcessing ? "Drafting ..." : `Draft`}
+                    {isProcessing ? "Saving ..." : `Save`}
                   </Button>
                 </Col>
               </Form.Group>
@@ -351,7 +336,7 @@ const NewpostPage = () => {
   );
 };
 
-export default NewpostPage;
+export default ProductPage;
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);

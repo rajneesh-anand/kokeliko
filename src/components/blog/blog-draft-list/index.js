@@ -2,7 +2,7 @@ import Link from "next/link";
 import Router from "next/router";
 import htmr from "htmr";
 
-const BlogListTwo = ({ data }) => {
+const BlogDraftList = ({ data }) => {
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -15,8 +15,8 @@ const BlogListTwo = ({ data }) => {
     ev.target.src = "https://source.unsplash.com/600x900/?tech,street";
   }
 
-  const unpublishBlog = async (id) => {
-    await fetch(`/api/unpublish/${id}`, {
+  const publishBlog = async (id) => {
+    await fetch(`/api/publish/${id}`, {
       method: "PUT",
     });
     await Router.push("/user/account");
@@ -46,9 +46,9 @@ const BlogListTwo = ({ data }) => {
               <div style={{ marginLeft: "auto" }}>
                 <button
                   className="blue-button"
-                  onClick={() => unpublishBlog(blog.id)}
+                  onClick={() => publishBlog(blog.id)}
                 >
-                  Un-Publish
+                  Publish
                 </button>
                 <Link href={`/user/post/edit/${blog.id}`}>
                   <a className="blue-button">Edit Blog</a>
@@ -62,4 +62,4 @@ const BlogListTwo = ({ data }) => {
   ));
 };
 
-export default BlogListTwo;
+export default BlogDraftList;

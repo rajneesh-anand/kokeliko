@@ -6,17 +6,17 @@ const MainMenu = () => {
     <nav>
       <ul className="main-menu">
         <li>
-          <Link href="/articles/spirituality" activeClassName="active">
+          <Link href="/spirituality" activeClassName="active">
             <a className="main-menu-link">Spirituality</a>
           </Link>
         </li>
         <li>
-          <Link href="/articles/meditation" activeClassName="active">
+          <Link href="/meditation" activeClassName="active">
             <a className="main-menu-link">Meditation</a>
           </Link>
         </li>
         <li>
-          <Link href="/articles/yoga" activeClassName="active">
+          <Link href="/yoga" activeClassName="active">
             <a className="main-menu-link">Yoga</a>
           </Link>
         </li>

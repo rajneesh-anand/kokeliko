@@ -3,7 +3,6 @@ export const MessageBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   flex-direction: column;
   text-align: center;
 `;

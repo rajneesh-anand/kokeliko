@@ -1,7 +1,10 @@
 export const productCategoryOptions = [
-  { value: "Mobile", text: "Mobile" },
-  { value: "Laptop", text: "Laptop" },
-  { value: "Computer", text: "Computer" },
+  "Automotive",
+  "Electronics",
+  "Fan",
+  "Heater",
+  "Festival Items",
+  "Misc Items",
 ];
 
 export const productSubCategoryOptions = [

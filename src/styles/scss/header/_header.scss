@@ -70,13 +70,12 @@
   justify-content: space-between;
 
   .header-logo{
-        cursor: pointer;   
+    cursor: pointer;   
   }
 
-  .logged-profile{
+  .profile-icon{
     @media #{$xxs-device} {
-      display: none;
-     
+      display: none;     
     }
     @media #{$xs-device} {
       display: none;  
@@ -86,20 +85,18 @@
     }
     @media #{$md-device} {
       display: none;  
-    }
-  
-  
+    } 
 
      i{
        font-size: 24px;
        color: brown;
+       padding-top: 8px;
      }  
   }
 
   .hamburger-menu {
     width: 100px;
-    display: none;
-   
+    display: none;   
     @media #{$xxs-device} {
       display: inline;
       width: auto;

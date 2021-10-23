@@ -6,7 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "pg:run": "npx prisma db push",
+    "pg:push": "npx prisma db push",
     "prisma:generate": "prisma generate",
     "postinstall": "prisma generate"
   },

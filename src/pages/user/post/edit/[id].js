@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import slugify from "slugify";
+import { slugify } from "@/utils/index";
 import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
@@ -34,8 +34,8 @@ const EditPostPage = ({ data }) => {
     postData ? postData.content : null
   );
   const [thumbImage, setThumbImage] = useState();
-  const [tags, setTags] = useState([]);
-  const [subCat, setSubCat] = useState([]);
+  const [tags, setTags] = useState(postData.tags);
+  const [subCat, setSubCat] = useState(postData.subCategories);
   const [isProcessing, setProcessingTo] = useState(false);
   const {
     register,
@@ -84,24 +84,13 @@ const EditPostPage = ({ data }) => {
     formData.append("tags", JSON.stringify(tags));
     formData.append("content", blogContent);
     formData.append("template", data.blog_template);
-    formData.append(
-      "slug",
-      slugify(data.blog_title, {
-        remove: /[*+~.()'"!:@,]/g,
-        lower: true,
-      })
-    );
-    formData.append("published", true);
-    formData.append("author", session?.user?.email);
+    formData.append("slug", slugify(data.blog_title));
 
     try {
-      const result = await fetch(
-        `${process.env.API_URL}/publish/${postData.id}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const result = await fetch(`${process.env.API_URL}/blog/${postData.id}`, {
+        method: "POST",
+        body: formData,
+      });
       console.log(result.status);
       if (result.status >= 400 && result.status < 600) {
         throw new Error("Bad response from server");

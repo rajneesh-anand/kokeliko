@@ -47,41 +47,40 @@ const Header = ({ classOption }) => {
             <div className="d-flex flex-wrap align-items-center justify-content-between">
               <MainMenu />
             </div>
-
-            {cartItemsCount > 0 && (
-              <div>
-                <button
-                  style={{
-                    border: "none",
-                    backgroundColor: "white",
-                    position: "relative",
-                  }}
-                  onClick={handleShowCart}
-                >
-                  <GiShoppingBag
+            <div className="d-flex align-items-center">
+              {cartItemsCount > 0 && (
+                <div className="cart-icon">
+                  <button
                     style={{
-                      height: 28,
-                      width: 28,
-                      color: "teal",
+                      border: "none",
+                      backgroundColor: "white",
+                      position: "relative",
                     }}
-                  />
-                  <span
-                    style={{
-                      position: "absolute",
-                      left: 18,
-                      paddingTop: 8,
-                      color: "white",
-                      fontSize: 13,
-                    }}
+                    onClick={handleShowCart}
                   >
-                    {cartItemsCount}
-                  </span>
-                </button>
-              </div>
-            )}
+                    <GiShoppingBag
+                      style={{
+                        height: 28,
+                        width: 28,
+                        color: "teal",
+                      }}
+                    />
+                    <span
+                      style={{
+                        position: "absolute",
+                        left: 16,
+                        paddingTop: 8,
+                        color: "white",
+                        fontSize: 13,
+                      }}
+                    >
+                      {cartItemsCount}
+                    </span>
+                  </button>
+                </div>
+              )}
 
-            {session ? (
-              <div className="logged-profile">
+              {session ? (
                 <OverlayTrigger
                   trigger="click"
                   key="bottom"
@@ -102,10 +101,10 @@ const Header = ({ classOption }) => {
                             </li>
                             <li>
                               <Link
-                                href="/user/course"
+                                href="/user/orders"
                                 activeClassName="active"
                               >
-                                <a className="main-menu-link">My Blogs</a>
+                                <a className="main-menu-link">My Orders</a>
                               </Link>
                             </li>
                             <li>
@@ -119,23 +118,22 @@ const Header = ({ classOption }) => {
                     </Popover>
                   }
                 >
-                  <i className="fas fa-user-circle"></i>
+                  <div className="profile-icon">
+                    <i className="fas fa-user-circle"></i>
+                  </div>
                 </OverlayTrigger>
-              </div>
-            ) : (
-              <div className="logged-profile">
+              ) : (
                 <Link href="/auth/signin">
                   <a className="default-btn-sm">Sign In</a>
                 </Link>
+              )}
+              <div className="hamburger-menu">
+                <button className="btn-menu" onClick={handleShow}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
               </div>
-            )}
-
-            <div className="hamburger-menu">
-              <button className="btn-menu" onClick={handleShow}>
-                <span></span>
-                <span></span>
-                <span></span>
-              </button>
             </div>
           </div>
         </div>

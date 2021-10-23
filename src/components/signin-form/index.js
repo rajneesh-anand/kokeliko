@@ -54,7 +54,7 @@ export default function SignInForm({ csrfToken }) {
             </div>
             <div className="signin-facebook">
               <button onClick={() => signIn("facebook")}>
-                <i class="bx bxl-facebook-circle"></i>
+                <i className="bx bxl-facebook-circle"></i>
                 <span> Sign In with Facebook</span>
               </button>
             </div>
