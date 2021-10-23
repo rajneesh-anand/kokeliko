@@ -123,9 +123,11 @@ const Header = ({ classOption }) => {
                   </div>
                 </OverlayTrigger>
               ) : (
-                <Link href="/auth/signin">
-                  <a className="default-btn-sm">Sign In</a>
-                </Link>
+                <div className="profile-icon">
+                  <Link href="/auth/signin">
+                    <a className="default-btn-sm">Sign In</a>
+                  </Link>
+                </div>
               )}
               <div className="hamburger-menu">
                 <button className="btn-menu" onClick={handleShow}>
