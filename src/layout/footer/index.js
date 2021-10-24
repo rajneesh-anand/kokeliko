@@ -3,55 +3,78 @@ import FooterLogo from "../../components/footer-logo";
 
 const Footer = () => {
   return (
-    <footer className="footer-area reveal-footer border-top-style">
+    <footer className="footer-area">
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-12">
-            <div className="footer-content">
-              <div className="widget-item">
-                <div className="widget-footer-nav">
-                  <nav>
-                    <ul>
-                      <li>
-                        <Link href={process.env.PUBLIC_URL + "/termsofuse"}>
-                          <a target="_blank">terms &amp; service</a>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href={process.env.PUBLIC_URL + "/privacypolicy"}>
-                          <a target="_blank">privacy policy</a>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href={process.env.PUBLIC_URL + "/contact"}>
-                          <a>contact</a>
-                        </Link>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-              {/* <div className="widget-item text-center">
-                <div className="about-widget">
-                  <FooterLogo
-                    image={`${process.env.PUBLIC_URL}/img/logo.png`}
-                  />
-                </div>
-                <div className="widget-copyright">
-                  <p>
-                    © 2021 <span>KokeLiko</span>. Made with{" "}
-                    <i className="icofont-heart-alt"></i> by{" "}
-                    <a
-                      target="_blank"
-                      href="https://www.google.com"
-                      rel="noreferrer"
-                    >
-                      Oshoa
-                    </a>
-                  </p>
-                </div>
-              </div> */}
-              <div className="widget-item">
+        <div className="footer-content">
+          <div className="widget-item-nav">
+            <div className="widget-footer-nav">
+              <nav>
+                <ul>
+                  <li>
+                    <Link href={process.env.PUBLIC_URL + "/termsofuse"}>
+                      <a target="_blank">Terms &amp; Service</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={process.env.PUBLIC_URL + "/privacypolicy"}>
+                      <a target="_blank">Privacy Policy</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={process.env.PUBLIC_URL + "/contact"}>
+                      <a>Contact</a>
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div className="widget-item-social">
+            <ul className="social">
+              <li>
+                <span>Follow Us </span>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/"
+                  className="facebook"
+                  target="_blank"
+                >
+                  <i className="ri-facebook-fill"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/"
+                  className="twitter"
+                  target="_blank"
+                >
+                  <i className="ri-linkedin-fill"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com/"
+                  className="linkedin"
+                  target="_blank"
+                >
+                  <i className="ri-twitter-fill"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/"
+                  className="instagram"
+                  target="_blank"
+                >
+                  <i className="ri-instagram-line"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* <div className="widget-item">
                 <ul className="widget-social">
                   <li className="social-text">
                     <span>follow us on social</span>
@@ -84,9 +107,7 @@ const Footer = () => {
                     </a>
                   </li>
                 </ul>
-              </div>
-            </div>
-          </div>
+              </div> */}
         </div>
       </div>
     </footer>

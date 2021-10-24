@@ -10,7 +10,7 @@ const BlogDetails = ({ data }) => {
     return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
   };
   return (
-    <div className="blog-details-area ptb-50">
+    <div className="blog-details-area">
       <div className="container">
         <div className="row">
           <div className="col-lg-12 col-md-12">
@@ -48,9 +48,7 @@ const BlogDetails = ({ data }) => {
                   <div className="d-flex align-items-center">
                     <img src={data.author.image} alt="user" />
                     <div className="title">
-                      <span className="name">
-                        Author : <small>{data.author.name}</small>
-                      </span>
+                      <span className="name">Author : {data.author.name}</span>
                       {/* <span className="date">March 17, 2021</span> */}
                     </div>
                   </div>
