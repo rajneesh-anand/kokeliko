@@ -5,13 +5,12 @@ import SideBarMenu from "@/components/sidebar-menu";
 import SideBarCart from "@/components/sidebar-cart";
 import MainMenu from "@/components/main-menu";
 import { useCart } from "../../contexts/cart/use-cart";
-import { GiShoppingBag } from "react-icons/gi";
 import { signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
-const Header = ({ classOption }) => {
+const Header = () => {
   const [session, loading] = useSession();
   const { cartItemsCount } = useCart();
   const [show, setShow] = useState(false);
@@ -50,32 +49,9 @@ const Header = ({ classOption }) => {
             <div className="d-flex align-items-center">
               {cartItemsCount > 0 && (
                 <div className="cart-icon">
-                  <button
-                    style={{
-                      border: "none",
-                      backgroundColor: "white",
-                      position: "relative",
-                    }}
-                    onClick={handleShowCart}
-                  >
-                    <GiShoppingBag
-                      style={{
-                        height: 28,
-                        width: 28,
-                        color: "teal",
-                      }}
-                    />
-                    <span
-                      style={{
-                        position: "absolute",
-                        left: 16,
-                        paddingTop: 8,
-                        color: "white",
-                        fontSize: 13,
-                      }}
-                    >
-                      {cartItemsCount}
-                    </span>
+                  <button onClick={handleShowCart}>
+                    <i className="icofont-shopify"></i>
+                    <span>{cartItemsCount}</span>
                   </button>
                 </div>
               )}

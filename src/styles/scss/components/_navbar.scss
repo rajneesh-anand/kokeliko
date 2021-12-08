@@ -1,9 +1,3 @@
-/*
------------------------------------------------------------------------
-	Main Navigation CSS
------------------------------------------------------------------------
-*/
-
 .main-menu {
   align-content: center;
 
@@ -358,12 +352,6 @@
   top: -10px;
   right: -80px;
   z-index: 1;
-
-  @media #{$lg-device, $xlmax-device} {
-    right: 0;
-    top: auto;
-    bottom: 100%;
-  }
 }
 
 /* Responsive Mobile Menu */

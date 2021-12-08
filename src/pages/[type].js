@@ -5,59 +5,31 @@ import Header from "@/layout/header";
 import Layout from "@/layout/index";
 import BlogList from "@/components/blog/blog-list";
 import Message from "@/components/message";
-import Loading from "@/components/loading";
-import { usePaginatedData } from "@/utils/useRequest";
 
-const ArticlePage = ({ articleType }) => {
-  const {
-    result,
-    error,
-    isLoadingMore,
-    size,
-    setSize,
-    isReachingEnd,
-    isEmpty,
-  } = usePaginatedData(`${process.env.PUBLIC_URL}/api/articles/${articleType}`);
+import { useRouter } from "next/router";
+
+const ArticlePage = ({ blogData }) => {
+  const router = useRouter();
+  const title = router.query.type;
 
   return (
     <Layout>
       <SEO
-        title={`${articleType[0].toUpperCase()}${articleType.slice(
-          1
-        )} | KokeLiko`}
+        title={`${title.toUpperCase()} | KokeLiko`}
         description="Explore the world of Yoga and Meditation"
-        canonical={`${process.env.PUBLIC_URL}/articles/${articleType}`}
+        canonical={`${process.env.PUBLIC_URL}/${title}`}
       />
       <div className="wrapper">
         <Header />
-
-        {isLoadingMore ? (
-          <Loading />
-        ) : isEmpty ? (
+        {blogData.data.length > 0 ? (
+          <BlogList blogListData={blogData} />
+        ) : (
           <Message
             title="There's nothing here !"
             url="/user/post/create"
             btnText="Write &amp; Share Your Own Blog"
           />
-        ) : (
-          <>
-            <BlogList data={result} />
-            <div className="row">
-              <div className="col d-flex justify-content-center">
-                {!isReachingEnd && (
-                  <button
-                    className="default-btn"
-                    disabled={isLoadingMore || isReachingEnd}
-                    onClick={() => setSize(size + 1)}
-                  >
-                    {isLoadingMore ? "Loading..." : "More Blogs"}
-                  </button>
-                )}
-              </div>
-            </div>
-          </>
         )}
-
         <Footer />
       </div>
     </Layout>
@@ -66,9 +38,22 @@ const ArticlePage = ({ articleType }) => {
 
 export default ArticlePage;
 
-export const getServerSideProps = async ({ params }) => {
-  const articleType = params.type;
-  return {
-    props: { articleType },
-  };
+export const getServerSideProps = async ({ query, params }) => {
+  const page = query.page || 1;
+  const type = params.type;
+
+  try {
+    const res = await fetch(
+      `${process.env.PUBLIC_URL}/api/category/${type}?page=${page}`
+    );
+    if (res.status !== 200) {
+      throw new Error("Failed to fetch");
+    }
+    const result = await res.json();
+    console.log(result);
+    return { props: { blogData: result } };
+  } catch (err) {
+    console.log(err.message);
+    return { props: { blogData: null } };
+  }
 };

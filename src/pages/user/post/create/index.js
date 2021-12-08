@@ -6,10 +6,7 @@ import Header from "@/layout/header";
 import Layout from "@/layout/index";
 import { useSession, getSession } from "next-auth/client";
 import dynamic from "next/dynamic";
-import {
-  blogTagsOptions,
-  blogCategoryOptions,
-} from "../../../../constant/blogs";
+import { blogTagsOptions, blogCategoryOptions } from "@/constant/blogs";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
@@ -35,7 +32,8 @@ const NewpostPage = () => {
   const [thumbImage, setThumbImage] = useState();
   const [tags, setTags] = useState([]);
   const [subCat, setSubCat] = useState([]);
-  const [isProcessing, setProcessingTo] = useState(false);
+  const [isPublishing, setPublishing] = useState(false);
+  const [isDrafting, setDrafting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -76,7 +74,7 @@ const NewpostPage = () => {
   }, [message]);
 
   const onPublish = async (data) => {
-    setProcessingTo(true);
+    setPublishing(true);
     setMessage("");
     const formData = new FormData();
     formData.append("image", thumbImage);
@@ -105,22 +103,22 @@ const NewpostPage = () => {
         method: "POST",
         body: formData,
       });
-      console.log(result.status);
+
       if (result.status >= 400 && result.status < 600) {
         throw new Error("Bad response from server");
       } else {
-        setProcessingTo(false);
+        setPublishing(false);
         setMessage("success");
         setThumbImage(null);
       }
     } catch (error) {
-      setProcessingTo(false);
+      setPublishing(false);
       setMessage("failed");
     }
   };
 
   const onDraft = async (data) => {
-    setProcessingTo(true);
+    setDrafting(true);
     setMessage("");
     const formData = new FormData();
     formData.append("image", thumbImage);
@@ -149,16 +147,16 @@ const NewpostPage = () => {
         method: "POST",
         body: formData,
       });
-      console.log(result.status);
+
       if (result.status >= 400 && result.status < 600) {
         throw new Error("Bad response from server");
       } else {
-        setProcessingTo(false);
+        setDrafting(false);
         setMessage("success");
         setThumbImage(null);
       }
     } catch (error) {
-      setProcessingTo(false);
+      setDrafting(false);
       setMessage("failed");
     }
   };
@@ -167,182 +165,183 @@ const NewpostPage = () => {
     <Layout>
       <SEO
         title="New Blog | KokeLiko "
+        description="Post your Blog"
         canonical={`${process.env.PUBLIC_URL}/user/post/create`}
       />
       <div className="wrapper">
         <Header />
-        <div className="container">
-          {message && (
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-          )}
+        <div className="user-account-area">
+          <div className="container">
+            {message && (
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            )}
 
-          <div className="newblog-form ptb-50">
-            <Form>
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Thumbnail Image
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Control
-                    type="file"
-                    accept=".jpg, .png, .jpeg"
-                    onChange={(event) => {
-                      setThumbImage(event.target.files[0]);
-                    }}
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Title *
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Control
-                    type="text"
-                    placeholder=" Blog Title "
-                    {...register("blog_title", {
-                      required: " Blog title is required ! ",
-                    })}
-                  />
-                  {errors.blog_title && (
-                    <Form.Label style={{ color: "red" }}>
-                      {errors.blog_title.message}
-                    </Form.Label>
-                  )}
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Category
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Select
-                    className="me-sm-2"
-                    {...register("blog_category")}
-                  >
-                    {blogCategoryOptions.map((option, index) => (
-                      <option key={index} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Sub-Categories
-                </Form.Label>
-                <Col sm="10">
-                  <Multiselect
-                    options={blogCategoryOptions}
-                    selectedValues={catSelectedValues}
-                    onSelect={onCatSelect}
-                    onRemove={onCatRemove}
-                    placeholder="+ Add Sub Categories"
-                    id="catOption"
-                    isObject={false}
-                    className="catDrowpdown"
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Tags
-                </Form.Label>
-                <Col sm="10">
-                  <Multiselect
-                    options={blogTagsOptions}
-                    selectedValues={tagSelectedValues}
-                    onSelect={onTagSelect}
-                    onRemove={onTagRemove}
-                    placeholder="+ Add Tags"
-                    id="tagOption"
-                    isObject={false}
-                    className="tagDrowpdown"
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Template
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Select
-                    className="me-sm-2"
-                    {...register("blog_template")}
-                  >
-                    <option value="blogpost_with_thumbImage">
-                      Blog with Thumb Image
-                    </option>
-                    <option value="blogpost_without_thumbImage">
-                      Blog without Thumb Image
-                    </option>
-                  </Form.Select>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Blog Content *
-                </Form.Label>
-                <Col sm="10">
-                  {editorLoaded ? (
-                    <CKEditor
-                      editor={ClassicEditor}
-                      data={blogContent}
-                      onReady={(editor) => {
-                        console.log("Editor is ready to use!", editor);
-                      }}
-                      config={{ height: 400 }}
-                      onChange={(event, editor) => {
-                        editor.editing.view.change((writer) => {
-                          writer.setStyle(
-                            "height",
-                            "500px",
-                            editor.editing.view.document.getRoot()
-                          );
-                        });
-                        const data = editor.getData();
-                        setBlogContent(data);
+            <div className="newblog-form">
+              <Form>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Blog Thumbnail Image
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="file"
+                      accept=".jpg, .png, .jpeg"
+                      onChange={(event) => {
+                        setThumbImage(event.target.files[0]);
                       }}
                     />
-                  ) : (
-                    <p>editor..</p>
-                  )}
-                </Col>
-              </Form.Group>
+                  </Col>
+                </Form.Group>
 
-              <Form.Group as={Row} className="mb-3 text-center ">
-                <Col sm={{ span: 10, offset: 2 }}>
-                  <Button
-                    variant="primary"
-                    onClick={handleSubmit(onPublish)}
-                    style={{ marginRight: 8 }}
-                  >
-                    {isProcessing ? "Publishing ..." : `Publish`}
-                  </Button>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Blog Title *
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="text"
+                      placeholder=" Blog Title "
+                      {...register("blog_title", {
+                        required: " Blog title is required ! ",
+                      })}
+                    />
+                    {errors.blog_title && (
+                      <Form.Label style={{ color: "red" }}>
+                        {errors.blog_title.message}
+                      </Form.Label>
+                    )}
+                  </Col>
+                </Form.Group>
 
-                  <Button variant="primary" onClick={handleSubmit(onDraft)}>
-                    {isProcessing ? "Drafting ..." : `Draft`}
-                  </Button>
-                </Col>
-              </Form.Group>
-            </Form>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Blog Category
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Select
+                      className="me-sm-2"
+                      {...register("blog_category")}
+                    >
+                      {blogCategoryOptions.map((option, index) => (
+                        <option key={index} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Blog Sub-Categories
+                  </Form.Label>
+                  <Col sm="10">
+                    <Multiselect
+                      options={blogCategoryOptions}
+                      selectedValues={catSelectedValues}
+                      onSelect={onCatSelect}
+                      onRemove={onCatRemove}
+                      placeholder="+ Add Sub Categories"
+                      id="catOption"
+                      isObject={false}
+                      className="catDrowpdown"
+                    />
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Blog Tags
+                  </Form.Label>
+                  <Col sm="10">
+                    <Multiselect
+                      options={blogTagsOptions}
+                      selectedValues={tagSelectedValues}
+                      onSelect={onTagSelect}
+                      onRemove={onTagRemove}
+                      placeholder="+ Add Tags"
+                      id="tagOption"
+                      isObject={false}
+                      className="tagDrowpdown"
+                    />
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Blog Template
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Select
+                      className="me-sm-2"
+                      {...register("blog_template")}
+                    >
+                      <option value="blogpost_with_thumbImage">
+                        Blog with Thumb Image
+                      </option>
+                      <option value="blogpost_without_thumbImage">
+                        Blog without Thumb Image
+                      </option>
+                    </Form.Select>
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Blog Content *
+                  </Form.Label>
+                  <Col sm="10">
+                    {editorLoaded ? (
+                      <CKEditor
+                        editor={ClassicEditor}
+                        data={blogContent}
+                        onReady={(editor) => {
+                          editor.editing.view.change((writer) => {
+                            writer.setStyle(
+                              "height",
+                              "172px",
+                              editor.editing.view.document.getRoot()
+                            );
+                          });
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          setBlogContent(data);
+                        }}
+                      />
+                    ) : (
+                      <p>editor..</p>
+                    )}
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3 text-center ">
+                  <Col sm={{ span: 10, offset: 2 }}>
+                    <Button
+                      variant="primary"
+                      onClick={handleSubmit(onPublish)}
+                      style={{ marginRight: 8 }}
+                    >
+                      {isPublishing ? "Publishing ..." : `Publish`}
+                    </Button>
+
+                    <Button variant="primary" onClick={handleSubmit(onDraft)}>
+                      {isDrafting ? "Drafting ..." : `Draft`}
+                    </Button>
+                  </Col>
+                </Form.Group>
+              </Form>
+            </div>
           </div>
         </div>
         <Footer />

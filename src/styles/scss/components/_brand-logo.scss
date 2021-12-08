@@ -1,10 +1,4 @@
-/*
------------------------------------------------------------------------
-  Brand Logo CSS
------------------------------------------------------------------------
-*/
-
-.brand-logo-slider{
+.brand-logo-slider {
   align-items: center;
 }
 
@@ -38,19 +32,12 @@
 
 .brand-logo-item {
   img {
-    opacity: .5;
-    @include transition(.3s);
+    opacity: 0.5;
+    @include transition(0.3s);
   }
   &:hover {
     img {
       opacity: 1;
-    }
-  }
-}
-
-.brand-logo-slider-container {
-  .brand-logo-slider {
-    .brand-logo-item {
     }
   }
 }

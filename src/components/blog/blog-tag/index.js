@@ -26,18 +26,8 @@ const BlogTag = ({ tags }) => {
       <span>Tags:</span>
       {allTags.map((tag, i) => {
         return (
-          <div
-            key={i}
-            style={{
-              margin: "0px 4px",
-              background: "#80eb16",
-              padding: "4px 12px",
-              fontFamily: "Roboto Condensed",
-              fontWeight: 600,
-            }}
-          >
-            {tag.title}
-            {i !== allTags.length - 1 && " "}
+          <div key={i} className="tags">
+            <h6>{tag.title}</h6>
           </div>
         );
       })}

@@ -1,14 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import htmr from "htmr";
-import BlogTag from "../blog-tag";
-import Comment from "../../comment";
+import moment from "moment";
+import BlogTag from "@/components/blog/blog-tag";
+import Comment from "@/components/comment";
 
 const BlogDetails = ({ data }) => {
-  const fomatDate = (date_value) => {
-    let date = new Date(date_value);
-    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-  };
   return (
     <div className="blog-details-area">
       <div className="container">
@@ -27,7 +24,7 @@ const BlogDetails = ({ data }) => {
                   <ul>
                     <li>
                       <i className="ri-calendar-2-line"></i>
-                      {fomatDate(data.createdAt)}
+                      {moment(data.createdAt).format("Do MMMM YYYY")}
                     </li>
                     <li>
                       <i className="ri-time-line"></i>
@@ -36,8 +33,8 @@ const BlogDetails = ({ data }) => {
                   </ul>
                 </div>
 
-                <h4>{data.title}</h4>
-                {htmr(data.content)}
+                <h1>{data.title}</h1>
+                <div> {htmr(data.content)}</div>
               </div>
               <div className="article-tags">
                 <BlogTag tags={data.tags} />
@@ -49,7 +46,6 @@ const BlogDetails = ({ data }) => {
                     <img src={data.author.image} alt="user" />
                     <div className="title">
                       <span className="name">Author : {data.author.name}</span>
-                      {/* <span className="date">March 17, 2021</span> */}
                     </div>
                   </div>
                 </div>

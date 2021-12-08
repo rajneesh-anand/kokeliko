@@ -1,10 +1,7 @@
-
-.wrapper{
+.wrapper {
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
-    
-
 }
 
 .section-padding-bottom {
@@ -651,7 +648,7 @@ iframe {
       font-size: 18px;
       line-height: 1;
       letter-spacing: -0.25px;
-      font-family: $font-current-theme1;
+      font-family: var(--fontFamily);
       @media #{$lg-device} {
         font-size: 36px;
       }
@@ -661,7 +658,7 @@ iframe {
     }
     .page-title {
       color: $black-999;
-      font-family: $font-current-theme1;
+      font-family: var(--fontFamily);
       font-size: 18px;
       letter-spacing: 3px;
       margin-right: 10px;
@@ -735,7 +732,7 @@ iframe {
       .title {
         border-left: 1px solid #e1e1e1;
         color: $black;
-        font-family: $font-current-theme2;
+        font-family: var(--fontFamily);
         font-size: 48px;
         font-weight: $font-weight-normal;
         letter-spacing: 0;
@@ -772,9 +769,7 @@ iframe {
   }
 }
 
-.hv-center { 
-
-
+.hv-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -847,7 +842,7 @@ iframe {
 .blockquote-area {
   p {
     color: $black;
-    font-family: $font-current-theme2;
+    font-family: var(--fontFamily);
     font-size: 30px;
     letter-spacing: -0.15px;
     line-height: 48px;
@@ -2727,12 +2722,12 @@ iframe {
     width: 100%;
   }
 }
-.popover{
+.popover {
   border-radius: 0px !important;
 }
-.popover-header{
+.popover-header {
   font-size: 0.875rem !important;
-  font-family: 'Poppins' !important;
+  font-family: "Poppins" !important;
 }
 .profile-buttons {
   margin-bottom: 0px !important;
@@ -2762,18 +2757,15 @@ iframe {
 // }
 
 .buttonList {
-
   padding: 30px 0px;
   border-bottom: 1px solid #ddd;
-   
-  a{
+
+  a {
     margin: 8px;
   }
- 
 }
 
-
-.ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items {
+.ck.ck-toolbar.ck-toolbar_grouping > .ck-toolbar__items {
   flex-wrap: nowrap !important;
   @media #{$xs-device} {
     flex-wrap: wrap !important;
@@ -2783,7 +2775,7 @@ iframe {
   }
 }
 
-.info{
+.info {
   margin-top: 60px;
   margin-bottom: 60px;
 }

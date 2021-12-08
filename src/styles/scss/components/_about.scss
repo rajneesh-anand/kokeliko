@@ -1,16 +1,11 @@
-/*
------------------------------------------------------------------------
-	About CSS
------------------------------------------------------------------------
-*/
 .about-page-wrapper {
   position: relative;
   min-height: 100vh;
   .title {
-    font-family: $font-current-theme1;
+    font-family: var(--fontFamily);
     font-size: 36px;
     font-weight: $font-weight-bold;
-    letter-spacing: -.15px;
+    letter-spacing: -0.15px;
     margin-bottom: 40px;
     @media #{$lg-device} {
       font-size: 30px;
@@ -37,7 +32,7 @@
   }
   p {
     font-size: 18px;
-    letter-spacing: -.16px;
+    letter-spacing: -0.16px;
     line-height: 30px;
     margin-bottom: 0;
     @media #{$sm-device} {
@@ -53,7 +48,7 @@
   }
   ul {
     font-size: 18px;
-    letter-spacing: -.16px;
+    letter-spacing: -0.16px;
     line-height: 30px;
     margin-bottom: 0;
     @media #{$xs-device} {
@@ -143,7 +138,7 @@
         }
         h4 {
           color: $gray-ccc;
-          font-family: $font-current-theme1;
+          font-family: var(--fontFamily);
           font-size: 36px;
           font-weight: $font-weight-bold;
           letter-spacing: 0;
@@ -167,7 +162,7 @@
               right: 0;
               position: absolute;
               width: 0;
-              @include transition(.3s);
+              @include transition(0.3s);
             }
           }
         }

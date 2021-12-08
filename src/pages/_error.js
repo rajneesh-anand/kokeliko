@@ -33,7 +33,7 @@ function Error({ statusCode }) {
               Oops ! An unexpected error has occurred
             </h6>
             <Link href="/">
-              <a>Go back home</a>
+              <a>Back to Home Page</a>
             </Link>
           </div>
         </div>

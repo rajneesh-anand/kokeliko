@@ -11,18 +11,18 @@ const Footer = () => {
               <nav>
                 <ul>
                   <li>
-                    <Link href={process.env.PUBLIC_URL + "/termsofuse"}>
-                      <a target="_blank">Terms &amp; Service</a>
+                    <Link href={process.env.PUBLIC_URL + "/terms"}>
+                      <a target="_blank">Terms of Service</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href={process.env.PUBLIC_URL + "/privacypolicy"}>
-                      <a target="_blank">Privacy Policy</a>
+                    <Link href={process.env.PUBLIC_URL + "/privacy"}>
+                      <a target="_blank">Privacy</a>
                     </Link>
                   </li>
                   <li>
                     <Link href={process.env.PUBLIC_URL + "/contact"}>
-                      <a>Contact</a>
+                      <a>Contact Us</a>
                     </Link>
                   </li>
                 </ul>
