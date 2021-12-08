@@ -17,6 +17,7 @@
     "@ckeditor/ckeditor5-build-classic": "^29.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.2",
     "@prisma/client": "^2.30.0",
+    "@sendgrid/mail": "^7.6.0",
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.15.1",
     "aos": "^2.3.4",
