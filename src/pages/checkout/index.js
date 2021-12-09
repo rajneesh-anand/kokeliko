@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import StripeCheckoutForm from "../../components/stripe-checkout-form";
+import StripeCheckoutForm from "@/components/stripe-checkout-form";
 import { getSession } from "next-auth/client";
-import SEO from "../../components/seo";
-import Footer from "../../layout/footer";
-import Header from "../../layout/header";
-import Layout from "../../layout";
-import { useCart } from "../../contexts/cart/use-cart";
-import Message from "components/message";
+import SEO from "@/components/seo";
+import Footer from "@/layout/footer";
+import Header from "@/layout/header";
+import Layout from "@/layout/index";
+import { useCart } from "@/contexts/cart/use-cart";
+import Message from "@/components/message";
 
 const StripeCheckout = () => {
   const { cartItemsCount } = useCart();
@@ -20,7 +20,7 @@ const StripeCheckout = () => {
     <Layout>
       <SEO
         title="Checkout | KokeLiko "
-        canonical={process.env.PUBLIC_URL + "/checkout"}
+        canonical={`${process.env.PUBLIC_URL}/checkout`}
       />
       <div className="wrapper">
         <Header />
@@ -31,7 +31,7 @@ const StripeCheckout = () => {
             </Elements>
           ) : (
             <Message
-              title="  Your shopping cart is empty , Please add items in your cart"
+              title="Your shopping cart is empty , Please add items in your cart"
               url="/shop"
               btnText="Goto Shop Page"
             />
