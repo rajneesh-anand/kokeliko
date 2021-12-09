@@ -11,11 +11,11 @@ generator client {
 
 model Post {
   id        Int     @default(autoincrement()) @id
-  title     String?
-  subCategories String[]
-  category String?
+  title     String? @unique
   slug      String?
   content   String?
+  category String?
+  subCategories String[] 
   template   String?
   tags      String[]
   image     String?

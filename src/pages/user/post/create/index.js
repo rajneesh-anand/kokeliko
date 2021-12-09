@@ -37,6 +37,7 @@ const NewpostPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -110,6 +111,10 @@ const NewpostPage = () => {
         setPublishing(false);
         setMessage("success");
         setThumbImage(null);
+        setBlogContent("");
+        reset("", {
+          keepValues: false,
+        });
       }
     } catch (error) {
       setPublishing(false);
@@ -154,6 +159,10 @@ const NewpostPage = () => {
         setDrafting(false);
         setMessage("success");
         setThumbImage(null);
+        setBlogContent("");
+        reset("", {
+          keepValues: false,
+        });
       }
     } catch (error) {
       setDrafting(false);
