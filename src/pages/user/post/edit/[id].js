@@ -251,18 +251,31 @@ const EditPostPage = ({ data }) => {
                         <CKEditor
                           editor={ClassicEditor}
                           data={blogContent}
-                          onReady={(editor) => {
-                            console.log("Editor is ready to use!", editor);
+                          config={{
+                            link: {
+                              decorators: {
+                                addTargetToExternalLinks: {
+                                  mode: "automatic",
+                                  callback: (url) =>
+                                    /^(https?:)?\/\//.test(url),
+                                  attributes: {
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                  },
+                                },
+                              },
+                            },
                           }}
-                          config={{ height: 400 }}
-                          onChange={(event, editor) => {
+                          onReady={(editor) => {
                             editor.editing.view.change((writer) => {
                               writer.setStyle(
                                 "height",
-                                "500px",
+                                "172px",
                                 editor.editing.view.document.getRoot()
                               );
                             });
+                          }}
+                          onChange={(event, editor) => {
                             const data = editor.getData();
                             setBlogContent(data);
                           }}

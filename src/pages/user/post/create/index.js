@@ -314,6 +314,20 @@ const NewpostPage = () => {
                       <CKEditor
                         editor={ClassicEditor}
                         data={blogContent}
+                        config={{
+                          link: {
+                            decorators: {
+                              addTargetToExternalLinks: {
+                                mode: "automatic",
+                                callback: (url) => /^(https?:)?\/\//.test(url),
+                                attributes: {
+                                  target: "_blank",
+                                  rel: "noopener noreferrer",
+                                },
+                              },
+                            },
+                          },
+                        }}
                         onReady={(editor) => {
                           editor.editing.view.change((writer) => {
                             writer.setStyle(
