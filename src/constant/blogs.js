@@ -26,4 +26,12 @@ export const blogTagsOptions = [
   "Fitness",
 ];
 
-export const blogCategoryOptions = ["yoga", "spirituality", "meditation"];
+export const blogCategoryOptions = [
+  "ayurveda",
+  "yoga",
+  "meditation",
+  "spirituality",
+  "health",
+  "nature",
+  "beauty",
+];

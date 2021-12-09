@@ -17,13 +17,6 @@
 }
 
 .service-area {
-  padding: 95px 0 0px;
-  @media #{$md-device} {
-    padding: 75px 0 0;
-  }
-  @media #{$sm-device} {
-    padding: 55px 0 0;
-  }
   .title {
     margin-bottom: 40px;
     @media #{$lg-device} {

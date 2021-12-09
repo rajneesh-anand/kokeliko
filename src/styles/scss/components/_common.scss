@@ -636,147 +636,47 @@ iframe {
 /*-------- Page Title Style Css --------*/
 
 .page-title-area {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
   .page-title-content {
-    padding: 5px 0 5px;
-    @media #{$md-device} {
-      padding: 5px 0 5px;
-    }
-    @media #{$sm-device} {
-      padding: 10px 0 10px;
-    }
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
     .title {
-      font-size: 18px;
+      font-size: 24px;
       line-height: 1;
       letter-spacing: -0.25px;
       font-family: var(--fontFamily);
-      @media #{$lg-device} {
-        font-size: 36px;
-      }
-      @media #{$sm-device} {
-        font-size: 30px;
-      }
+      border-left: 1px solid #ed2775;
+      padding-left: 10px;
     }
-    .page-title {
+    .sub-title {
       color: $black-999;
       font-family: var(--fontFamily);
       font-size: 18px;
       letter-spacing: 3px;
       margin-right: 10px;
-      //   margin-bottom: 39px;
-      // text-transform: uppercase;
-      @media #{$lg-device} {
-        margin-bottom: 20px;
-      }
-      @media #{$sm-device} {
-        font-size: 16px;
-        margin-bottom: 15px;
-      }
     }
     .bread-crumbs {
-      color: $black-888;
-      font-size: 15px;
-      margin-bottom: 2px;
-      a {
-        color: $black-888;
-        &:hover {
-          color: $theme-color;
-        }
-      }
-      span {
-        &.active {
-          color: $theme-color5;
-        }
-      }
-      .breadcrumb-sep {
-        padding: 0 8.7px;
-      }
-    }
-    &.text-light {
-      .title {
-        color: $white;
-      }
-      .bread-crumbs {
-        color: $white;
-        a {
-          color: $white;
-        }
-      }
-    }
-    &.content-style2 {
-      align-items: center;
       display: flex;
-      justify-content: center;
-      padding: 100px 0 100px;
-      @media #{$lg-device} {
-        padding: 100px 0 100px;
-      }
-      @media #{$md-device} {
-        padding: 80px 0 80px;
-      }
-      @media #{$sm-device} {
-        padding: 60px 0 60px;
-      }
-      .page-title {
-        color: $black;
-        letter-spacing: 0;
-        line-height: 1;
-        margin: 0 41px 0 0;
-        @media #{$sm-device} {
-          margin: 0 30px 0 0;
-        }
-        @media #{$xs-device} {
-          font-size: 16px;
-          margin: 0 15px 0 0;
-        }
-      }
-      .title {
-        border-left: 1px solid #e1e1e1;
-        color: $black;
-        font-family: var(--fontFamily);
-        font-size: 48px;
-        font-weight: $font-weight-normal;
-        letter-spacing: 0;
-        line-height: 1;
-        margin-bottom: 0;
-        padding: 20px 0 20px 70px;
-        @media #{$md-device} {
-          font-size: 36px;
-        }
-        @media #{$sm-device} {
-          font-size: 30px;
-          padding: 20px 0 20px 30px;
-        }
-        @media #{$xs-device} {
-          font-size: 20px;
-          padding: 10px 0 10px 15px;
-        }
-        @media #{$xxs-device} {
-          padding: 10px 0 10px 13px;
+      font-size: 12px;
+      margin-bottom: 2px;
+      list-style-type: none;
+
+      li {
+        margin-right: 8px;
+        a {
+          &:hover {
+            color: $theme-color;
+          }
         }
       }
     }
   }
 }
 
-.bread-crumbs {
-  color: $body-color;
-  font-size: 16px;
-  a {
-    color: $body-color;
-    &:hover {
-      color: $theme-color;
-    }
-  }
-}
-
-.hv-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  flex-direction: column;
-  text-align: center;
-}
 /*-------- Pagination Style Css --------*/
 
 .pagination-area {

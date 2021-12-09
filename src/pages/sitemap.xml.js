@@ -13,19 +13,7 @@ export const getServerSideProps = async ({ res }) => {
     },
   });
 
-  const movies = await prisma.movie.findMany({
-    where: {
-      status: true,
-    },
-    select: {
-      slug: true,
-    },
-  });
-
-  const baseUrl = {
-    development: "http://localhost:3000",
-    production: "https://kokeliko.vercel.app",
-  }[process.env.NODE_ENV];
+  const baseUrl = "https://kokeliko.vercel.app";
 
   const staticPages = [
     "https://kokeliko.vercel.app/about",
@@ -35,15 +23,8 @@ export const getServerSideProps = async ({ res }) => {
     "https://kokeliko.vercel.app/meditation",
     "https://kokeliko.vercel.app/travel",
     "https://kokeliko.vercel.app/shop",
-    "https://kokeliko.vercel.app/photos",
-    "https://kokeliko.vercel.app/privacypolicy",
-    "https://kokeliko.vercel.app/termsofuse",
-    "https://kokeliko.vercel.app/user/post/create",
-    "https://kokeliko.vercel.app/user/account",
-    "https://kokeliko.vercel.app/user/product",
-    "https://kokeliko.vercel.app/user/upload/video",
-    "https://kokeliko.vercel.app/auth/signin",
-    "https://kokeliko.vercel.app/movie",
+    "https://kokeliko.vercel.app/privacy",
+    "https://kokeliko.vercel.app/terms",
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -76,18 +57,7 @@ export const getServerSideProps = async ({ res }) => {
             })
             .join("")}
 
-              ${movies
-                .map((movie) => {
-                  return `
-              <url>
-                <loc>${baseUrl}/movie/${movie.slug}</loc>
-                <lastmod>${new Date().toISOString()}</lastmod>
-                <changefreq>weekly</changefreq>
-                <priority>1.0</priority>
-              </url>
-            `;
-                })
-                .join("")}
+            
     </urlset>
   `;
 

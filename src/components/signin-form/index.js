@@ -92,18 +92,12 @@ export default function SignInForm({ csrfToken }) {
             <div className="signin-conditions">
               <p>
                 By Login, you agree to KokeLiko
-                <a
-                  href={process.env.PUBLIC_URL + "/termsofservices"}
-                  target="_blank"
-                >
+                <a href={process.env.PUBLIC_URL + "/terms"} target="_blank">
                   {" "}
                   Terms of service{" "}
                 </a>
                 and
-                <a
-                  href={process.env.PUBLIC_URL + "/privacypolicy"}
-                  target="_blank"
-                >
+                <a href={process.env.PUBLIC_URL + "/privacy"} target="_blank">
                   {" "}
                   Privacy policy
                 </a>

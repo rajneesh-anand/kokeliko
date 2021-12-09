@@ -64,21 +64,28 @@ const BlogList = ({ blogListData }) => {
   return (
     <div className="blog-area">
       <div className="container">
-        <div className="row justify-content-center">
+        <div className="row">
           {blogListData.data.map((item, index) => (
-            <div key={index} className="col-lg-4 col-md-6">
+            <div key={index} className="col-lg-6">
               <div className="single-blog-post">
-                <div className="image">
-                  <Link href={`/read/${item.slug}`}>
-                    <a className="d-block">
-                      <img src={item.image} alt="blog" />
-                    </a>
-                  </Link>
-                  <Link href={`/read/${item.slug}`}>
-                    <a className="tag">{item.category}</a>
-                  </Link>
-                </div>
+                {/* {item.image && (
+                  <div className="image">
+                    <Link href={`/read/${item.slug}`}>
+                      <a className="d-block">
+                        <img src={item.image} alt="blog" />
+                      </a>
+                    </Link>
+                    <Link href={`/read/${item.slug}`}>
+                      <a className="tag">{item.category}</a>
+                    </Link>
+                  </div>
+                )} */}
                 <div className="content">
+                  <h1>
+                    <Link href={`/read/${item.slug}`}>
+                      <a>{item.title}</a>
+                    </Link>
+                  </h1>
                   <ul className="meta">
                     <li>
                       <i className="ri-calendar-2-line"></i>
@@ -89,11 +96,6 @@ const BlogList = ({ blogListData }) => {
                       <span>5 Mins</span>
                     </li>
                   </ul>
-                  <h1>
-                    <Link href={`/read/${item.slug}`}>
-                      <a>{item.title}</a>
-                    </Link>
-                  </h1>
 
                   <div>{truncate(item.content, 40)}</div>
                 </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import AboutData from "@/data/global/about.json";
+import AboutData from "@/data/about.json";
 import PageTitle from "@/components/page-title";
 
 const AboutPageDetails = () => {
@@ -9,12 +9,23 @@ const AboutPageDetails = () => {
       <div className="page-title-area">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12" data-aos="fade-up">
+            <div className="col-lg-12">
               <PageTitle
-                classOption="page-title-content content-style2 text-center"
+                classOption="page-title-content"
                 subTitle="About"
                 title="We Are KokeLiko"
               />
+              <div className="page-title-content">
+                <ul className="bread-crumbs">
+                  <li>
+                    <Link href="/">
+                      <a>Home </a>
+                    </Link>
+                  </li>
+                  <li>{">"}</li>
+                  <li> About</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -22,10 +33,7 @@ const AboutPageDetails = () => {
       <div className="service-area">
         <div className="container">
           <div className="row">
-            <div
-              className="col-lg-8 col-xl-8 mb-sm-50 mb-md-70"
-              data-aos="fade-up"
-            >
+            <div className="col-lg-8 col-xl-8 ">
               <h2 className="title">{AboutData[0].title}</h2>
               <p
                 dangerouslySetInnerHTML={{
@@ -33,26 +41,18 @@ const AboutPageDetails = () => {
                 }}
               />
             </div>
-            <div
-              className="col-lg-4 col-xl-3 offset-xl-1"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
+            <div className="col-lg-4 col-xl-3 offset-xl-1">
               <h2 className="title">{AboutData[1].title}</h2>
-              {/* <ul>
+              <ul>
                 {AboutData[1].pagelinkText &&
-                  AboutData[1].pagelinkText.map((single, key) => {
-                    return (
-                      <div>
-                        <li key={key}>
-                          <Link href={process.env.PUBLIC_URL + "/"}>
-                            <a>{single}</a>
-                          </Link>
-                        </li>
-                      </div>
-                    );
-                  })}
-              </ul> */}
+                  AboutData[1].pagelinkText.map((single, key) => (
+                    <li key={key}>
+                      <Link href={process.env.PUBLIC_URL + "/"}>
+                        <a>{single.text}</a>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
             </div>
           </div>
         </div>

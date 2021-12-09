@@ -27,9 +27,8 @@ const BlogListTwo = ({ data }) => {
       <div className="row no-gutters">
         <div className="col-md-3">
           <img
-            onError={addDefaultSrc}
             className="img-responsive"
-            src={blog.image}
+            src={blog.image ? blog.image : "/img/default.svg"}
             alt={blog.title}
           />
         </div>

@@ -12,14 +12,17 @@ const BlogDetails = ({ data }) => {
         <div className="row">
           <div className="col-lg-12 col-md-12">
             <div className="blog-details-desc">
-              <div className="article-image">
-                <Link href="/">
-                  <a className="tag">{data.category}</a>
-                </Link>
-                <img src={data.image} alt="blog-details" />
-              </div>
+              {data.image && (
+                <div className="article-image">
+                  <Link href="/">
+                    <a className="tag">{data.category}</a>
+                  </Link>
+                  <img src={data.image} alt="blog-details" />
+                </div>
+              )}
 
               <div className="article-content">
+                <h1>{data.title}</h1>
                 <div className="entry-meta">
                   <ul>
                     <li>
@@ -32,8 +35,6 @@ const BlogDetails = ({ data }) => {
                     </li>
                   </ul>
                 </div>
-
-                <h1>{data.title}</h1>
                 <div> {htmr(data.content)}</div>
               </div>
               <div className="article-tags">

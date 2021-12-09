@@ -1,6 +1,6 @@
 import React from "react";
-import SEO from "../components/seo";
-import { sitePrivacyPolicy } from "../constant/privacy-policy";
+import SEO from "@/components/seo";
+import { sitePrivacyPolicy } from "@/constant/privacy";
 import styled from "styled-components";
 import { Link, Element } from "react-scroll";
 import Sticky from "react-stickynode";
