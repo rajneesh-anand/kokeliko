@@ -38,6 +38,7 @@ const ContactForm = () => {
 
   const onSubmit = async (data) => {
     setMessage(null);
+    setProcessingTo(true);
     const userInfo = {
       name: data.name,
       email: data.email,
@@ -62,12 +63,14 @@ const ContactForm = () => {
       } else {
         setMessage("success");
         setContent("");
+        setProcessingTo(false);
         reset("", {
           keepValues: false,
         });
       }
     } catch (error) {
       setMessage("failed");
+      setProcessingTo(false);
     }
   };
 
@@ -88,7 +91,7 @@ const ContactForm = () => {
           />
         )}
 
-        <div className="contact-form ptb-50">
+        <div className="contact-form">
           <div className="form-items">
             <h3>How Can We Help You ? </h3>
             <p>Fill in the data below.</p>
@@ -159,7 +162,7 @@ const ContactForm = () => {
                   </select>
                 </div>
 
-                <div className="col-lg-12 col-md-12 col-sm-12">
+                <div className="col-lg-12 col-md-12 col-sm-12 form-editor">
                   {editorLoaded ? (
                     <CKEditor
                       editor={ClassicEditor}

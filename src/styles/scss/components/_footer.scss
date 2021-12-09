@@ -1,8 +1,5 @@
 .footer-area {
   background-color: $white;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  border-top: 1px solid #ddd;
 
   .about-widget {
     .footer-logo {
@@ -95,6 +92,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-top: 1px solid #ddd;
     @media #{$xxs-device} {
       justify-content: center;
     }
@@ -284,6 +284,15 @@
         }
       }
     }
+  }
+  .disclaimer {
+    background-color: black;
+    color: white;
+    font-size: 9.5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
   }
 }
 

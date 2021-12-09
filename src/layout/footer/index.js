@@ -110,6 +110,13 @@ const Footer = () => {
               </div> */}
         </div>
       </div>
+      <div className="container-fluid">
+        <div className="disclaimer">
+          <span>Disclaimer :</span> The website is under construction. The data
+          uploaded to website is purely for testing purposes. Kindly read the
+          blog at relevant sources.
+        </div>
+      </div>
     </footer>
   );
 };
