@@ -1,29 +1,24 @@
 import React from "react";
-import SEO from "../../components/seo";
-import ContactContainer from "../../containers/contact";
-// import MapContainer from "../../containers/global/map";
-import Footer from "../../layout/footer";
-import Header from "../../layout/header";
-import Layout from "../../layout";
+import SEO from "@/components/seo";
+import Footer from "@/layout/footer";
+import Header from "@/layout/header";
+import Layout from "@/layout/index";
 
-const Contact = () => {
+const ContactPage = () => {
   return (
-    <React.Fragment>
-      <Layout>
-        <SEO
-          title="Contact | KokeLiko "
-          canonical={process.env.PUBLIC_URL + "/contact"}
-        />
-        <div className="wrapper home-default-wrapper">
-          <Header classOption="hb-border" />
-          <div className="main-content">
-            <ContactContainer />
-          </div>
-          <Footer />
-        </div>
-      </Layout>
-    </React.Fragment>
+    <Layout>
+      <SEO
+        title="Contact | KokeLiko"
+        description="Contact Us "
+        canonical={`${process.env.PUBLIC_URL}/contact`}
+      />
+      <div className="wrapper">
+        <Header />
+
+        <Footer />
+      </div>
+    </Layout>
   );
 };
 
-export default Contact;
+export default ContactPage;
