@@ -644,19 +644,19 @@ iframe {
     display: flex;
     justify-content: center;
 
-    .title {
+    .page-title {
       font-size: 24px;
-      line-height: 1;
-      letter-spacing: -0.25px;
+      // line-height: 1;
+      // letter-spacing: -0.25px;
       font-family: var(--fontFamily);
       border-left: 1px solid #ed2775;
       padding-left: 10px;
     }
-    .sub-title {
+    .page-sub-title {
       color: $black-999;
       font-family: var(--fontFamily);
       font-size: 18px;
-      letter-spacing: 3px;
+      // letter-spacing: 3px;
       margin-right: 10px;
     }
     .bread-crumbs {

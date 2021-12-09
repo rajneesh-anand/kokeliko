@@ -6,34 +6,34 @@ import PageTitle from "@/components/page-title";
 const AboutPageDetails = () => {
   return (
     <React.Fragment>
-      <div className="page-title-area">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <PageTitle
-                classOption="page-title-content"
-                subTitle="About"
-                title="We Are KokeLiko"
-              />
-              <div className="page-title-content">
-                <ul className="bread-crumbs">
-                  <li>
-                    <Link href="/">
-                      <a>Home </a>
-                    </Link>
-                  </li>
-                  <li>{">"}</li>
-                  <li> About</li>
-                </ul>
+      <div className="service-area">
+        <div className="page-title-area">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12">
+                <PageTitle
+                  classOption="page-title-content"
+                  subTitle="About"
+                  title="We Are KokeLiko"
+                />
+                {/* <div className="page-title-content">
+                  <ul className="bread-crumbs">
+                    <li>
+                      <Link href="/">
+                        <a>Home </a>
+                      </Link>
+                    </li>
+                    <li>{">"}</li>
+                    <li> About</li>
+                  </ul>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="service-area">
         <div className="container">
           <div className="row">
-            <div className="col-lg-8 col-xl-8 ">
+            <div className="col-lg-12 col-xl-12 ">
               <h2 className="title">{AboutData[0].title}</h2>
               <p
                 dangerouslySetInnerHTML={{
@@ -41,7 +41,7 @@ const AboutPageDetails = () => {
                 }}
               />
             </div>
-            <div className="col-lg-4 col-xl-3 offset-xl-1">
+            {/* <div className="col-lg-4 col-xl-3 offset-xl-1">
               <h2 className="title">{AboutData[1].title}</h2>
               <ul>
                 {AboutData[1].pagelinkText &&
@@ -53,7 +53,7 @@ const AboutPageDetails = () => {
                     </li>
                   ))}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

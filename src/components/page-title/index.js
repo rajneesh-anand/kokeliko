@@ -4,8 +4,8 @@ import Link from "next/link";
 const PageTitle = ({ subTitle, title, classOption }) => {
   return (
     <div className={`${classOption}`}>
-      <h4 className="sub-title">{subTitle}</h4>
-      <h1 className="title">{title}</h1>
+      <h4 className="page-sub-title">{subTitle}</h4>
+      <h1 className="page-title">{title}</h1>
     </div>
   );
 };

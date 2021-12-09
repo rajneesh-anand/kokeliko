@@ -25,6 +25,11 @@ const Footer = () => {
                       <a>Contact Us</a>
                     </Link>
                   </li>
+                  <li>
+                    <Link href={process.env.PUBLIC_URL + "/about"}>
+                      <a>About KokeLiko</a>
+                    </Link>
+                  </li>
                 </ul>
               </nav>
             </div>

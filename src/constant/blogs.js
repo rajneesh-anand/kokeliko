@@ -22,16 +22,19 @@ export const blogTagsOptions = [
   "Weight Loss",
   "Chakra",
   "Massage",
-  "Sexual Healing",
   "Fitness",
 ];
 
 export const blogCategoryOptions = [
+  "sports",
+  "entertainment",
+  "jobs",
+  "politics",
+  "science",
   "ayurveda",
-  "yoga",
-  "meditation",
-  "spirituality",
+  "yoga-meditation",
   "health",
-  "nature",
-  "beauty",
+  "travel",
+  "technology",
+  "fashion-beauty",
 ];

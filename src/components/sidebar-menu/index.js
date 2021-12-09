@@ -61,62 +61,54 @@ const SideMenu = ({ show, handleClose }) => {
         <nav>
           <ul className="aside-menu">
             <li>
-              <Link href="/spirituality" activeClassName="active">
-                <a className="main-menu-link">Spirituality</a>
+              <Link href="/politics" activeClassName="active">
+                <a className="main-menu-link">Politics</a>
               </Link>
             </li>
             <li>
-              <Link href="/meditation" activeClassName="active">
-                <a className="main-menu-link">Meditation</a>
+              <Link href="/sports" activeClassName="active">
+                <a className="main-menu-link">Sports</a>
               </Link>
             </li>
             <li>
-              <Link href="/yoga" activeClassName="active">
-                <a className="main-menu-link">Yoga</a>
+              <Link href="/health" activeClassName="active">
+                <a className="main-menu-link">Health</a>
               </Link>
             </li>
             <li>
-              <Link href="/shop" activeClassName="active">
-                <a className="main-menu-link">Shop</a>
+              <Link href="/technology" activeClassName="active">
+                <a className="main-menu-link">Technology</a>
               </Link>
             </li>
             <li>
-              <Link href="/query" activeClassName="active">
-                <a className="main-menu-link">Send Us Query ?</a>
+              <Link href="/entertainment" activeClassName="active">
+                <a className="main-menu-link">Entertainment</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/jobs" activeClassName="active">
+                <a className="main-menu-link">Jobs &amp; Career</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/travel" activeClassName="active">
+                <a className="main-menu-link">Travel</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/fashion-beauty" activeClassName="active">
+                <a className="main-menu-link">Fashion &amp; Beauty</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/yoga-meditation" activeClassName="active">
+                <a className="main-menu-link">Yoga &amp; Meditation</a>
               </Link>
             </li>
           </ul>
         </nav>
 
         <div className="aside-footer-area">
-          {/* <ul className="social-links">
-            <li>
-              <a href="https://www.facebook.com/" target="_blank">
-                <i className="ri-facebook-fill"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com/" target="_blank">
-                <i className="ri-twitter-fill"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/" target="_blank">
-                <i className="ri-linkedin-fill"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.messenger.com/" target="_blank">
-                <i className="ri-messenger-fill"></i>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/" target="_blank">
-                <i className="ri-github-fill"></i>
-              </a>
-            </li>
-          </ul> */}
-
           <div className="article-share">
             <ul className="social">
               <li>
