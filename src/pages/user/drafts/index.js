@@ -79,6 +79,9 @@ export const getServerSideProps = async (context) => {
         select: { name: true },
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return {
     props: {

@@ -16,6 +16,9 @@ export default async function handler(req, res) {
           select: { name: true, image: true },
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     res.statusCode = 200;
