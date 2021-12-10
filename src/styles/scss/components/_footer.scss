@@ -163,13 +163,10 @@
           }
           a {
             display: block;
-            width: 35px;
-            height: 35px;
-            line-height: 33px;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
             border-radius: 50%;
-            background-color: var(--mainColor);
-            color: var(--whiteColor);
-            border: 1px solid var(--mainColor);
             text-align: center;
             font-size: 16px;
             margin-left: 2px;
@@ -185,10 +182,6 @@
               line-height: 24px;
             }
 
-            &:hover {
-              color: var(--mainColor);
-              background-color: transparent;
-            }
             &.facebook {
               background-color: #3b5998;
               color: var(--whiteColor);

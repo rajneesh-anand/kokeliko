@@ -42,10 +42,8 @@ const ContactForm = () => {
     const userInfo = {
       name: data.name,
       email: data.email,
-      subject: data.msg_subject,
-      message: data.message,
-      mobile: data.mobile,
-      type: data.type,
+      subject: data.subject,
+      message: content,
     };
 
     try {
@@ -94,7 +92,7 @@ const ContactForm = () => {
         <div className="contact-form">
           <div className="form-items">
             <h3>How Can We Help You ? </h3>
-            <p>Fill in the data below.</p>
+            <p>Fill in the form below</p>
             <form>
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-6">
@@ -127,24 +125,20 @@ const ContactForm = () => {
                   />
                   {errors.email && <p>{errors.email.message}</p>}
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-6">
+                <div className="col-lg-12 col-md-12 col-sm-12">
                   <input
                     type="text"
-                    name="contact"
+                    name="subject"
                     className="form-control"
-                    placeholder="Your Contact Number"
-                    {...register("contact", {
-                      required: "Contact number is required !",
-                      pattern: {
-                        value: /^((\+91?)|\+)?[7-9][0-9]{9}$/,
-                        message: "Invalid Mobile Number !",
-                      },
+                    placeholder="The subject of your message "
+                    {...register("subject", {
+                      required: "Kindly fill the subject  !",
                     })}
                   />
-                  {errors.contact && <p>{errors.contact.message}</p>}
+                  {errors.subject && <p>{errors.subject.message}</p>}
                 </div>
 
-                <div className="col-lg-6 col-md-6 col-sm-6">
+                {/* <div className="col-lg-6 col-md-6 col-sm-6">
                   <select className="form-select mt-3" {...register("type")}>
                     <option value="Online Seller Courses">
                       Online Courses
@@ -160,7 +154,7 @@ const ContactForm = () => {
                     </option>
                     <option value="Others Query">Others Query</option>
                   </select>
-                </div>
+                </div> */}
 
                 <div className="col-lg-12 col-md-12 col-sm-12 form-editor">
                   {editorLoaded ? (
