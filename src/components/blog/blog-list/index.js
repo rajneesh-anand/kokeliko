@@ -16,11 +16,12 @@ const BlogList = ({ blogListData }) => {
     return htmr(str.split(" ").splice(0, no_words).join(" ") + " ");
   };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setBlogs(data.data);
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    const masonryList = document.querySelector(".blogs-list");
+    let Iso = new Isotope(masonryList, {
+      itemSelector: ".masonry-grid",
+    });
+  }, [blogListData]);
 
   // Router event handler
   useEffect(() => {
@@ -64,11 +65,11 @@ const BlogList = ({ blogListData }) => {
   return (
     <div className="blog-area">
       <div className="container">
-        <div className="row">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-3 blogs-list mb-n30">
           {blogListData.data.map((item, index) => (
-            <div key={index} className="col-lg-6">
+            <div key={index} className="col masonry-grid mb-30">
               <div className="single-blog-post">
-                {/* {item.image && (
+                {item.image && (
                   <div className="image">
                     <Link href={`/read/${item.slug}`}>
                       <a className="d-block">
@@ -79,7 +80,7 @@ const BlogList = ({ blogListData }) => {
                       <a className="tag">{item.category}</a>
                     </Link>
                   </div>
-                )} */}
+                )}
                 <div className="content">
                   <h1>
                     <Link href={`/read/${item.slug}`}>
