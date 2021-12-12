@@ -6,6 +6,7 @@ import moment from "moment";
 import Loading from "@components/loading";
 
 const BlogList = ({ blogListData }) => {
+  console.log(blogListData);
   const router = useRouter();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -43,8 +44,9 @@ const BlogList = ({ blogListData }) => {
 
   const handleScroll = () => {
     const lastUserLoaded = document.querySelector(
-      ".blog-area > .single-blog-post:last-child"
+      ".single-blog-post:last-child"
     );
+    console.log(lastUserLoaded);
     if (lastUserLoaded) {
       const lastUserLoadedOffset =
         lastUserLoaded.offsetTop + lastUserLoaded.clientHeight;
