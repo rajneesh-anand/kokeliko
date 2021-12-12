@@ -4,9 +4,10 @@ import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
 import BlogList from "@/components/blog/blog-list";
-import Message from "@/components/message";
+import Loading from "@/components/loading";
 
 const HomePage = ({ blogData }) => {
+  console.log(!blogData);
   return (
     <Layout>
       <SEO
@@ -14,19 +15,17 @@ const HomePage = ({ blogData }) => {
         description="Explore the world of Yoga and Meditation"
         canonical={`${process.env.PUBLIC_URL}`}
       />
-      <Header />
+      <div className="wrapper">
+        <Header />
 
-      {blogData.data.length > 0 ? (
-        <BlogList blogListData={blogData} />
-      ) : (
-        <Message
-          title="There's nothing here !"
-          url="/user/post/create"
-          btnText="Write &amp; Share Your Own Blog"
-        />
-      )}
+        {blogData ? (
+          blogData.data.length > 0 && <BlogList blogListData={blogData} />
+        ) : (
+          <Loading />
+        )}
 
-      <Footer />
+        <Footer />
+      </div>
     </Layout>
   );
 };
@@ -40,8 +39,8 @@ export const getServerSideProps = async ({ query }) => {
       throw new Error("Failed to fetch");
     }
     const result = await res.json();
-    console.log(result);
-    return { props: { blogData: result } };
+    // console.log(result);
+    return { props: { blogData: result.data.length > 0 ? result : null } };
   } catch (err) {
     console.log(err.message);
     return { props: { blogData: null } };

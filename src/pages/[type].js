@@ -4,11 +4,12 @@ import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
 import BlogList from "@/components/blog/blog-list";
-import Message from "@/components/message";
+import Loading from "@/components/loading";
 
 import { useRouter } from "next/router";
 
 const ArticlePage = ({ blogData }) => {
+  console.log(blogData);
   const router = useRouter();
   const title = router.query.type;
 
@@ -23,14 +24,10 @@ const ArticlePage = ({ blogData }) => {
       />
       <div className="wrapper">
         <Header />
-        {blogData.data.length > 0 ? (
-          <BlogList blogListData={blogData} />
+        {blogData ? (
+          blogData.data.length > 0 && <BlogList blogListData={blogData} />
         ) : (
-          <Message
-            title="There's nothing here !"
-            url="/user/post/create"
-            btnText="Write &amp; Share Your Own Blog"
-          />
+          <Loading />
         )}
         <Footer />
       </div>
@@ -52,8 +49,8 @@ export const getServerSideProps = async ({ query, params }) => {
       throw new Error("Failed to fetch");
     }
     const result = await res.json();
-    console.log(result);
-    return { props: { blogData: result } };
+    // console.log(result);
+    return { props: { blogData: result.data.length > 0 ? result : null } };
   } catch (err) {
     console.log(err.message);
     return { props: { blogData: null } };
