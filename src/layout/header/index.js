@@ -4,11 +4,12 @@ import Logo from "@/components/logo";
 import SideBarMenu from "@/components/sidebar-menu";
 import SideBarCart from "@/components/sidebar-cart";
 import MainMenu from "@/components/main-menu";
-import { useCart } from "../../contexts/cart/use-cart";
+import { useCart } from "@/contexts/cart/use-cart";
 import { signOut, useSession } from "next-auth/client";
 import Link from "next/link";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const [session, loading] = useSession();
@@ -95,7 +96,7 @@ const Header = () => {
                   }
                 >
                   <div className="profile-icon">
-                    <i className="fas fa-user-circle"></i>
+                    <FaUserCircle />
                   </div>
                 </OverlayTrigger>
               ) : (
