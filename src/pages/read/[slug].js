@@ -4,20 +4,20 @@ import Header from "@/layout/header";
 import Footer from "@/layout/footer";
 import Layout from "@/layout/index";
 import BlogDetail from "@/components/blog/blog-details";
+import prisma from "@libs/prisma";
 
-const SingleBlogPage = ({ blogDetail }) => {
-  // console.log(blogDetail);
+const SingleBlogPage = ({ data }) => {
+  const blogData = data ? JSON.parse(data) : null;
   return (
     <Layout>
       <SEO
-        title={`${blogDetail.title}`}
+        title={`${blogData.title}`}
         description="Explore the world of Yoga and Meditation"
-        canonical={`${process.env.PUBLIC_URL}/read/${blogDetail.slug}`}
+        canonical={`${process.env.PUBLIC_URL}/read/${blogData.slug}`}
       />
       <div className="wrapper">
         <Header />
-        <BlogDetail data={blogDetail} />
-
+        <BlogDetail data={blogData} />
         <Footer />
       </div>
     </Layout>
@@ -25,9 +25,12 @@ const SingleBlogPage = ({ blogDetail }) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.PUBLIC_URL}/api/bloglist`);
-  const posts = await res.json();
-  const paths = posts.data.map((post) => ({
+  const posts = await prisma.post.findMany({
+    where: {
+      published: true,
+    },
+  });
+  const paths = posts.map((post) => ({
     params: { slug: post.slug },
   }));
 
@@ -36,10 +39,18 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
-  const result = await fetch(`${process.env.PUBLIC_URL}/api/blog/${slug}`);
-  const data = await result.json();
+  const post = await prisma.post.findFirst({
+    where: {
+      slug: slug,
+    },
+    include: {
+      author: {
+        select: { name: true, image: true },
+      },
+    },
+  });
   return {
-    props: { blogDetail: data ? data.data : null },
+    props: { data: post ? JSON.stringify(post) : null },
   };
 }
 

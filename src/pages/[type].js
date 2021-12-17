@@ -7,10 +7,12 @@ import BlogList from "@/components/blog/blog-list";
 import Loading from "@/components/loading";
 import { useRouter } from "next/router";
 import { blogCategoryOptions } from "@/constant/blogs";
+import prisma from "@libs/prisma";
 
-const BlogCategoryPage = ({ blogData }) => {
+const BlogCategoryPage = ({ data }) => {
   const router = useRouter();
   const title = router.query.type;
+  const blogsData = data ? JSON.parse(data) : null;
 
   return (
     <Layout>
@@ -23,8 +25,8 @@ const BlogCategoryPage = ({ blogData }) => {
       />
       <div className="wrapper">
         <Header />
-        {blogData ? (
-          blogData.data.length > 0 && <BlogList blogListData={blogData} />
+        {blogsData ? (
+          blogsData.length > 0 && <BlogList blogListData={blogsData} />
         ) : (
           <Loading />
         )}
@@ -64,15 +66,26 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { type } = params;
   try {
-    const res = await fetch(`${process.env.PUBLIC_URL}/api/category/${type}`);
-    if (res.status !== 200) {
-      throw new Error("Failed to fetch");
-    }
-    const result = await res.json();
-    return { props: { blogData: result.data.length > 0 ? result : null } };
+    const posts = await prisma.post.findMany({
+      where: {
+        published: true,
+        category: type,
+      },
+      include: {
+        author: {
+          select: { name: true, image: true },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return {
+      props: { data: posts.length > 0 ? JSON.stringify(posts) : null },
+    };
   } catch (err) {
     console.log(err.message);
-    return { props: { blogData: null } };
+    return { props: { data: null } };
   }
 }
 

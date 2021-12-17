@@ -67,7 +67,7 @@ const BlogList = ({ blogListData }) => {
     <div className="blog-area">
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-3 blogs-list mb-n30">
-          {blogListData.data.map((item, index) => (
+          {blogListData.map((item, index) => (
             <div key={index} className="col masonry-grid mb-30">
               <div className="single-blog-post">
                 {item.image && (
