@@ -6,12 +6,11 @@ import moment from "moment";
 import Loading from "@components/loading";
 
 const BlogList = ({ blogListData }) => {
-  console.log(blogListData);
-  const router = useRouter();
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const startLoading = () => setLoading(true);
-  const stopLoading = () => setLoading(false);
+  // const router = useRouter();
+  // const [blogs, setBlogs] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const startLoading = () => setLoading(true);
+  // const stopLoading = () => setLoading(false);
 
   const truncate = (str, no_words) => {
     return htmr(str.split(" ").splice(0, no_words).join(" ") + " ");
@@ -24,45 +23,45 @@ const BlogList = ({ blogListData }) => {
     });
   }, [blogListData]);
 
-  // Router event handler
-  useEffect(() => {
-    router.events.on("routeChangeStart", startLoading);
-    router.events.on("routeChangeComplete", stopLoading);
-    return () => {
-      router.events.off("routeChangeStart", startLoading);
-      router.events.off("routeChangeComplete", stopLoading);
-    };
-  }, []);
+  // // Router event handler
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", startLoading);
+  //   router.events.on("routeChangeComplete", stopLoading);
+  //   return () => {
+  //     router.events.off("routeChangeStart", startLoading);
+  //     router.events.off("routeChangeComplete", stopLoading);
+  //   };
+  // }, []);
 
-  // Listen to scroll positions for loading more data on scroll
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
+  // // Listen to scroll positions for loading more data on scroll
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // });
 
-  const handleScroll = () => {
-    const lastUserLoaded = document.querySelector(
-      ".single-blog-post:last-child"
-    );
-    console.log(lastUserLoaded);
-    if (lastUserLoaded) {
-      const lastUserLoadedOffset =
-        lastUserLoaded.offsetTop + lastUserLoaded.clientHeight;
-      const pageOffset = window.pageYOffset + window.innerHeight;
-      if (pageOffset > lastUserLoadedOffset) {
-        if (blogListData.curPage < blogListData.maxPage && !loading) {
-          const query = router.query;
-          query.page = parseInt(blogListData.curPage) + 1;
-          router.push({
-            pathname: router.pathname,
-            query: query,
-          });
-        }
-      }
-    }
-  };
+  // const handleScroll = () => {
+  //   const lastUserLoaded = document.querySelector(
+  //     ".single-blog-post:last-child"
+  //   );
+  //   console.log(lastUserLoaded);
+  //   if (lastUserLoaded) {
+  //     const lastUserLoadedOffset =
+  //       lastUserLoaded.offsetTop + lastUserLoaded.clientHeight;
+  //     const pageOffset = window.pageYOffset + window.innerHeight;
+  //     if (pageOffset > lastUserLoadedOffset) {
+  //       if (blogListData.curPage < blogListData.maxPage && !loading) {
+  //         const query = router.query;
+  //         query.page = parseInt(blogListData.curPage) + 1;
+  //         router.push({
+  //           pathname: router.pathname,
+  //           query: query,
+  //         });
+  //       }
+  //     }
+  //   }
+  // };
 
   return (
     <div className="blog-area">
@@ -112,7 +111,7 @@ const BlogList = ({ blogListData }) => {
           ))}
         </div>
       </div>
-      {loading && <Loading />}
+      {/* {loading && <Loading />} */}
     </div>
   );
 };

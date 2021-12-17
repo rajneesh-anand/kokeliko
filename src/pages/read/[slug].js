@@ -24,9 +24,17 @@ const SingleBlogPage = ({ blogDetail }) => {
   );
 };
 
-export default SingleBlogPage;
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.PUBLIC_URL}/api/bloglist`);
+  const posts = await res.json();
+  const paths = posts.data.map((post) => ({
+    params: { slug: post.slug },
+  }));
 
-export async function getServerSideProps({ params, req, res }) {
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
   const { slug } = params;
   const result = await fetch(`${process.env.PUBLIC_URL}/api/blog/${slug}`);
   const data = await result.json();
@@ -34,3 +42,5 @@ export async function getServerSideProps({ params, req, res }) {
     props: { blogDetail: data ? data.data : null },
   };
 }
+
+export default SingleBlogPage;

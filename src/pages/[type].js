@@ -5,11 +5,10 @@ import Header from "@/layout/header";
 import Layout from "@/layout/index";
 import BlogList from "@/components/blog/blog-list";
 import Loading from "@/components/loading";
-
 import { useRouter } from "next/router";
+import { blogCategoryOptions } from "@/constant/blogs";
 
-const ArticlePage = ({ blogData }) => {
-  console.log(blogData);
+const BlogCategoryPage = ({ blogData }) => {
   const router = useRouter();
   const title = router.query.type;
 
@@ -35,24 +34,46 @@ const ArticlePage = ({ blogData }) => {
   );
 };
 
-export default ArticlePage;
+// export const getServerSideProps = async ({ query, params }) => {
+//   const page = query.page || 1;
+//   const type = params.type;
 
-export const getServerSideProps = async ({ query, params }) => {
-  const page = query.page || 1;
-  const type = params.type;
+//   try {
+//     const res = await fetch(
+//       `${process.env.PUBLIC_URL}/api/category/${type}?page=${page}`
+//     );
+//     if (res.status !== 200) {
+//       throw new Error("Failed to fetch");
+//     }
+//     const result = await res.json();
+//     return { props: { blogData: result.data.length > 0 ? result : null } };
+//   } catch (err) {
+//     console.log(err.message);
+//     return { props: { blogData: null } };
+//   }
+// };
 
+export async function getStaticPaths() {
+  const paths = blogCategoryOptions.map((category) => ({
+    params: { type: category },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const { type } = params;
   try {
-    const res = await fetch(
-      `${process.env.PUBLIC_URL}/api/category/${type}?page=${page}`
-    );
+    const res = await fetch(`${process.env.PUBLIC_URL}/api/category/${type}`);
     if (res.status !== 200) {
       throw new Error("Failed to fetch");
     }
     const result = await res.json();
-    // console.log(result);
     return { props: { blogData: result.data.length > 0 ? result : null } };
   } catch (err) {
     console.log(err.message);
     return { props: { blogData: null } };
   }
-};
+}
+
+export default BlogCategoryPage;

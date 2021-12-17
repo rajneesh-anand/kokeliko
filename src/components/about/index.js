@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import AboutData from "@/data/about.json";
 import PageTitle from "@/components/page-title";
 
@@ -16,17 +15,6 @@ const AboutPageDetails = () => {
                   subTitle="About"
                   title="We Are KokeLiko"
                 />
-                {/* <div className="page-title-content">
-                  <ul className="bread-crumbs">
-                    <li>
-                      <Link href="/">
-                        <a>Home </a>
-                      </Link>
-                    </li>
-                    <li>{">"}</li>
-                    <li> About</li>
-                  </ul>
-                </div> */}
               </div>
             </div>
           </div>
@@ -41,19 +29,6 @@ const AboutPageDetails = () => {
                 }}
               />
             </div>
-            {/* <div className="col-lg-4 col-xl-3 offset-xl-1">
-              <h2 className="title">{AboutData[1].title}</h2>
-              <ul>
-                {AboutData[1].pagelinkText &&
-                  AboutData[1].pagelinkText.map((single, key) => (
-                    <li key={key}>
-                      <Link href={process.env.PUBLIC_URL + "/"}>
-                        <a>{single.text}</a>
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </div> */}
           </div>
         </div>
       </div>

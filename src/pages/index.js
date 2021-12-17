@@ -7,7 +7,6 @@ import BlogList from "@/components/blog/blog-list";
 import Loading from "@/components/loading";
 
 const HomePage = ({ blogData }) => {
-  console.log(!blogData);
   return (
     <Layout>
       <SEO
@@ -30,21 +29,35 @@ const HomePage = ({ blogData }) => {
   );
 };
 
-export const getServerSideProps = async ({ query }) => {
-  const page = query.page || 1;
+// export const getServerSideProps = async ({ query }) => {
+//   const page = query.page || 1;
 
+//   try {
+//     const res = await fetch(`${process.env.PUBLIC_URL}/api/blogs?page=${page}`);
+//     if (res.status !== 200) {
+//       throw new Error("Failed to fetch");
+//     }
+//     const result = await res.json();
+//     // console.log(result);
+//     return { props: { blogData: result.data.length > 0 ? result : null } };
+//   } catch (err) {
+//     console.log(err.message);
+//     return { props: { blogData: null } };
+//   }
+// };
+
+export async function getStaticProps() {
   try {
-    const res = await fetch(`${process.env.PUBLIC_URL}/api/blogs?page=${page}`);
+    const res = await fetch(`${process.env.PUBLIC_URL}/api/bloglist`);
     if (res.status !== 200) {
       throw new Error("Failed to fetch");
     }
     const result = await res.json();
-    // console.log(result);
     return { props: { blogData: result.data.length > 0 ? result : null } };
   } catch (err) {
     console.log(err.message);
     return { props: { blogData: null } };
   }
-};
+}
 
 export default HomePage;
