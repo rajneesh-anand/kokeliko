@@ -7,10 +7,9 @@ import BlogList from "@/components/blog/blog-list";
 import Loading from "@/components/loading";
 import { useRouter } from "next/router";
 
-const BlogCategoryPage = ({ data }) => {
+const BlogCategoryPage = ({ blogsData }) => {
   const router = useRouter();
   const title = router.query.type;
-  const blogsData = data ? JSON.parse(data) : null;
 
   return (
     <Layout>
@@ -24,7 +23,7 @@ const BlogCategoryPage = ({ data }) => {
       <div className="wrapper">
         <Header />
         {blogsData ? (
-          blogsData.length > 0 && <BlogList blogListData={blogsData} />
+          blogsData.data.length > 0 && <BlogList blogListData={blogsData} />
         ) : (
           <Loading />
         )}
@@ -46,10 +45,10 @@ export const getServerSideProps = async ({ query, params }) => {
       throw new Error("Failed to fetch");
     }
     const result = await res.json();
-    return { props: { blogData: result.data.length > 0 ? result : null } };
+    return { props: { blogsData: result.data.length > 0 ? result : null } };
   } catch (err) {
     console.log(err.message);
-    return { props: { blogData: null } };
+    return { props: { blogsData: null } };
   }
 };
 
