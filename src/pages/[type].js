@@ -6,8 +6,6 @@ import Layout from "@/layout/index";
 import BlogList from "@/components/blog/blog-list";
 import Loading from "@/components/loading";
 import { useRouter } from "next/router";
-import { blogCategoryOptions } from "@/constant/blogs";
-import prisma from "@libs/prisma";
 
 const BlogCategoryPage = ({ data }) => {
   const router = useRouter();
@@ -36,57 +34,57 @@ const BlogCategoryPage = ({ data }) => {
   );
 };
 
-// export const getServerSideProps = async ({ query, params }) => {
-//   const page = query.page || 1;
-//   const type = params.type;
+export const getServerSideProps = async ({ query, params }) => {
+  const page = query.page || 1;
+  const type = params.type;
 
-//   try {
-//     const res = await fetch(
-//       `${process.env.PUBLIC_URL}/api/category/${type}?page=${page}`
-//     );
-//     if (res.status !== 200) {
-//       throw new Error("Failed to fetch");
-//     }
-//     const result = await res.json();
-//     return { props: { blogData: result.data.length > 0 ? result : null } };
-//   } catch (err) {
-//     console.log(err.message);
-//     return { props: { blogData: null } };
-//   }
-// };
-
-export async function getStaticPaths() {
-  const paths = blogCategoryOptions.map((category) => ({
-    params: { type: category },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-  const { type } = params;
   try {
-    const posts = await prisma.post.findMany({
-      where: {
-        published: true,
-        category: type,
-      },
-      include: {
-        author: {
-          select: { name: true, image: true },
-        },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    return {
-      props: { data: posts.length > 0 ? JSON.stringify(posts) : null },
-    };
+    const res = await fetch(
+      `${process.env.PUBLIC_URL}/api/category/${type}?page=${page}`
+    );
+    if (res.status !== 200) {
+      throw new Error("Failed to fetch");
+    }
+    const result = await res.json();
+    return { props: { blogData: result.data.length > 0 ? result : null } };
   } catch (err) {
     console.log(err.message);
-    return { props: { data: null } };
+    return { props: { blogData: null } };
   }
-}
+};
+
+// export async function getStaticPaths() {
+//   const paths = blogCategoryOptions.map((category) => ({
+//     params: { type: category },
+//   }));
+
+//   return { paths, fallback: false };
+// }
+
+// export async function getStaticProps({ params }) {
+//   const { type } = params;
+//   try {
+//     const posts = await prisma.post.findMany({
+//       where: {
+//         published: true,
+//         category: type,
+//       },
+//       include: {
+//         author: {
+//           select: { name: true, image: true },
+//         },
+//       },
+//       orderBy: {
+//         createdAt: "desc",
+//       },
+//     });
+//     return {
+//       props: { data: posts.length > 0 ? JSON.stringify(posts) : null },
+//     };
+//   } catch (err) {
+//     console.log(err.message);
+//     return { props: { data: null } };
+//   }
+// }
 
 export default BlogCategoryPage;
