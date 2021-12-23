@@ -73,12 +73,7 @@ const BlogList = ({ blogListData }) => {
               <div className="single-blog-post">
                 {item.image && (
                   <div className="image">
-                    <Image
-                      src={item.image}
-                      width={204}
-                      height={208}
-                      layout="responsive"
-                    />
+                    <Image src={item.image} layout="fill" objectFit="cover" />
                     <Link href={`/read/${item.slug}`}>
                       <a className="tag">{item.category}</a>
                     </Link>
@@ -96,8 +91,12 @@ const BlogList = ({ blogListData }) => {
                       {moment(item.createdAt).format("Do MMMM YYYY")}
                     </li>
                     <li>
-                      <i className="ri-time-line"></i>
-                      <span>5 Mins</span>
+                      <i className="ri-time-line"></i>{" "}
+                      {item.readingTime ? (
+                        <span>{item.readingTime}</span>
+                      ) : (
+                        <span>5 Mins</span>
+                      )}
                     </li>
                   </ul>
 

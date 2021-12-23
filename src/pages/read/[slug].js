@@ -24,20 +24,20 @@ const SingleBlogPage = ({ data }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const posts = await prisma.post.findMany({
-    where: {
-      published: true,
-    },
-  });
-  const paths = posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
+// export async function getStaticPaths() {
+//   const posts = await prisma.post.findMany({
+//     where: {
+//       published: true,
+//     },
+//   });
+//   const paths = posts.map((post) => ({
+//     params: { slug: post.slug },
+//   }));
 
-  return { paths, fallback: false };
-}
+//   return { paths, fallback: false };
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const { slug } = params;
   const post = await prisma.post.findFirst({
     where: {

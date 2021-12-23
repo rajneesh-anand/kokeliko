@@ -96,6 +96,7 @@ const NewpostPage = () => {
     formData.append("content", blogContent);
     formData.append("template", data.blog_template);
     formData.append("slug", slugify(data.blog_title));
+    formData.append("readingTime", data.reading_time);
     formData.append("published", true);
     formData.append("author", session?.user?.email);
 
@@ -144,6 +145,7 @@ const NewpostPage = () => {
     formData.append("content", blogContent);
     formData.append("template", data.blog_template);
     formData.append("slug", slugify(data.blog_title));
+    formData.append("readingTime", data.reading_time);
     formData.append("published", false);
     formData.append("author", session?.user?.email);
 
@@ -290,7 +292,7 @@ const NewpostPage = () => {
                   <Form.Label column sm="2">
                     Blog Template
                   </Form.Label>
-                  <Col sm="10">
+                  <Col sm="4">
                     <Form.Select
                       className="me-sm-2"
                       {...register("blog_template")}
@@ -302,6 +304,16 @@ const NewpostPage = () => {
                         Blog without Thumb Image
                       </option>
                     </Form.Select>
+                  </Col>
+                  <Form.Label column sm="2">
+                    Reading Time
+                  </Form.Label>
+                  <Col sm="4">
+                    <Form.Control
+                      type="text"
+                      placeholder="5 Min"
+                      {...register("reading_time")}
+                    />
                   </Col>
                 </Form.Group>
 

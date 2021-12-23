@@ -31,7 +31,11 @@ const BlogDetails = ({ data }) => {
                     </li>
                     <li>
                       <i className="ri-time-line"></i>
-                      <span>5 Mins</span>
+                      {data.readingTime ? (
+                        <span>{data.readingTime}</span>
+                      ) : (
+                        <span>5 Mins</span>
+                      )}
                     </li>
                   </ul>
                 </div>

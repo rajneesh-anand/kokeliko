@@ -85,6 +85,7 @@ const EditPostPage = ({ data }) => {
     formData.append("content", blogContent);
     formData.append("template", data.blog_template);
     formData.append("slug", slugify(data.blog_title));
+    formData.append("readingTime", data.reading_time);
 
     try {
       const result = await fetch(`${process.env.API_URL}/blog/${postData.id}`, {
@@ -226,7 +227,7 @@ const EditPostPage = ({ data }) => {
                     <Form.Label column sm="2">
                       Blog Template
                     </Form.Label>
-                    <Col sm="10">
+                    <Col sm="4">
                       <Form.Select
                         className="me-sm-2"
                         defaultValue={postData.template}
@@ -239,6 +240,17 @@ const EditPostPage = ({ data }) => {
                           Blog without Thumb Image
                         </option>
                       </Form.Select>
+                    </Col>
+
+                    <Form.Label column sm="2">
+                      Reading Time
+                    </Form.Label>
+                    <Col sm="4">
+                      <Form.Control
+                        type="text"
+                        placeholder={postData.readingTime}
+                        {...register("reading_time")}
+                      />
                     </Col>
                   </Form.Group>
 
