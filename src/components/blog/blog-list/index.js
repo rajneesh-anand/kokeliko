@@ -8,7 +8,6 @@ import Image from "next/image";
 
 const BlogList = ({ blogListData }) => {
   const router = useRouter();
-  const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   const startLoading = () => setLoading(true);
   const stopLoading = () => setLoading(false);
@@ -17,12 +16,12 @@ const BlogList = ({ blogListData }) => {
     return htmr(str.split(" ").splice(0, no_words).join(" ") + " ");
   };
 
-  useEffect(() => {
-    const masonryList = document.querySelector(".blogs-list");
-    let Iso = new Isotope(masonryList, {
-      itemSelector: ".masonry-grid",
-    });
-  }, [blogListData]);
+  // useEffect(() => {
+  //   const masonryList = document.querySelector(".blogs-list");
+  //   let Iso = new Isotope(masonryList, {
+  //     itemSelector: ".masonry-grid",
+  //   });
+  // }, [blogListData]);
 
   // Router event handler
   useEffect(() => {
@@ -71,14 +70,17 @@ const BlogList = ({ blogListData }) => {
           {blogListData.data.map((item, index) => (
             <div key={index} className="col masonry-grid mb-30">
               <div className="single-blog-post">
-                {item.image && (
-                  <div className="image">
-                    <Image src={item.image} layout="fill" objectFit="cover" />
-                    <Link href={`/read/${item.slug}`}>
-                      <a className="tag">{item.category}</a>
-                    </Link>
-                  </div>
-                )}
+                <div className="image">
+                  <Image
+                    src={item.image ? item.image : "/img/default.webp"}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                  <Link href={`${item.category}`}>
+                    <a className="tag">{item.category}</a>
+                  </Link>
+                </div>
+
                 <div className="content">
                   <h1>
                     <Link href={`/read/${item.slug}`}>
