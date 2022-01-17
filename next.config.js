@@ -5,9 +5,7 @@ const apiUrl = isProd
   ? "https://blognodeserver.herokuapp.com/api"
   : "http://localhost:8080/api";
 
-const publicUrl = isProd
-  ? "https://kokeliko.vercel.app"
-  : "http://localhost:3000";
+const publicUrl = isProd ? "https://www.tswan.club" : "http://localhost:3000";
 
 module.exports = withImages({
   env: {
