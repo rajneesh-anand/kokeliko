@@ -13,22 +13,22 @@ export const getServerSideProps = async ({ res }) => {
     },
   });
 
-  const baseUrl = "https://kokeliko.vercel.app";
+  const baseUrl = "https://www.tswan.club";
 
   const staticPages = [
-    "https://kokeliko.vercel.app/about",
-    "https://kokeliko.vercel.app/contact",
-    "https://kokeliko.vercel.app/politics",
-    "https://kokeliko.vercel.app/sports",
-    "https://kokeliko.vercel.app/technology",
-    "https://kokeliko.vercel.app/jobs",
-    "https://kokeliko.vercel.app/health",
-    "https://kokeliko.vercel.app/entertainment",
-    "https://kokeliko.vercel.app/travel",
-    "https://kokeliko.vercel.app/fashion-beauty",
-    "https://kokeliko.vercel.app/yoga-meditation",
-    "https://kokeliko.vercel.app/privacy",
-    "https://kokeliko.vercel.app/terms",
+    "https://www.tswan.club/about",
+    "https://www.tswan.club/contact",
+    "https://www.tswan.club/politics",
+    "https://www.tswan.club/sports",
+    "https://www.tswan.club/technology",
+    "https://www.tswan.club/jobs",
+    "https://www.tswan.club/health",
+    "https://www.tswan.club/entertainment",
+    "https://www.tswan.club/travel",
+    "https://www.tswan.club/fashion-beauty",
+    "https://www.tswan.club/yoga-meditation",
+    "https://www.tswan.club/privacy",
+    "https://www.tswan.club/terms",
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
