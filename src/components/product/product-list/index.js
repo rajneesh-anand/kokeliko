@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useMasonry from "@/utils/useMasonry";
 import DataFilter from "@/components/data-filter";
 import { slugify } from "@/utils/index";
-import ProductCard from "../product-card";
+import ProductCard from "@/components/product/product-card";
 
 const ProductList = ({ data }) => {
   const { categories } = useMasonry(
@@ -31,6 +31,7 @@ const ProductList = ({ data }) => {
                 <div
                   key={item.id}
                   className={`col masonry-grid mb-30 ${item.category
+                    .split(",")
                     .map((cat) => slugify(cat))
                     .join(" ")}`}
                 >

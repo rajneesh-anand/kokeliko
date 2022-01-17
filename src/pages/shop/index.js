@@ -6,18 +6,10 @@ import Layout from "@/layout/index";
 import ProductList from "@/components/product/product-list";
 import Message from "@/components/message";
 import Loading from "@/components/loading";
-import { usePaginatedData } from "@/utils/useRequest";
+import { getProducts } from "@/utils/getProducts";
 
-const ShopPage = () => {
-  const {
-    result,
-    error,
-    isLoadingMore,
-    size,
-    setSize,
-    isReachingEnd,
-    isEmpty,
-  } = usePaginatedData("/api/shop");
+const ShopPage = ({ products }) => {
+  console.log(products);
 
   return (
     <Layout>
@@ -28,38 +20,28 @@ const ShopPage = () => {
       />
       <div className="wrapper">
         <Header />
-
-        {isLoadingMore ? (
-          <Loading />
-        ) : isEmpty ? (
-          <Message
-            title="Nothing found here !"
-            url="/user/newpost"
-            btnText="Write &amp; Share Your Own Blog"
-          />
+        {products.length > 0 ? (
+          <ProductList data={products} />
         ) : (
-          <>
-            <ProductList data={result} />
-            <div className="row">
-              <div className="col d-flex justify-content-center">
-                {!isReachingEnd && (
-                  <button
-                    className="default-btn"
-                    disabled={isLoadingMore || isReachingEnd}
-                    onClick={() => setSize(size + 1)}
-                  >
-                    {isLoadingMore ? "Loading..." : "More Blogs"}
-                  </button>
-                )}
-              </div>
-            </div>
-          </>
+          <Message
+            title="There's no product available at this time !"
+            url="/"
+            btnText="Go Back to Home Page"
+          />
         )}
-
         <Footer />
       </div>
     </Layout>
   );
 };
+
+export async function getServerSideProps() {
+  const products = await getProducts();
+  return {
+    props: {
+      products,
+    },
+  };
+}
 
 export default ShopPage;

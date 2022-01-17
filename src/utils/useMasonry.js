@@ -7,7 +7,8 @@ const useMasonry = (data, masonryListWrap, masonryGrid, btnWrap, btn) => {
 
   useEffect(() => {
     const mixCategories = data.map((item) => {
-      return item.category.map((cat) => cat);
+      let productCategory = item.category.split(",");
+      return productCategory.map((cat) => cat);
     });
     const allCat = flatDeep(mixCategories, Infinity);
 

@@ -10,26 +10,24 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="icon" href="/fav.png" />
+
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-S0648M85HN"
+          />
+
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id='G-93NWLELNJZ'`}
           />
 
           <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2616775792880013"
-            crossOrigin="anonymous"
-          ></script>
-
-          <script
             dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-93NWLELNJZ', {
-              page_path: window.location.pathname,
-            });
+              __html: `              
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());            
+              gtag('config', 'G-S0648M85HN');              
           `,
             }}
           />
