@@ -9,7 +9,7 @@ const ContactPage = () => {
   return (
     <Layout>
       <SEO
-        title="Contact | KokeLiko"
+        title="Contact Tswan"
         description="Contact Us "
         canonical={`${process.env.PUBLIC_URL}/contact`}
       />

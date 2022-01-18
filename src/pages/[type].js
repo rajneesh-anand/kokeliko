@@ -14,9 +14,7 @@ const BlogCategoryPage = ({ blogsData }) => {
   return (
     <Layout>
       <SEO
-        title={`${
-          title[0].toUpperCase() + title.slice(1).toLowerCase()
-        } | KokeLiko`}
+        title={`${title[0].toUpperCase() + title.slice(1).toLowerCase()} Tswan`}
         description="Explore the world of Yoga and Meditation"
         canonical={`${process.env.PUBLIC_URL}/${title}`}
       />

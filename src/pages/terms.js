@@ -31,8 +31,8 @@ const TermsOfUsePage = () => {
   return (
     <>
       <SEO
-        title="Privacy Policy | KokeLiko"
-        canonical={`${process.env.PUBLIC_URL}/privacypolicy`}
+        title="Tswan Terms &amp; Conditions "
+        canonical={`${process.env.PUBLIC_URL}/terms`}
       />
       <div className="container">
         <div className="row">

@@ -10,7 +10,7 @@ const HomePage = ({ blogsData }) => {
   return (
     <Layout>
       <SEO
-        title="Home | Kokeliko"
+        title="Tswan"
         description="Explore the world of Yoga and Meditation"
         canonical={`${process.env.PUBLIC_URL}`}
       />

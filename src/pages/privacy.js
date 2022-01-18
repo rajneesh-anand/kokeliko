@@ -31,7 +31,7 @@ const PrivacyPolicyPage = () => {
   return (
     <>
       <SEO
-        title="Privacy Policy | KokeLiko"
+        title="Privacy Policy "
         canonical={`${process.env.PUBLIC_URL}/privacypolicy`}
       />
       <div className="container">

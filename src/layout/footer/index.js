@@ -1,5 +1,4 @@
 import Link from "next/link";
-import FooterLogo from "../../components/footer-logo";
 
 const Footer = () => {
   return (
@@ -27,7 +26,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link href={process.env.PUBLIC_URL + "/about"}>
-                      <a>About KokeLiko</a>
+                      <a>About Tswan</a>
                     </Link>
                   </li>
                 </ul>
@@ -78,41 +77,6 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-
-          {/* <div className="widget-item">
-                <ul className="widget-social">
-                  <li className="social-text">
-                    <span>follow us on social</span>
-                  </li>
-                  <li>
-                    <a
-                      href="https://twitter.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="social_twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.facebook.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="social_facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.instagram.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="social_instagram"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div> */}
         </div>
       </div>
       <div className="container-fluid">

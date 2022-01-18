@@ -9,15 +9,13 @@ const AboutPage = () => {
   return (
     <Layout>
       <SEO
-        title="About | KokeLiko "
+        title="About Tswan "
         description="Explore more about Transcendental Meditation"
         canonical={`${process.env.PUBLIC_URL}/about`}
       />
       <div className="wrapper">
         <Header />
-
         <AboutPageDetails />
-
         <Footer />
       </div>
     </Layout>
