@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/client";
+import { BsFacebook } from "react-icons/bs";
 
 export default function SignInForm({ csrfToken }) {
   const {
@@ -54,7 +55,7 @@ export default function SignInForm({ csrfToken }) {
             </div>
             <div className="signin-facebook">
               <button onClick={() => signIn("facebook")}>
-                <i className="bx bxl-facebook-circle"></i>
+                <BsFacebook style={{ fontSize: "20.5px" }} />
                 <span> Sign In with Facebook</span>
               </button>
             </div>
@@ -91,7 +92,7 @@ export default function SignInForm({ csrfToken }) {
             </div>
             <div className="signin-conditions">
               <p>
-                By Login, you agree to KokeLiko
+                By Login, you agree to Tswan's
                 <a href={process.env.PUBLIC_URL + "/terms"} target="_blank">
                   {" "}
                   Terms of service{" "}

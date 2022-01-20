@@ -8,19 +8,26 @@ export default function AccountverifyPage() {
   return (
     <Layout>
       <SEO
-        title="Email Verification | KokeLiko "
+        title="Email Verification "
         canonical={process.env.PUBLIC_URL + "/auth/verify-account"}
       />
       <div className="wrapper ">
         <Header />
-        <div className="container">
-          <div className="hv-center">
-            <h3>
-              We have sent a verification link to registered email address.
-            </h3>
-            <h2>Kindly login to your email and verify. Thank You </h2>
-          </div>
+
+        <div
+          className="container"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <h3 style={{ fontWeight: "400", color: "green", marginBottom: 16 }}>
+            We have sent a login verification link to registered email address !
+          </h3>
         </div>
+
         <Footer />
       </div>
     </Layout>

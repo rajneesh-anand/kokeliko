@@ -132,7 +132,7 @@ const ContactForm = () => {
                     className="form-control"
                     placeholder="The subject of your message "
                     {...register("subject", {
-                      required: "Kindly fill the subject  !",
+                      required: "Subject is required !",
                     })}
                   />
                   {errors.subject && <p>{errors.subject.message}</p>}
