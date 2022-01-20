@@ -6,6 +6,7 @@ import Layout from "@/layout/index";
 import BlogList from "@/components/blog/blog-list";
 import Loading from "@/components/loading";
 import { useRouter } from "next/router";
+import Message from "@components/message";
 
 const BlogCategoryPage = ({ blogsData }) => {
   const router = useRouter();
@@ -23,7 +24,11 @@ const BlogCategoryPage = ({ blogsData }) => {
         {blogsData ? (
           blogsData.data.length > 0 && <BlogList blogListData={blogsData} />
         ) : (
-          <Loading />
+          <Message
+            title=" There's nothing here !"
+            url="/user/post/create"
+            btnText="Post your own blog"
+          />
         )}
         <Footer />
       </div>

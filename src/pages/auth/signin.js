@@ -10,8 +10,8 @@ const SignInPage = ({ csrfToken }) => {
   return (
     <Layout>
       <SEO
-        title="Sign In | KokeLiko"
-        description="Sign In to KokeLiko"
+        title="Sign In | Tswan"
+        description="Sign In to Tswan Club"
         canonical={`${process.env.PUBLIC_URL}/auth/signin`}
       />
       <div className="wrapper">

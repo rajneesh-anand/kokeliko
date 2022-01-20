@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/client";
 import { BsFacebook } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
 
 export default function SignInForm({ csrfToken }) {
   const {
@@ -81,11 +82,9 @@ export default function SignInForm({ csrfToken }) {
                 {errors.email && <p>{errors.email.message}</p>}
 
                 <div className="text-center">
-                  <button
-                    className="default-btn"
-                    onClick={handleSubmit(onSubmit)}
-                  >
-                    <i className="bx bx-paper-plane"></i> Sign In with Email
+                  <button onClick={handleSubmit(onSubmit)}>
+                    <MdEmail style={{ fontSize: "24.5px", marginRight: 8 }} />
+                    <span>Sign In with Email</span>
                   </button>
                 </div>
               </form>
@@ -95,12 +94,12 @@ export default function SignInForm({ csrfToken }) {
                 By Login, you agree to Tswan's
                 <a href={process.env.PUBLIC_URL + "/terms"} target="_blank">
                   {" "}
-                  Terms of service{" "}
+                  terms of service{" "}
                 </a>
                 and
                 <a href={process.env.PUBLIC_URL + "/privacy"} target="_blank">
                   {" "}
-                  Privacy policy
+                  privacy policy
                 </a>
               </p>
             </div>

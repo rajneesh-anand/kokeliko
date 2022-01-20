@@ -115,219 +115,221 @@ const ProductPage = () => {
   return (
     <Layout>
       <SEO
-        title="New Product | KokeLiko "
+        title="New Product"
         canonical={`${process.env.PUBLIC_URL}/user/product/create`}
       />
       <div className="wrapper">
         <Header />
-        <div className="container">
-          {message && (
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-          )}
+        <div className="user-account-area">
+          <div className="container">
+            {message && (
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+            )}
 
-          <div className="newblog-form ptb-50">
-            <Form>
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Product Image
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Control
-                    type="file"
-                    accept=".jpg, .png, .jpeg"
-                    onChange={(event) => {
-                      setProductImage(event.target.files[0]);
-                    }}
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Product Name *
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Control
-                    type="text"
-                    placeholder=" Product Name"
-                    {...register("product_name", {
-                      required: " Product Name is required ! ",
-                    })}
-                  />
-                  {errors.product_name && (
-                    <Form.Label style={{ color: "red" }}>
-                      {errors.product_name.message}
-                    </Form.Label>
-                  )}
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Product Description *
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Control
-                    type="text"
-                    placeholder=" Product Description"
-                    {...register("product_desc", {
-                      required: " Product Description is required ! ",
-                    })}
-                  />
-                  {errors.product_desc && (
-                    <Form.Label style={{ color: "red" }}>
-                      {errors.product_desc.message}
-                    </Form.Label>
-                  )}
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Size
-                </Form.Label>
-                <Col sm="4">
-                  <Form.Control
-                    type="text"
-                    placeholder=" Product Size"
-                    {...register("size")}
-                  />
-                </Col>
-                <Form.Label column sm="2">
-                  Weight
-                </Form.Label>
-                <Col sm="4">
-                  <Form.Control
-                    type="text"
-                    placeholder=" Product Weight (grams)"
-                    {...register("weight", {
-                      pattern: {
-                        value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
-                        message: "Accept only decimal numbers",
-                      },
-                    })}
-                  />
-                </Col>
-              </Form.Group>
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  M.R.P
-                </Form.Label>
-                <Col sm="4">
-                  <Form.Control
-                    type="text"
-                    placeholder="Maximum Reatil Price"
-                    {...register("price", {
-                      required: "MRP is required !",
-                      pattern: {
-                        value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
-                        message: "Accept only decimal numbers",
-                      },
-                    })}
-                  />
-                  {errors.price && (
-                    <Form.Label style={{ color: "red" }}>
-                      {errors.price.message}
-                    </Form.Label>
-                  )}
-                </Col>
-                <Form.Label column sm="2">
-                  Sale Price
-                </Form.Label>
-                <Col sm="4">
-                  <Form.Control
-                    type="text"
-                    placeholder=" Sale Price"
-                    {...register("sale_price", {
-                      pattern: {
-                        value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
-                        message: "Accept only decimal numbers",
-                      },
-                    })}
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Stock Available
-                </Form.Label>
-                <Col sm="4">
-                  <Form.Select className="me-sm-2" {...register("stock")}>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </Form.Select>
-                </Col>
-                <Form.Label column sm="2">
-                  Product Category
-                </Form.Label>
-                <Col sm="4">
-                  <Multiselect
-                    options={productCategoryOptions}
-                    selectedValues={catSelectedValues}
-                    onSelect={onCatSelect}
-                    onRemove={onCatRemove}
-                    placeholder="+ Add Category"
-                    id="catOption"
-                    isObject={false}
-                    className="catDrowpdown"
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">
-                  Product Usage
-                </Form.Label>
-                <Col sm="10">
-                  {editorLoaded ? (
-                    <CKEditor
-                      editor={ClassicEditor}
-                      data={usage}
-                      onReady={(editor) => {
-                        console.log("Editor is ready to use!", editor);
-                      }}
-                      config={{ height: 400 }}
-                      onChange={(event, editor) => {
-                        editor.editing.view.change((writer) => {
-                          writer.setStyle(
-                            "height",
-                            "320px",
-                            editor.editing.view.document.getRoot()
-                          );
-                        });
-                        const data = editor.getData();
-                        setUsage(data);
+            <div className="newblog-form">
+              <Form>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Product Image
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="file"
+                      accept=".jpg, .png, .jpeg"
+                      onChange={(event) => {
+                        setProductImage(event.target.files[0]);
                       }}
                     />
-                  ) : (
-                    <p>editor..</p>
-                  )}
-                </Col>
-              </Form.Group>
+                  </Col>
+                </Form.Group>
 
-              <Form.Group as={Row} className="mb-3 text-center ">
-                <Col sm={{ span: 10, offset: 2 }}>
-                  <Button
-                    variant="primary"
-                    onClick={handleSubmit(onSubmit)}
-                    style={{ marginRight: 8 }}
-                  >
-                    {isProcessing ? "Saving ..." : `Save`}
-                  </Button>
-                </Col>
-              </Form.Group>
-            </Form>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Product Name *
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="text"
+                      placeholder=" Product Name"
+                      {...register("product_name", {
+                        required: " Product Name is required ! ",
+                      })}
+                    />
+                    {errors.product_name && (
+                      <Form.Label style={{ color: "red" }}>
+                        {errors.product_name.message}
+                      </Form.Label>
+                    )}
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Product Description *
+                  </Form.Label>
+                  <Col sm="10">
+                    <Form.Control
+                      type="text"
+                      placeholder=" Product Description"
+                      {...register("product_desc", {
+                        required: " Product Description is required ! ",
+                      })}
+                    />
+                    {errors.product_desc && (
+                      <Form.Label style={{ color: "red" }}>
+                        {errors.product_desc.message}
+                      </Form.Label>
+                    )}
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Size ( L X B X H)
+                  </Form.Label>
+                  <Col sm="4">
+                    <Form.Control
+                      type="text"
+                      placeholder=" Product Size"
+                      {...register("size")}
+                    />
+                  </Col>
+                  <Form.Label column sm="2">
+                    Weight ( in grams )
+                  </Form.Label>
+                  <Col sm="4">
+                    <Form.Control
+                      type="text"
+                      placeholder=" Product Weight (grams)"
+                      {...register("weight", {
+                        pattern: {
+                          value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
+                          message: "Accept only decimal numbers",
+                        },
+                      })}
+                    />
+                  </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    M.R.P
+                  </Form.Label>
+                  <Col sm="4">
+                    <Form.Control
+                      type="text"
+                      placeholder="Maximum Retail Price"
+                      {...register("price", {
+                        required: "MRP is required !",
+                        pattern: {
+                          value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
+                          message: "Accept only decimal numbers",
+                        },
+                      })}
+                    />
+                    {errors.price && (
+                      <Form.Label style={{ color: "red" }}>
+                        {errors.price.message}
+                      </Form.Label>
+                    )}
+                  </Col>
+                  <Form.Label column sm="2">
+                    Sale Price
+                  </Form.Label>
+                  <Col sm="4">
+                    <Form.Control
+                      type="text"
+                      placeholder=" Sale Price"
+                      {...register("sale_price", {
+                        pattern: {
+                          value: /^([\d]{0,6})(\.[\d]{1,2})?$/,
+                          message: "Accept only decimal numbers",
+                        },
+                      })}
+                    />
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Stock Available
+                  </Form.Label>
+                  <Col sm="4">
+                    <Form.Select className="me-sm-2" {...register("stock")}>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </Form.Select>
+                  </Col>
+                  <Form.Label column sm="2">
+                    Product Category
+                  </Form.Label>
+                  <Col sm="4">
+                    <Multiselect
+                      options={productCategoryOptions}
+                      selectedValues={catSelectedValues}
+                      onSelect={onCatSelect}
+                      onRemove={onCatRemove}
+                      placeholder="+ Add Category"
+                      id="catOption"
+                      isObject={false}
+                      className="catDrowpdown"
+                    />
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                  <Form.Label column sm="2">
+                    Product Usage
+                  </Form.Label>
+                  <Col sm="10">
+                    {editorLoaded ? (
+                      <CKEditor
+                        editor={ClassicEditor}
+                        data={usage}
+                        onReady={(editor) => {
+                          console.log("Editor is ready to use!", editor);
+                        }}
+                        config={{ height: 400 }}
+                        onChange={(event, editor) => {
+                          editor.editing.view.change((writer) => {
+                            writer.setStyle(
+                              "height",
+                              "320px",
+                              editor.editing.view.document.getRoot()
+                            );
+                          });
+                          const data = editor.getData();
+                          setUsage(data);
+                        }}
+                      />
+                    ) : (
+                      <p>editor..</p>
+                    )}
+                  </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3 text-center ">
+                  <Col sm={{ span: 10, offset: 2 }}>
+                    <Button
+                      variant="primary"
+                      onClick={handleSubmit(onSubmit)}
+                      style={{ marginRight: 8 }}
+                    >
+                      {isProcessing ? "Saving ..." : `Save`}
+                    </Button>
+                  </Col>
+                </Form.Group>
+              </Form>
+            </div>
           </div>
         </div>
         <Footer />

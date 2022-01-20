@@ -39,7 +39,16 @@
       color: red;
     }
     button {
+      border: none;
+      width: 256px;
       margin-bottom: 12px;
+      padding: 8px;
+      background-color: #20726e;
+      color: white;
+      font-size: 14px;
+      &:hover {
+        background-color: #144947;
+      }
     }
   }
 
@@ -99,7 +108,7 @@
 
 .mobile-user-profile-detail {
   img {
-    width: "60px";
+    width: 48px !important;
   }
   // button {
   //       border: none;
@@ -112,19 +121,17 @@
   //       font-size: 14px;
   // }
   p {
-    font-family: "Roboto", "sans-serif";
     color: rgb(27, 26, 26);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 14px;
+    letter-spacing: 0.02em;
+    font-size: 12.5px;
     font-weight: 500;
   }
   a {
-    font-family: "Roboto", "sans-serif";
     color: rgb(27, 26, 26);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    font-size: 11.5px;
     font-weight: 500;
   }
 }
