@@ -5,12 +5,7 @@ import Image from "next/image";
 const Logo = ({ image }) => {
   return (
     <Link href="/">
-      <Image
-        src={process.env.PUBLIC_URL + image}
-        alt="logo"
-        layout="fill"
-        obejectfit="cover"
-      />
+      <Image src={image} alt="logo" layout="fill" obejectfit="cover" />
     </Link>
   );
 };
