@@ -18,7 +18,7 @@ const SEO = ({ title, description, canonical, css, js, image }) => (
       content={description}
     />
     <meta name="og:url" property="og:url" content={`${canonical}`} />
-    <meta property="og:site_name" content="KokeLiko" />
+    <meta property="og:site_name" content="tswan" />
     <meta
       property="og:image"
       itemProp="image"
