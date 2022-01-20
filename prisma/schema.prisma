@@ -9,6 +9,28 @@ generator client {
 }
 
 
+
+model Student {
+  id        Int     @default(autoincrement()) @id
+  firstName     String
+  lastName   String?
+  address   String ?
+  city  String?
+  state String?
+  pinCode String?
+  contact String?
+  email String?
+  schoolName String ?
+  photo String?
+  class String?
+  stream String?
+  message String?
+  subjects String[]
+  enrollmentDate DateTime  @default(now())
+  
+}
+
+
 model Post {
   id        Int     @default(autoincrement()) @id
   title     String? @unique
@@ -19,7 +41,7 @@ model Post {
   template   String?
   tags      String[]
   image     String?
-  readingTime String? 
+  readingTime String?
   createdAt     DateTime  @default(now()) 
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
@@ -71,8 +93,10 @@ model User {
   id            Int       @default(autoincrement()) @id
   name          String?
   email         String?   @unique
+  password      String?
   emailVerified DateTime? @map(name: "email_verified")
   image         String?
+  userRole      String?   @default("OWNER")
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   posts         Post[]

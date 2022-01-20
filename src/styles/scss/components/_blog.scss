@@ -11,11 +11,20 @@
     display: block;
     position: relative;
     overflow: hidden;
+    padding: 8px 72px;
+
+    @media #{$xs-device} {
+      padding: 8px 0px;
+    }
 
     .image {
       overflow: hidden;
       position: relative;
-      height: 196px;
+      height: 320px;
+
+      @media #{$xs-device} {
+        height: 200px;
+      }
 
       img {
         transition: var(--transition);
@@ -133,6 +142,7 @@
   .blog-details-desc {
     .article-image {
       position: relative;
+      height: 400px;
 
       .tag {
         background: linear-gradient(

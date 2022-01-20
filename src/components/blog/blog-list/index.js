@@ -66,21 +66,18 @@ const BlogList = ({ blogListData }) => {
   return (
     <div className="blog-area">
       <div className="container">
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-3 blogs-list mb-n30">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-1 row-cols-xl-1 blogs-list mb-n30">
           {blogListData.data.map((item, index) => (
             <div key={index} className="col masonry-grid mb-30">
               <div className="single-blog-post">
-                <div className="image">
-                  <Image
-                    src={item.image ? item.image : "/img/default.webp"}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                  <Link href={`${item.category}`}>
-                    <a className="tag">{item.category}</a>
-                  </Link>
-                </div>
-
+                {item.image && (
+                  <div className="image">
+                    <Image src={item.image} layout="fill" objectFit="cover" />
+                    <Link href={`${item.category}`}>
+                      <a className="tag">{item.category}</a>
+                    </Link>
+                  </div>
+                )}
                 <div className="content">
                   <h1>
                     <Link href={`/read/${item.slug}`}>
@@ -102,7 +99,7 @@ const BlogList = ({ blogListData }) => {
                     </li>
                   </ul>
 
-                  <div>{truncate(item.content, 40)}</div>
+                  <div>{truncate(item.content, 80)}</div>
                 </div>
                 <div className="read-more">
                   <Link href={`/read/${item.slug}`}>

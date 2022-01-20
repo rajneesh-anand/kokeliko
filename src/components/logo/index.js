@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
+import Image from "next/image";
 
 const Logo = ({ image }) => {
   return (
     <Link href="/">
-      <img
-        className="logo-main"
+      <Image
         src={process.env.PUBLIC_URL + image}
-        alt="Logo"
+        alt="logo"
+        layout="fill"
+        obejectfit="cover"
       />
     </Link>
   );

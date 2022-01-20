@@ -21,7 +21,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <Link href={process.env.PUBLIC_URL + "/contact"}>
-                      <a>Contact Us</a>
+                      <a>Contact</a>
                     </Link>
                   </li>
                   <li>

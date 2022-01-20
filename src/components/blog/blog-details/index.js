@@ -4,6 +4,7 @@ import htmr from "htmr";
 import moment from "moment";
 import BlogTag from "@/components/blog/blog-tag";
 import Comment from "@/components/comment";
+import Image from "next/image";
 
 const BlogDetails = ({ data }) => {
   return (
@@ -17,7 +18,8 @@ const BlogDetails = ({ data }) => {
                   <Link href="/">
                     <a className="tag">{data.category}</a>
                   </Link>
-                  <img src={data.image} alt="blog-details" />
+                  <Image src={data.image} layout="fill" objectFit="cover" />
+                  {/* <img src={data.image} alt="blog-details" /> */}
                 </div>
               )}
 
