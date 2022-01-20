@@ -1,3 +1,4 @@
 User-agent: *
 Disallow:
-Sitemap: https://kokeliko.vercel.app/sitemap.xml
+
+Sitemap: https://www.tswan.club/sitemap.xml
