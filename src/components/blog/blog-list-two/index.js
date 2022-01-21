@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Router from "next/router";
 import htmr from "htmr";
+import Image from "next/image";
+import { height } from "styled-system";
 
 const BlogListTwo = ({ data }) => {
   const formatDate = (dateString) => {
@@ -10,10 +12,6 @@ const BlogListTwo = ({ data }) => {
   const truncate = (str, no_words) => {
     return htmr(str.split(" ").splice(0, no_words).join(" ") + "  ... ... ...");
   };
-
-  function addDefaultSrc(ev) {
-    ev.target.src = "https://source.unsplash.com/600x900/?tech,street";
-  }
 
   const unpublishBlog = async (id) => {
     await fetch(`/api/unpublish/${id}`, {
@@ -25,12 +23,17 @@ const BlogListTwo = ({ data }) => {
   return data.map((blog) => (
     <div key={blog.id} className="card mb-3">
       <div className="row no-gutters">
-        <div className="col-md-3">
-          <img
-            className="img-responsive"
-            src={blog.image ? blog.image : "/img/default.svg"}
-            alt={blog.title}
-          />
+        <div className="col-md-3" style={{ paddingLeft: 0 }}>
+          <div style={{ position: "relative", height: "100%" }}>
+            {blog.image && (
+              <Image
+                src={blog.image}
+                alt={blog.title}
+                layout="fill"
+                objectFit="cover"
+              />
+            )}
+          </div>
         </div>
         <div className="col-md-8">
           <div className="card-body">

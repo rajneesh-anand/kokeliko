@@ -5,6 +5,7 @@ import htmr from "htmr";
 import moment from "moment";
 import Loading from "@components/loading";
 import Image from "next/image";
+import ImageLoader from "@/components/ui/loaders/ImageLoader";
 
 const BlogList = ({ blogListData }) => {
   const router = useRouter();

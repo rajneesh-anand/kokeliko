@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const editorRef = useRef();
@@ -28,10 +28,25 @@ const ContactForm = () => {
     if (message) {
       if (message === "success") {
         toast.success(
-          "Thank you for your email, We will contact you shortly !"
+          "Thank you for your email, We will contact you shortly !",
+          {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          }
         );
       } else {
-        toast.error("Oops, Something went wrong !");
+        toast.error(" Oops something went wrong !", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }
     }
   }, [message]);
@@ -75,20 +90,6 @@ const ContactForm = () => {
   return (
     <div className="contact-area pb-50">
       <div className="container">
-        {message && (
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-        )}
-
         <div className="contact-form">
           <div className="form-items">
             <h3>How Can We Help You ? </h3>

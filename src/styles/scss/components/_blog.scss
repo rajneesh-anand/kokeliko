@@ -316,7 +316,7 @@
 
         .tags {
           border: 1px solid goldenrod;
-          border-radius: 10px;
+          // border-radius: 10px;
           margin-left: 8px;
           padding: 4px 8px;
 
@@ -437,6 +437,9 @@
                   color: #3b5998;
                   background-color: transparent;
                 }
+                i {
+                  vertical-align: middle;
+                }
               }
               &.twitter {
                 background-color: #1da1f2;
@@ -446,6 +449,9 @@
                 &:hover {
                   color: #1da1f2;
                   background-color: transparent;
+                }
+                i {
+                  vertical-align: middle;
                 }
               }
               &.linkedin {
@@ -457,6 +463,9 @@
                   color: #007bb5;
                   background-color: transparent;
                 }
+                i {
+                  vertical-align: middle;
+                }
               }
               &.instagram {
                 background-color: #c13584;
@@ -466,6 +475,9 @@
                 &:hover {
                   color: #c13584;
                   background-color: transparent;
+                }
+                i {
+                  vertical-align: middle;
                 }
               }
             }
