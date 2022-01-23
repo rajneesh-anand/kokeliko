@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import htmr from "htmr";
-import moment from "moment";
 import Loading from "@components/loading";
 import Image from "next/image";
-import ImageLoader from "@/components/ui/loaders/ImageLoader";
 
 const BlogList = ({ blogListData }) => {
   const router = useRouter();
@@ -88,7 +86,7 @@ const BlogList = ({ blogListData }) => {
                   <ul className="meta">
                     <li>
                       <i className="ri-calendar-2-line"></i>
-                      {moment(item.createdAt).format("Do MMMM YYYY")}
+                      {dayjs(item.createdAt).format("MMM D, YYYY")}
                     </li>
                     <li>
                       <i className="ri-time-line"></i>{" "}

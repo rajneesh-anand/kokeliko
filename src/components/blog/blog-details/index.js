@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import htmr from "htmr";
-import moment from "moment";
+import * as dayjs from "dayjs";
 import BlogTag from "@/components/blog/blog-tag";
 import Comment from "@/components/comment";
 import Image from "next/image";
@@ -29,7 +29,7 @@ const BlogDetails = ({ data }) => {
                   <ul>
                     <li>
                       <i className="ri-calendar-2-line"></i>
-                      {moment(data.createdAt).format("Do MMMM YYYY")}
+                      {dayjs(data.createdAt).format("MMM D, YYYY")}
                     </li>
                     <li>
                       <i className="ri-time-line"></i>
