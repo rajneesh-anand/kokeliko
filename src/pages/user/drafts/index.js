@@ -15,7 +15,7 @@ const DraftPage = ({ blogData }) => {
   return (
     <Layout>
       <SEO
-        title="My Account | KokeLiko "
+        title="My Account | Draft"
         canonical={`${process.env.PUBLIC_URL}/user/account`}
       />
       <div className="wrapper">
@@ -43,7 +43,7 @@ const DraftPage = ({ blogData }) => {
             ) : (
               <div className="info">
                 <Message
-                  title="You have not published any blog !"
+                  title="Nothing in Draft !"
                   url="/user/post/create"
                   btnText="Write &amp; Share Your Own Blog"
                 />

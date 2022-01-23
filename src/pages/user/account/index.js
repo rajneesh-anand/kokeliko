@@ -15,7 +15,7 @@ const AccountPage = ({ blogData }) => {
   return (
     <Layout>
       <SEO
-        title="My Account | KokeLiko "
+        title="My Account | Blogs "
         canonical={`${process.env.PUBLIC_URL}/user/account`}
       />
       <div className="wrapper">
