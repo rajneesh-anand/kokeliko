@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import htmr from "htmr";
 import Loading from "@components/loading";
 import Image from "next/image";
+import * as dayjs from "dayjs";
 
 const BlogList = ({ blogListData }) => {
   const router = useRouter();
