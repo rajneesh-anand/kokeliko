@@ -4,7 +4,7 @@ import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
-import { useSession, getSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { blogTagsOptions, blogCategoryOptions } from "@/constant/blogs";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,7 +23,7 @@ const Multiselect = dynamic(
 );
 
 const NewpostPage = () => {
-  const [session, loading] = useSession();
+  const { data: session } = useSession();
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
   const [editorLoaded, setEditorLoaded] = useState(false);
@@ -175,7 +175,7 @@ const NewpostPage = () => {
   return (
     <Layout>
       <SEO
-        title="New Blog | KokeLiko "
+        title="Write New Blog  "
         description="Post your Blog"
         canonical={`${process.env.PUBLIC_URL}/user/post/create`}
       />

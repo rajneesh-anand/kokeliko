@@ -1,5 +1,5 @@
 import React from "react";
-import { useSession, getSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/react";
 import prisma from "@/libs/prisma";
 import Link from "next/link";
 import SEO from "@/components/seo";
@@ -10,7 +10,6 @@ import Layout from "@/layout/index";
 import BlogListTwo from "@/components/blog/blog-list-two";
 
 const AccountPage = ({ blogData }) => {
-  const [session, loading] = useSession();
   const data = JSON.parse(blogData).length != 0 ? JSON.parse(blogData) : null;
   return (
     <Layout>

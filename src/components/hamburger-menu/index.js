@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/react";
 import { getClosest, getSiblings, slideToggle, slideUp } from "../../utils";
 
 const HamburgerMenu = ({ show, onClose }) => {
-  const [session] = useSession();
+  const { data: session, status } = useSession();
   const onClickHandler = (e) => {
     const target = e.currentTarget;
     const parentEl = target.parentElement;

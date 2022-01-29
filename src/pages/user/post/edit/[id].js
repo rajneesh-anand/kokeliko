@@ -4,7 +4,7 @@ import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
-import { useSession, getSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { blogTagsOptions, blogCategoryOptions } from "@/constant/blogs";
 import { ToastContainer, toast } from "react-toastify";
@@ -25,7 +25,7 @@ const Multiselect = dynamic(
 
 const EditPostPage = ({ data }) => {
   const postData = data ? JSON.parse(data) : null;
-  const [session, loading] = useSession();
+
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
   const [editorLoaded, setEditorLoaded] = useState(false);
@@ -110,7 +110,7 @@ const EditPostPage = ({ data }) => {
     postData && (
       <Layout>
         <SEO
-          title="Edit Blog | KokeLiko "
+          title="Edit Blog  "
           canonical={`${process.env.PUBLIC_URL}/user/post/edit/${postData.id}`}
         />
         <div className="wrapper">

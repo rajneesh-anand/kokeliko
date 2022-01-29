@@ -7,6 +7,7 @@ import Comment from "@/components/comment";
 import Image from "next/image";
 
 const BlogDetails = ({ data }) => {
+  console.log(data);
   return (
     <div className="blog-details-area">
       <div className="container">
@@ -50,7 +51,12 @@ const BlogDetails = ({ data }) => {
               <div className="article-footer">
                 <div className="post-author-meta">
                   <div className="d-flex align-items-center">
-                    <img src={data.author.image} alt="user" />
+                    <img
+                      src={
+                        data.author.image ? data.author.image : "/img/logo.png"
+                      }
+                      alt="user"
+                    />
                     <div className="title">
                       <span className="name">Author : {data.author.name}</span>
                     </div>
@@ -108,7 +114,7 @@ const BlogDetails = ({ data }) => {
             <h4 className="title text-center">Leave a comment</h4>
             <div className="comment-form-wrap">
               <Comment
-                url={`https://kokeliko.vercel.app/read/${data.slug}`}
+                url={`https://www.tswan.club/read/${data.slug}`}
                 id={data.id}
                 title={data.title}
               />

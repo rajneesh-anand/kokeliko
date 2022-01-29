@@ -3,7 +3,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { CARD_OPTIONS } from "../../utils/stripe";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import { useCart } from "../../contexts/cart/use-cart";
 import { stateOptions, countryOptions } from "../../constant/shipping";
 
@@ -15,7 +15,7 @@ const StripeCheckoutForm = () => {
   const [total, setTotal] = useState();
   const [shipping, setShipping] = useState(0);
   const [tax, setTax] = useState(0);
-  const [session] = useSession();
+  const { data: session, status } = useSession();
   const { cartItemsCount, calculatePrice, items, clearCart } = useCart();
   const {
     register,

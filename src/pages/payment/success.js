@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import SEO from "../../components/seo";
 import Footer from "../../layout/footer";
@@ -11,7 +11,7 @@ import { useCart } from "../../contexts/cart/use-cart";
 
 const Success = ({ data }) => {
   console.log(JSON.parse(data));
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   const orderData = JSON.parse(data);
   const ProductDetails = JSON.parse(orderData.ProductDetails);
   const { clearCart } = useCart();
@@ -20,35 +20,10 @@ const Success = ({ data }) => {
     clearCart();
   }, []);
 
-  return loading ? (
-    <div className="hv-center">
-      <div className="spinner-border text-primary" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-    </div>
-  ) : !session ? (
+  return (
     <Layout>
       <SEO
-        title="Payment Success | KokeLiko "
-        canonical={process.env.PUBLIC_URL + "/payment/success"}
-      />
-      <div className="wrapper home-default-wrapper">
-        <Header classOption="hb-border" />
-        <div className="main-content">
-          <div className="hv-center">
-            <p>Please Sign In to view this page </p>
-            <Link href="/auth/signin">
-              <a className="blue-button">Sign In</a>
-            </Link>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    </Layout>
-  ) : (
-    <Layout>
-      <SEO
-        title="Payment Success | KokeLiko "
+        title="Payment Status "
         canonical={process.env.PUBLIC_URL + "/payment/success"}
       />
       <div className="wrapper home-default-wrapper">
@@ -107,6 +82,15 @@ const Success = ({ data }) => {
 };
 
 export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
   try {
     const { order } = context.query;
     const result = await prisma.orders.findFirst({

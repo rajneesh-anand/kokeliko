@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/react";
 // import { OverlayTrigger, Popover } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
@@ -8,7 +8,7 @@ import PopoverBody from "react-bootstrap/PopoverBody";
 import PopoverHeader from "react-bootstrap/PopoverHeader";
 
 function Profile() {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   return session ? (
     <OverlayTrigger
       trigger="click"
@@ -52,11 +52,9 @@ function Profile() {
       />
     </OverlayTrigger>
   ) : (
-    !loading && (
-      <Link href="/auth/signin">
-        <a className="btn btn-outline-dark btn-sm">Sign In</a>
-      </Link>
-    )
+    <Link href="/auth/signin">
+      <a className="btn btn-outline-dark btn-sm">Sign In</a>
+    </Link>
   );
 }
 

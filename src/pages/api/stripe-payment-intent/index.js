@@ -10,7 +10,7 @@ export default async (req, res) => {
     // console.log(amt);
     try {
       const paymentIntent = await stripe.paymentIntents.create({
-        description: "Kokeliko Shop Payment",
+        description: "Tswan Shop Payment",
         shipping: {
           name: name,
           address: {

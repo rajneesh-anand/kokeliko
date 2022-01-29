@@ -1,4 +1,4 @@
-import { Provider } from "next-auth/client";
+import { SessionProvider } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
@@ -7,7 +7,7 @@ import { CartProvider } from "contexts/cart/use-cart";
 import AOS from "aos";
 import "@/styles/scss/styles.scss";
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -30,12 +30,12 @@ const App = ({ Component, pageProps }) => {
   }, [router.events]);
 
   return (
-    <Provider session={pageProps.session}>
-      <CartProvider>
+    <CartProvider>
+      <SessionProvider session={session}>
         <Component {...pageProps} />
-        <ToastContainer />
-      </CartProvider>
-    </Provider>
+      </SessionProvider>
+      <ToastContainer />
+    </CartProvider>
   );
 };
 

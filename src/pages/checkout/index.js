@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import StripeCheckoutForm from "@/components/stripe-checkout-form";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";

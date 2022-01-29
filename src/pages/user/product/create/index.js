@@ -4,7 +4,7 @@ import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
 import Header from "@/layout/header";
 import Layout from "@/layout/index";
-import { useSession, getSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/react";
 import { productCategoryOptions } from "@/constant/product";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -23,7 +23,7 @@ const Multiselect = dynamic(
 );
 
 const ProductPage = () => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
   const [editorLoaded, setEditorLoaded] = useState(false);

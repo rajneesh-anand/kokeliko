@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { signIn } from "next-auth/client";
+import { signIn } from "next-auth/react";
 import { BsFacebook } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 

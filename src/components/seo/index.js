@@ -39,8 +39,8 @@ const SEO = ({ title, description, canonical, css, js, image }) => (
       property="twitter:description"
       content={description}
     />
-    <meta name="twitter:site" property="twitter:site" content="@kokeliko" />
-    <meta name="twitter:creator" property="twitter:site" content="@kokeliko" />
+    <meta name="twitter:site" property="twitter:site" content="@tswan" />
+    <meta name="twitter:creator" property="twitter:site" content="@tswan" />
 
     <meta
       name="twitter:image"

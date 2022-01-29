@@ -4,10 +4,10 @@ import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
 import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/react";
 
 const SideMenu = ({ show, handleClose }) => {
-  const [session] = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <Offcanvas

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { getCsrfToken, getSession } from "next-auth/client";
+import { getCsrfToken, getSession } from "next-auth/react";
+
 import SignInForm from "@/components/signin-form";
 import SEO from "@/components/seo";
 import Footer from "@/layout/footer";
@@ -25,6 +26,7 @@ const SignInPage = ({ csrfToken }) => {
 
 export async function getServerSideProps(context) {
   const csrfToken = await getCsrfToken(context);
+
   const session = await getSession(context);
   if (session) {
     return {
@@ -34,7 +36,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
+  console.log(csrfToken);
   return {
     props: { csrfToken },
   };

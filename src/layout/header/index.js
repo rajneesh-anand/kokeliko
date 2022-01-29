@@ -5,14 +5,14 @@ import SideBarMenu from "@/components/sidebar-menu";
 import SideBarCart from "@/components/sidebar-cart";
 import MainMenu from "@/components/main-menu";
 import { useCart } from "@/contexts/cart/use-cart";
-import { signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
   const { cartItemsCount } = useCart();
   const [show, setShow] = useState(false);
   const [showCart, setShowCart] = useState(false);

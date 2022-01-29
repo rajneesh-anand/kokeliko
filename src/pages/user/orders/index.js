@@ -1,5 +1,5 @@
 import React from "react";
-import { useSession, getSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/react";
 import prisma from "@/libs/prisma";
 import Link from "next/link";
 import SEO from "@/components/seo";
@@ -11,12 +11,11 @@ import OrderList from "@/components/order/order-list";
 import EmptyBox from "@/styles/icons/EmptyBox";
 
 const OrderPage = ({ orderData }) => {
-  const [session, loading] = useSession();
   const data = JSON.parse(orderData).length != 0 ? JSON.parse(orderData) : null;
   return (
     <Layout>
       <SEO
-        title="My Orders | KokeLiko "
+        title="My Orders  "
         canonical={`${process.env.PUBLIC_URL}/user/orders`}
       />
       <div className="wrapper">
